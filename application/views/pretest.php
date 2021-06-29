@@ -41,40 +41,39 @@
                             <h3 class="timeline-header">
                                 <?php echo $preTest[$a]['question'] ?>
                             </h3>
-
                             <div class="timeline-body">
 
                                 <div class="form-group clearfix">
                                     <div class="icheck-success d-inline">
-                                        <input type="radio" name="<?php echo $preTest[$a]['nomor']; ?>pila" id="<?php echo $preTest[$a]['nomor']; ?>pila">
+                                        <input type="radio" name="<?php echo $preTest[$a]['nomor']; ?>" id="<?php echo $preTest[$a]['nomor']; ?>pila"  <?php if($preTest[$a]['answer']=='A'){echo 'checked';}  ?> >
                                         <label for="<?php echo $preTest[$a]['nomor']; ?>pila">
                                             <?php echo $preTest[$a]['pila'] ?>
                                         </label>
                                     </div>
                                     <br/><br/>
                                     <div class="icheck-success d-inline">
-                                        <input type="radio" name="<?php echo $preTest[$a]['nomor']; ?>pilb" id="<?php echo $preTest[$a]['nomor']; ?>pilb">
+                                        <input type="radio" name="<?php echo $preTest[$a]['nomor']; ?>" id="<?php echo $preTest[$a]['nomor']; ?>pilb" <?php if($preTest[$a]['answer']=='B'){echo 'checked';}  ?> >
                                         <label for="<?php echo $preTest[$a]['nomor']; ?>pilb">
                                             <?php echo $preTest[$a]['pilb'] ?>
                                         </label>
                                     </div>
                                     <br/><br/>
                                     <div class="icheck-success d-inline">
-                                        <input type="radio" name="<?php echo $preTest[$a]['nomor']; ?>pilc" id="<?php echo $preTest[$a]['nomor']; ?>pilc">
+                                        <input type="radio" name="<?php echo $preTest[$a]['nomor']; ?>" id="<?php echo $preTest[$a]['nomor']; ?>pilc" <?php if($preTest[$a]['answer']=='C'){echo 'checked';}  ?> >
                                         <label for="<?php echo $preTest[$a]['nomor']; ?>pilc">
                                             <?php echo $preTest[$a]['pilc'] ?>
                                         </label>
                                     </div>
                                     <br/><br/>
                                     <div class="icheck-success d-inline">
-                                        <input type="radio" name="<?php echo $preTest[$a]['nomor']; ?>pild" id="<?php echo $preTest[$a]['nomor']; ?>pild">
+                                        <input type="radio" name="<?php echo $preTest[$a]['nomor']; ?>" id="<?php echo $preTest[$a]['nomor']; ?>pild" <?php if($preTest[$a]['answer']=='D'){echo 'checked';}  ?> >
                                         <label for="<?php echo $preTest[$a]['nomor']; ?>pild">
                                             <?php echo $preTest[$a]['pild'] ?>
                                         </label>
                                     </div>
                                     <br/><br/>
                                     <div class="icheck-success d-inline">
-                                        <input type="radio" name="<?php echo $preTest[$a]['nomor']; ?>pile" id="<?php echo $preTest[$a]['nomor']; ?>pile">
+                                        <input type="radio" name="<?php echo $preTest[$a]['nomor']; ?>" id="<?php echo $preTest[$a]['nomor']; ?>pile" <?php if($preTest[$a]['answer']=='E'){echo 'checked';}  ?> >
                                         <label for="<?php echo $preTest[$a]['nomor']; ?>pile">
                                             <?php echo $preTest[$a]['pile'] ?>
                                         </label>

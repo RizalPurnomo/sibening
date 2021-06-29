@@ -22,7 +22,7 @@ class Course extends CI_Controller
     public function preTest($idGetCourse)
     {
         $data['preTest'] = $this->course_model->getPreTest($idGetCourse);
-        print_r($data);
+
         $this->load->view('preTest',$data);
     }
 
