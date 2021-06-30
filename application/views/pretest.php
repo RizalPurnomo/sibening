@@ -1,5 +1,52 @@
 <?php $this->load->view('header'); ?>
 
+<script type="text/javascript">
+  function simpanPreTest(){
+    // if(!$('input[name="1"]:checked').val() || !$('input[name="2"]:checked').val() || !$('input[name="3"]:checked').val() || !$('input[name="4"]:checked').val() || !$('input[name="5"]:checked').val() || !$('input[name="6"]:checked').val() ){
+    //   alert("Ada yang belum dijawab, silahkan diisi terlebih dahulu");
+    //   return;
+    // }
+
+    var dataArray = {
+      "question": {
+              'soal1': $("#soal1").val(),
+              'soal2': $("#soal2").val(),
+              'soal3': $("#soal3").val(),
+              'soal4': $("#soal4").val(),
+              'soal5': $("#soal5").val(),
+              'soal6': $("#soal6").val()
+      },
+      "answer": {
+            'no1': $('input[name="1"]:checked').val(),
+            'no2': $('input[name="2"]:checked').val(),
+            'no3': $('input[name="3"]:checked').val(),
+            'no4': $('input[name="4"]:checked').val(),
+            'no5': $('input[name="5"]:checked').val(),
+            'no6': $('input[name="6"]:checked').val()
+      }
+    }
+    // console.log(dataArray);
+
+    $.ajax({
+        type: "POST",
+        data: dataArray,
+        url: '<?php echo base_url('course/saveUpdateData/'); ?>' + $("#idgetcourse").val() ,
+        success: function(result) {
+            // Swal.fire({
+            //     icon: 'success',
+            //     title: 'Data Berhasil Disimpan',
+            //     showConfirmButton: false,
+            //     timer: 1500
+            // })
+            console.log(result);
+            // window.location = "<?php echo base_url(); ?>dashboard";
+        }
+    })
+
+  }
+</script>
+
+
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -24,76 +71,90 @@
     <!-- Main content -->
     <div class="content">
       <div class="container">
-      <div class="row">
+        <div class="row">
           <div class="col-md-12">
-            <!-- The time line -->
-            <div class="timeline">
-                <!-- timeline time label -->
-                <div class="time-label">
-                    <span class="bg-red">Pre Test <?php echo $preTest[0]['title'] ?></span>
-                </div>
-                <div>
 
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">
+                  <input type="text" id="idgetcourse" value="<?php echo $preTest[0]['idgetcourse'] ?>">
+                  PRE TEST <?php echo $preTest[0]['title']; ?>
+                </h3>
+              </div>
+              <!-- /.card-header -->
+              <!-- form start -->
+              <form role="form">
+                <div class="card-body">
+                  <!-- The time line -->
+                  <div class="timeline">
                     <?php if (!empty($preTest)) {
-                    for ($a = 0; $a < count($preTest); $a++) { ?>
-                        <i class="fas bg-blue"><?php echo $preTest[$a]['nomor']; ?></i>
-                        <div class="timeline-item">
-                            <h3 class="timeline-header">
-                                <?php echo $preTest[$a]['question'] ?>
-                            </h3>
-                            <div class="timeline-body">
+                      for ($a = 0; $a < count($preTest); $a++) { ?>
+                            <div>
+                              <i class="fas bg-blue"><?php echo $a +1 ; ?></i>
+                              <div class="timeline-item">
+                                  <h3 class="timeline-header">
+                                    <input type="text" id="soal<?php echo $a +1 ; ?>" value="<?php echo $preTest[$a]['idsoal'] ?>">
+                                    <label> <?php echo $preTest[$a]['question'] ?> </label>
+                                  </h3>
+                                  <div class="timeline-body">
 
-                                <div class="form-group clearfix">
-                                    <div class="icheck-success d-inline">
-                                        <input type="radio" name="<?php echo $preTest[$a]['nomor']; ?>" id="<?php echo $preTest[$a]['nomor']; ?>pila"  <?php if($preTest[$a]['answer']=='A'){echo 'checked';}  ?> >
-                                        <label for="<?php echo $preTest[$a]['nomor']; ?>pila">
-                                            <?php echo $preTest[$a]['pila'] ?>
-                                        </label>
-                                    </div>
-                                    <br/><br/>
-                                    <div class="icheck-success d-inline">
-                                        <input type="radio" name="<?php echo $preTest[$a]['nomor']; ?>" id="<?php echo $preTest[$a]['nomor']; ?>pilb" <?php if($preTest[$a]['answer']=='B'){echo 'checked';}  ?> >
-                                        <label for="<?php echo $preTest[$a]['nomor']; ?>pilb">
-                                            <?php echo $preTest[$a]['pilb'] ?>
-                                        </label>
-                                    </div>
-                                    <br/><br/>
-                                    <div class="icheck-success d-inline">
-                                        <input type="radio" name="<?php echo $preTest[$a]['nomor']; ?>" id="<?php echo $preTest[$a]['nomor']; ?>pilc" <?php if($preTest[$a]['answer']=='C'){echo 'checked';}  ?> >
-                                        <label for="<?php echo $preTest[$a]['nomor']; ?>pilc">
-                                            <?php echo $preTest[$a]['pilc'] ?>
-                                        </label>
-                                    </div>
-                                    <br/><br/>
-                                    <div class="icheck-success d-inline">
-                                        <input type="radio" name="<?php echo $preTest[$a]['nomor']; ?>" id="<?php echo $preTest[$a]['nomor']; ?>pild" <?php if($preTest[$a]['answer']=='D'){echo 'checked';}  ?> >
-                                        <label for="<?php echo $preTest[$a]['nomor']; ?>pild">
-                                            <?php echo $preTest[$a]['pild'] ?>
-                                        </label>
-                                    </div>
-                                    <br/><br/>
-                                    <div class="icheck-success d-inline">
-                                        <input type="radio" name="<?php echo $preTest[$a]['nomor']; ?>" id="<?php echo $preTest[$a]['nomor']; ?>pile" <?php if($preTest[$a]['answer']=='E'){echo 'checked';}  ?> >
-                                        <label for="<?php echo $preTest[$a]['nomor']; ?>pile">
-                                            <?php echo $preTest[$a]['pile'] ?>
-                                        </label>
-                                    </div>                                                                                                                                                
-                                </div>
+                                      <div class="form-group clearfix">
+                                          <div class="icheck-success d-inline">
+                                              <input value="A" type="radio" name="<?php echo $a +1 ; ?>" id="<?php echo $a +1 ; ?>pila" <?php if($preTest[$a]['answer']=='A'){echo 'checked';}  ?> >
+                                              <label for="<?php echo $a +1 ; ?>pila">
+                                                  <?php echo $preTest[$a]['pila'] ?>
+                                              </label>
+                                          </div>
+                                          <br/><br/>
+                                          <div class="icheck-success d-inline">
+                                              <input value="B" type="radio" name="<?php echo $a +1 ; ?>" id="<?php echo $a +1 ; ?>pilb" <?php if($preTest[$a]['answer']=='B'){echo 'checked';}  ?> >
+                                              <label for="<?php echo $a +1 ; ?>pilb">
+                                                  <?php echo $preTest[$a]['pilb'] ?>
+                                              </label>
+                                          </div>
+                                          <br/><br/>
+                                          <div class="icheck-success d-inline">
+                                              <input value="C" type="radio" name="<?php echo $a +1 ; ?>" id="<?php echo $a +1 ; ?>pilc" <?php if($preTest[$a]['answer']=='C'){echo 'checked';}  ?> >
+                                              <label for="<?php echo $a +1 ; ?>pilc">
+                                                  <?php echo $preTest[$a]['pilc'] ?>
+                                              </label>
+                                          </div>
+                                          <br/><br/>
+                                          <div class="icheck-success d-inline">
+                                              <input value="D" type="radio" name="<?php echo $a +1 ; ?>" id="<?php echo $a +1 ; ?>pild"  <?php if($preTest[$a]['answer']=='D'){echo 'checked';}  ?> >
+                                              <label for="<?php echo $a +1 ; ?>pild">
+                                                  <?php echo $preTest[$a]['pild'] ?>
+                                              </label>
+                                          </div>
+                                          <br/><br/>
+                                          <div class="icheck-success d-inline">
+                                              <input value="E" type="radio" name="<?php echo $a +1 ; ?>" id="<?php echo $a +1 ; ?>pile"  <?php if($preTest[$a]['answer']=='E'){echo 'checked';}  ?> >
+                                              <label for="<?php echo $a +1 ; ?>pile">
+                                                  <?php echo $preTest[$a]['pile'] ?>
+                                              </label>
+                                          </div>                                                                                                                                                
+                                      </div>
 
+                                  </div>
+                              </div>
+                              <br/>
                             </div>
-                        </div>
-                        <br/>
-                    <?php }
-                    } ?>
-
+                        <?php }
+                      } ?>
+                  </div>
 
                 </div>
+                <!-- /.card-body -->
 
-            </div>
+                <div class="card-footer">
+                  <a href="#" class="btn btn-primary" onclick="simpanPreTest()">Simpan</a>
+                </div>
+              </form>
+            </div>          
+
           </div>
           <!-- /.col -->
         </div>
-
       </div><!-- /.container-fluid -->
     </div>
     <!-- /.content -->

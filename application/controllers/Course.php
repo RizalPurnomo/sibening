@@ -26,6 +26,25 @@ class Course extends CI_Controller
         $this->load->view('preTest',$data);
     }
 
+    public function saveUpdateData($idGetCourse){
+        // echo $idGetCourse;
+        $question = $this->input->post('question');
+        $answer = $this->input->post('answer');
+        for ($i=0; $i < count($question) ; $i++) { 
+            $answer = $this->course_model->getSudahDijawab($idGetCourse,"1");
+            echo $answer;
+        }
+        // $this->aset_model->saveData($data, 'tblaset');
+        // print_r($question);
+        // echo count($question);
+
+    }
+
+
+
+
+    // ----------------------------------
+
     public function add()
     {
         $data['typeaset'] = $this->aset_model->getAlltype();

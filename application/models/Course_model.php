@@ -27,13 +27,24 @@ class Course_model extends CI_Model
     }
 
     public function getPreTest($idgetcourse){
-        $sql = "SELECT * FROM getcourse a
+        $sql = "SELECT c.idquestion as idsoal,a.*,b.*,c.*,d.* FROM getcourse a
             INNER JOIN mcourse b ON a.idcourse=b.idcourse
             LEFT JOIN mquestion c ON c.idcourse=b.idcourse
             LEFT JOIN answer d ON d.idquestion=c.idquestion
             WHERE a.idgetcourse='$idgetcourse'";
         $qry = $this->db->query($sql);
         return $qry->result_array();
+    }
+
+    public function getSudahDijawab($idgetcourse,$idquestion){
+        $sql = "SELECT * FROM answer
+            WHERE idgetcourse='$idgetcourse' AND idquestion='$idquestion'";
+        $qry = $this->db->query($sql)->result_array();
+        if(empty($qry)){
+            return "false";
+        }else{
+            return "true";
+        }
     }
 
     ///------------------------
