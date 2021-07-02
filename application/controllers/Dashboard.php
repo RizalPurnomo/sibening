@@ -16,7 +16,7 @@ class Dashboard extends CI_Controller
     {
         $idpeserta = $this->session->userdata('idpeserta');
         $data['getcourse'] = $this->course_model->getCourse($idpeserta);
-        $data['course'] = $this->course_model->allCourse();
+        $data['course'] = $this->course_model->allCourse($idpeserta);
         $this->load->view('dashboard',$data);
         // print_r($data);
 

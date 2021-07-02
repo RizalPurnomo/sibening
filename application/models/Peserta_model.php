@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class User_model extends CI_Model
+class Peserta_model extends CI_Model
 {
 
     public function __construct()
@@ -9,24 +9,24 @@ class User_model extends CI_Model
         parent::__construct();
     }
 
-    public function getValidUser($user, $password)
+    public function getValidPeserta($email, $password)
     {
-        $sql = "SELECT * FROM muser 
- 				where username='" . $user . "' and password='" . $password . "'";
+        $sql = "SELECT * FROM mpeserta 
+ 				where email='" . $email . "' and password='" . $password . "'";
         $qry = $this->db->query($sql);
         return $qry->result_array();
     }
 
-    public function updateLastLogin($user, $data, $tabel)
+    public function updateLastLogin($email, $data, $tabel)
     {
-        $this->db->where('username', $user);
+        $this->db->where('email', $email);
         $this->db->update($tabel, $data);
-        return  "Data " . $user . " Berhasil Diupdate";
+        return  "Data " . $email . " Berhasil Diupdate";
     }
 
-    public function getAllUser()
+    public function getAllPeserta()
     {
-        $sql = "SELECT * FROM muser  order by username desc";
+        $sql = "SELECT * FROM mpeserta  order by email desc";
         $qry = $this->db->query($sql);
         return $qry->result_array();
     }

@@ -41,6 +41,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="<?php echo base_url() ?>assets/dist/css/adminlte.min.css">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <!-- Sweetalert2 -->
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body class="hold-transition layout-top-nav">
 <div class="wrapper">
@@ -65,12 +67,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <a href="index3.html" class="nav-link">Home</a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">Logout</a>
+            <a href="<?php echo base_url(); ?>course" class="nav-link">Course</a>
+          </li>          
+          <li class="nav-item">
+            <a href="<?php echo base_url(); ?>login/logout" class="nav-link">Logout</a>
           </li>
         </ul>
 
         <!-- SEARCH FORM -->
-        <form class="form-inline ml-0 ml-md-3">
+        <!-- <form class="form-inline ml-0 ml-md-3">
           <div class="input-group input-group-sm">
             <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
             <div class="input-group-append">
@@ -80,10 +85,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </div>
           </div>
         </form>
-      </div>
+      </div> -->
 
       <!-- Right navbar links -->
       <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
+          <li class="nav-item">
+            <p class="nav-link"><?php echo $this->session->userdata('namapeserta') ?></p>
+            
+          </li>
         <!-- Messages Dropdown Menu -->
         <li class="nav-item dropdown">
           <a class="nav-link" data-toggle="dropdown" href="#">

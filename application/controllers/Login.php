@@ -7,7 +7,7 @@ class Login extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->model(array('user_model'));
+		$this->load->model(array('peserta_model'));
 		// if (!empty($this->session->userdata('username'))) {
 		// 	redirect('dashboard');
 		// }
@@ -30,13 +30,13 @@ class Login extends CI_Controller
 		$password = $this->input->post('password');
 
 
-		$userdata = $this->user_model->getValidUser($email, md5($password));
+		$userdata = $this->peserta_model->getValidPeserta($email, md5($password));
 		if ($userdata) {
 			$this->session->set_userdata($userdata[0]);
 			$login = array(
 				"lastlogin" => date("Y-m-d H:i:s")
 			);
-			$this->user_model->updateLastLogin($email, $login, 'mpeserta');
+			$this->peserta_model->updateLastLogin($email, $login, 'mpeserta');
 			redirect('dashboard');
 		} else {
 			redirect('login');
