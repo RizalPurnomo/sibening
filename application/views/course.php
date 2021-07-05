@@ -80,22 +80,25 @@
                         <th>Post Test</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <?php for ($a = 0; $a < count($hasil); $a++) { ?>
-                        <tr>
-                            <td><?php echo $a + 1 ?></td>
-                            <td><?php echo $hasil[$a]['question'] ?></td>
-                            <td><?php echo $hasil[$a]['key'] ?></td>
-                            <td><?php echo $hasil[$a]['answer'] ?></td>
-                            <td><?php echo $hasil[$a]['answerpost'] ?></td>
-                        </tr>
-                    <?php } ?>
-                </tbody>
+                <tbody>`
+                  for (x in arr) {
+                    salah = "";
+                    if(arr[x]['benar']=="n"){salah='bgcolor="red"';}
+                    txt +=`<tr>
+                              <td>${(parseInt(x) + parseInt(1))} </td> 
+                              <td>${arr[x]['question']}</td>
+                              <td>${arr[x]['key']}</td>
+                              <td ${salah}>${arr[x]['answer']}</td>
+                              <td>${arr[x]['answerpost']}</td>
+                          </tr>`;
+                  }
+                `</tbody>
               </table>
                 `;
+        document.getElementById("divModal").innerHTML = txt;
       }
     })
-    // $('#modal-lg').modal('show'); 
+    $('#modal-lg').modal('show'); 
   }
 </script>
 
@@ -202,7 +205,7 @@
                                         <a class="btn btn-large btn-primary <?php echo $materi; ?>" href="<?php echo base_url('course/materi/') . $getcourse[$a]['idgetcourse']; ?>">Materi</a>
                                         <a class="btn btn-large btn-primary <?php echo $post; ?>" href="<?php echo base_url('course/postTest/') . $getcourse[$a]['idgetcourse']; ?>">Post</a>
                                         <a class="btn btn-large btn-danger <?php echo $delete; ?>" href="javascript:deleteData('<?php echo $getcourse[$a]['idgetcourse']; ?>')">Delete</a>
-                                        <a class="btn btn-large btn-success <?php echo $finish; ?>"  onclick="showModal('<?php echo $getcourse[$a]['idgetcourse']; ?>')" >Hasil</a> <!-- data-toggle="modal" data-target="#modal-lg"  | href="<?php echo base_url('course/hasil/') . $getcourse[$a]['idgetcourse']; ?>"-->
+                                        <a class="btn btn-large btn-success <?php echo $finish; ?>" href="javascript:showModal('<?php echo $getcourse[$a]['idgetcourse']; ?>')" >Hasil</a> <!-- data-toggle="modal" data-target="#modal-lg"  | href="<?php echo base_url('course/hasil/') . $getcourse[$a]['idgetcourse']; ?>"-->
                                     </td>
                                 </tr>
                         <?php }
@@ -274,27 +277,35 @@
             <div class="col-lg-3">
                 <div class="card card-primary card-outline">
                     <div class="card-header">
-                        <h5 class="card-title m-0">Course Information</h5>
+                    <center><h5>Course Information</h5></center>
                     </div>
                     <div class="row">
                         <div class="col-lg-6">
+                            <center>
                             Finish VS Enrolled
                             <h1><?php echo $enrollFinished; ?> / <?php echo $enrolled; ?></h1>
+                            </center>
                         </div>
                         <div class="col-lg-6">
+                            <center>
                             Get JPL VS Target
                             <h1><?php echo $getJPL; ?> / <?php echo $targetJPL; ?> </h1>
+                            </center>
                         </div>                        
                         <!-- <div class = "vertical"></div> -->
                     </div>
                     <div class="row">
                         <div class="col-lg-6">
+                            <center>
                             Precentage JPL
                             <h1><?php echo ($JPLFinished/$targetJPL)*100 ?>%</h1>
+                            </center>
                         </div>
                         <div class="col-lg-6">
+                            <center>
                             JPL Finish
                             <h1><?php echo $JPLFinished; ?></h1>
+                            </center>
                         </div>                        
                         <!-- <div class = "vertical"></div> -->
                     </div>                    
@@ -309,7 +320,7 @@
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
             <div class="modal-header">
-              <h4 class="modal-title">Large Modal</h4>
+              <h4 class="modal-title">Hasil Test</h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>

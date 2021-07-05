@@ -43,11 +43,11 @@ class Login extends CI_Controller
 		}
 	}
 
-	// public function logout()
-	// {
-	// 	$this->session->sess_destroy();
-	// 	// $this->session->unset_userdata('username');
-	// 	// $_SESSION = [];
-	// 	redirect('login');
-	// }
+	public function logout()
+	{
+		$this->session->sess_destroy();
+		// $this->session->unset_userdata('username');
+		// $_SESSION = [];
+		redirect('admin/login');
+	}
 }

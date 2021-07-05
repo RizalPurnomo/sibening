@@ -19,14 +19,14 @@ class Peserta_model extends CI_Model
 
     public function updateLastLogin($email, $data, $tabel)
     {
-        $this->db->where('email', $email);
+        $this->db->where('idpeserta', $email);
         $this->db->update($tabel, $data);
         return  "Data " . $email . " Berhasil Diupdate";
     }
 
     public function getAllPeserta()
     {
-        $sql = "SELECT * FROM mpeserta  order by email desc";
+        $sql = "SELECT * FROM mpeserta  order by idpeserta desc";
         $qry = $this->db->query($sql);
         return $qry->result_array();
     }
@@ -38,20 +38,20 @@ class Peserta_model extends CI_Model
 
     public function updateData($id, $data, $tabel)
     {
-        $this->db->where('email', $id);
+        $this->db->where('idpeserta', $id);
         $this->db->update($tabel, $data);
         return  "Data " . $id . " Berhasil Diupdate";
     }
 
     public function deleteData($id, $tabel)
     {
-        $this->db->where('email', $id);
+        $this->db->where('idpeserta', $id);
         $this->db->delete($tabel);
     }
 
-    public function getUserById($idUser)
+    public function getPesertaById($id)
     {
-        $query = "SELECT * FROM tbluser WHERE iduser='$idUser'";
+        $query = "SELECT * FROM mpeserta WHERE idpeserta='$id'";
         $sql = $this->db->query($query);
         return $sql->result_array();
     }

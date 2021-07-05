@@ -31,7 +31,41 @@
       <div class="container">
         <div class="row">
           <div class="col-md-12">
-
+            <div class="card card-primary card-outline">
+                <div class="card-header">
+                <center><h5>Course Information</h5></center>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <center>
+                        Finish VS Enrolled
+                        <h1><?php echo $enrollFinished; ?> / <?php echo $enrolled; ?></h1>
+                        </center>
+                    </div>
+                    <div class="col-lg-6">
+                        <center>
+                        Get JPL VS Target
+                        <h1><?php echo $getJPL; ?> / <?php echo $targetJPL; ?> </h1>
+                        </center>
+                    </div>                        
+                    <!-- <div class = "vertical"></div> -->
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <center>
+                        Precentage JPL
+                        <h1><?php echo ($JPLFinished/$targetJPL)*100 ?>%</h1>
+                        </center>
+                    </div>
+                    <div class="col-lg-6">
+                        <center>
+                        JPL Finish
+                        <h1><?php echo $JPLFinished; ?></h1>
+                        </center>
+                    </div>                        
+                    <!-- <div class = "vertical"></div> -->
+                </div>                    
+            </div>
           </div>
           <!-- /.col -->
         </div>

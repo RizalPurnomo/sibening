@@ -17,7 +17,7 @@ class Login extends CI_Controller
 	{
 		// echo "Session " . $this->session->userdata('username');
 		if ($this->session->userdata('email')) {
-			$this->load->view('dashboard');
+			$this->load->view('course');
 		} else {
 			$this->load->view('login');
 		}
@@ -37,7 +37,7 @@ class Login extends CI_Controller
 				"lastlogin" => date("Y-m-d H:i:s")
 			);
 			$this->peserta_model->updateLastLogin($email, $login, 'mpeserta');
-			redirect('dashboard');
+			redirect('course');
 		} else {
 			redirect('login');
 		}
