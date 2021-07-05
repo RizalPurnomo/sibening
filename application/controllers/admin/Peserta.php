@@ -54,4 +54,11 @@ class Peserta extends CI_Controller
         }
         return "Data Berhasil Di Delete";
     }
+
+    public function resetPassword($idData)
+    {
+        $peserta = $this->input->post('peserta');
+        $this->peserta_model->updateData($idData, $peserta, 'mpeserta');
+        print_r($this->input->post());
+    }
 }

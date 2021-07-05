@@ -56,10 +56,10 @@ $appName = $this->db->query($query)->result_array()[0]['appname'];
                     <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="<?php echo base_url(); ?>dashboard" class="nav-link">Home</a>
+                    <a href="<?php echo base_url(); ?>admin/dashboard" class="nav-link">Home</a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="<?php echo base_url('login/logout'); ?>" class="nav-link">Logout</a>
+                    <a href="<?php echo base_url('admin/login/logout'); ?>" class="nav-link">Logout</a>
                 </li>
             </ul>
 

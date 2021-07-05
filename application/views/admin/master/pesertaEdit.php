@@ -4,6 +4,48 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js" integrity="sha512-nOQuvD9nKirvxDdvQ9OMqe2dgapbPB7vYAMrzJihw5m+aNcf0dX53m6YxM4LgA9u8e9eg9QX+/+mPu8kCNpV2A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <script type="text/javascript">
+    async function resetPassword() {
+        const {
+            value: password
+        } = await Swal.fire({
+            title: 'Reset Password',
+            input: 'password',
+            inputLabel: 'Password',
+            inputPlaceholder: 'Reset Password',
+            inputAttributes: {
+                maxlength: 100,
+                autocapitalize: 'off',
+                autocorrect: 'off'
+            }
+        })
+
+        if (password) {
+            var dataArray = {
+                "peserta": {
+                    "password": CryptoJS.MD5(password).toString()
+                }
+            }
+
+            console.log(dataArray);
+            // return;
+            $.ajax({
+                type: "POST",
+                data: dataArray,
+                url: '<?php echo base_url('admin/peserta/resetPassword/'); ?>' + $("#idpeserta").val(),
+                success: function(result) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Password berhasil di RESET',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                    console.log(result);
+                    window.location = "<?php echo base_url(); ?>admin/peserta";
+                }
+            })
+        }
+    }
+
     function updatePeserta() {
         if ($("#email").val() == "" || $("#password").val() == "" || $("#nama").val() == "") {
             Swal.fire({
