@@ -6,7 +6,7 @@
 
 <!-- Main Footer -->
 <footer class="main-footer">
-    <strong>Copyright &copy; 2021 <a href="https://www.facebook.com/rizal.purnomo">Rizal Purnomo</a>.</strong>
+    <strong>Copyright &copy; 2021 <a href="https://puskesmasmatraman.jakarta.go.id/">Puskesmas Kecamatan Matraman</a>.</strong>
     All rights reserved.
     <div class="float-right d-none d-sm-inline-block">
         <b>Version</b> 1.0.0

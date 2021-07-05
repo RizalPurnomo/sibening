@@ -4,50 +4,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js" integrity="sha512-nOQuvD9nKirvxDdvQ9OMqe2dgapbPB7vYAMrzJihw5m+aNcf0dX53m6YxM4LgA9u8e9eg9QX+/+mPu8kCNpV2A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <script type="text/javascript">
-    async function resetPassword() {
-        const {
-            value: password
-        } = await Swal.fire({
-            title: 'Reset Password',
-            input: 'password',
-            inputLabel: 'Password',
-            inputPlaceholder: 'Reset Password',
-            inputAttributes: {
-                maxlength: 100,
-                autocapitalize: 'off',
-                autocorrect: 'off'
-            }
-        })
-
-        if (password) {
-            var dataArray = {
-                "peserta": {
-                    "password": CryptoJS.MD5(password).toString()
-                }
-            }
-
-            console.log(dataArray);
-            // return;
-            $.ajax({
-                type: "POST",
-                data: dataArray,
-                url: '<?php echo base_url('admin/peserta/resetPassword/'); ?>' + $("#idpeserta").val(),
-                success: function(result) {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Password berhasil di RESET',
-                        showConfirmButton: false,
-                        timer: 1500
-                    })
-                    console.log(result);
-                    window.location = "<?php echo base_url(); ?>admin/peserta";
-                }
-            })
-        }
-    }
-
-    function updatePeserta() {
-        if ($("#email").val() == "" || $("#password").val() == "" || $("#nama").val() == "") {
+    function updateCourse() {
+        if ($("#kategori").val() == "" || $("#title").val() == "" ) {
             Swal.fire({
                 icon: 'warning',
                 text: 'Harap Melengkapi Data!',
@@ -56,9 +14,10 @@
         }
 
         var dataArray = {
-            "peserta": {
-                "email": $("#email").val(),
-                "namapeserta": $("#nama").val()
+            "course": {
+                "kategori": $("#kategori").val(),
+                "title": $("#title").val(),
+                "jpl": $("#jpl").val(),
             }
         }
 
@@ -67,17 +26,17 @@
         $.ajax({
             type: "POST",
             data: dataArray,
-            url: '<?php echo base_url('admin/peserta/updateData/'); ?>' + $("#idpeserta").val(),
+            url: '<?php echo base_url('admin/course/updateCourse/'); ?>' + $("#idcourse").val(),
             success: function(result) {
                 Swal.fire({
                     icon: 'success',
-                    title: 'Data Berhasil Diupdate',
+                    title: 'Data Berhasil Disimpan',
                     showConfirmButton: false,
                     timer: 1500
                 })
 
                 console.log(result);
-                window.location = "<?php echo base_url(); ?>admin/peserta";
+                window.location = "<?php echo base_url(); ?>admin/course";
             }
         })
 
@@ -92,11 +51,11 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark">Peserta Add</h1>
+            <h1 class="m-0 text-dark">Course Add</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>admin/peserta"><?php echo $this->uri->segment(2); ?></a></li>
+                <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>admin/course"><?php echo $this->uri->segment(2); ?></a></li>
                 <li class="breadcrumb-item active"><?php echo $this->uri->segment(3); ?></li>
             </ol>
           </div><!-- /.col -->
@@ -113,7 +72,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        Input Data Peserta
+                        Input Data Course
                         <div class="card-tools">
                             <button type="button" class="btn btn-tool" data-card-widget="collapse">
                                 <i class="fas fa-minus"></i>
@@ -124,33 +83,40 @@
                     <div class="card-body">
                         <div class="card-body">
                             <div class="form-group row">
-                                <label for="inputEmail3" class="col-sm-2 col-form-label">Id Peserta</label>
+                                <label class="col-sm-2 col-form-label">Id Course</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="idpeserta" value="<?php echo $peserta[0]['idpeserta']; ?>" disabled placeholder="User Id">
-                                </div>
-                            </div>                            
-                            <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">Email</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="email" placeholder="Email" value="<?php echo $peserta[0]['email']; ?>">
+                                    <input type="text" class="form-control" id="idcourse" placeholder="Id Course" value="<?php echo $course[0]['idcourse']; ?>" disabled>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">Nama Peserta</label>
+                                <label for="inputPassword3" class="col-sm-2 col-form-label">Kategori</label>
                                 <div class="col-sm-10">
-                                    <input type="email" class="form-control" id="nama" placeholder="Nama Peserta" value="<?php echo $peserta[0]['namapeserta']; ?>">
+                                    <select class="form-control select2" style="width: 100%;" id="kategori">
+                                        <option value="">-- Select Category--</option>
+                                        <?php for ($a = 0; $a < count($kategori); $a++) {  ?>
+                                            <option value="<?php echo $kategori[$a]['kategori'] ?>" <?php echo ($kategori[$a]['kategori'] == $course[0]['kategori'] ?  'selected' : '') ?> >
+                                                <?php echo $kategori[$a]['kategori']  ?>
+                                            </option>
+                                        <?php } ?>
+                                    </select>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
+                                <label class="col-sm-2 col-form-label">Title</label>
                                 <div class="col-sm-10">
-                                    <button type="button" class="col-sm-6 btn btn-block btn-primary" onclick="resetPassword()">Ganti Password</button>
+                                    <input type="text" class="form-control" id="title" placeholder="Title" value="<?php echo $course[0]['title']; ?>">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="inputPassword3" class="col-sm-2 col-form-label">JPL</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="jpl" placeholder="JPL" value="<?php echo $course[0]['jpl']; ?>">
                                 </div>
                             </div>
                         </div>
                         <!-- /.card-body -->
                         <div class="card-footer">
-                            <button onclick="updatePeserta()" class="btn btn-info">Update</button>
+                            <button onclick="updateCourse()" class="btn btn-info">Update</button>
                             <!-- <button class="btn btn-default float-right">Cancel</button> -->
                         </div>
                         <!-- /.card-footer -->

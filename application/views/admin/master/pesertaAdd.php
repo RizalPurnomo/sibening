@@ -55,8 +55,8 @@
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="#"><?php echo $this->uri->segment(1); ?></a></li>
-              <li class="breadcrumb-item active"><?php echo $this->uri->segment(2); ?></li>
+                <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>admin/peserta"><?php echo $this->uri->segment(2); ?></a></li>
+                <li class="breadcrumb-item active"><?php echo $this->uri->segment(3); ?></li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->

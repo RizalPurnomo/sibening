@@ -7,8 +7,9 @@
     </script>
 
     <?php
-        $master = ($this->uri->segment(2) == 'peserta' ? 'menu-open' : '');
+        $master = ($this->uri->segment(2) == 'peserta' || $this->uri->segment(2) == 'course' ? 'menu-open' : '');
         $peserta = ($this->uri->segment(2) == 'peserta' ? 'active' : '');
+        $course = ($this->uri->segment(2) == 'course' ? 'active' : '');        
     ?>
 
     <?php
@@ -60,6 +61,12 @@
                                 <p>Peserta</p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="<?php echo base_url(); ?>admin/course" class="nav-link <?php echo $course; ?>">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Course</p>
+                            </a>
+                        </li>                        
                     </ul>
                 </li>
 

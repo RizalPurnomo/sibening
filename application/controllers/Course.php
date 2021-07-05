@@ -109,7 +109,7 @@ class Course extends CI_Controller
         $answerpost = $this->input->post('answer');
         for ($i=0; $i < count($question) ; $i++) { 
             $noSoal = $i+1;
-            $sdhJawabpost = $this->course_model->getSudahDijawabPost($idGetCourse,$question['soal'.$noSoal]);
+            $sdhJawabPost = $this->course_model->getSudahDijawabPost($idGetCourse,$question['soal'.$noSoal]);
             $jawabanBenar = $this->course_model->getJawabanBenar($question['soal'.$noSoal]);    
             if($jawabanBenar[0]['key'] == $answerpost['no'.$noSoal] ){
                 $benar = "y";
@@ -124,7 +124,7 @@ class Course extends CI_Controller
                 "benarpost" => $benar
             );    
 
-            if($sdhJawabpost==''){//save answer
+            if($sdhJawabPost==''){//save answer
                 $this->course_model->saveData($data, 'answerpost');
             }else{//update answer
                 $this->course_model->updateDataPost($sdhJawabPost, $data, 'answerpost');

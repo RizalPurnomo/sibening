@@ -10,6 +10,7 @@ class Course_model extends CI_Model
     }
 
 
+
     public function getCourse($idpeserta)
     {
         $sql = "SELECT * FROM getcourse a
@@ -25,6 +26,13 @@ class Course_model extends CI_Model
         $qry = $this->db->query($sql);
         return $qry->result_array();
         // echo $sql;
+    }
+
+    public function getCourseById($idcourse){
+        $sql = "SELECT * FROM mcourse a
+            WHERE idcourse='$idcourse'";
+        $qry = $this->db->query($sql);
+        return $qry->result_array();
     }
 
     public function getCourseDetailById($idgetcourse){
@@ -117,6 +125,13 @@ class Course_model extends CI_Model
         return  "Data " . $id . " Berhasil Diupdate";
     }
 
+    public function updateCourse($id, $data, $tabel)
+    {
+        $this->db->where('idcourse', $id);
+        $this->db->update($tabel, $data);
+        return  "Data " . $id . " Berhasil Diupdate";
+    }    
+
     public function updateDataPost($id, $data, $tabel)
     {
         $this->db->where('idanswerpost', $id);
@@ -137,6 +152,29 @@ class Course_model extends CI_Model
         $this->db->delete($tabel);
     }
 
+    public function deleteCourse($id, $tabel)
+    {
+        $this->db->where('idcourse', $id);
+        $this->db->delete($tabel);
+    }
+
+
+
+    //Kategory
+    public function getAllKategori()
+    {
+        $sql = "SELECT * FROM mkategori";
+        $qry = $this->db->query($sql);
+        return $qry->result_array();
+    }
+
+    // CREATE TABLE `mkategori` (
+    //     `idkategori` int(11) NOT NULL AUTO_INCREMENT,
+    //     `kategori` varchar(50) DEFAULT NULL,
+    //     PRIMARY KEY (`idkategori`)
+    //   )
+        
+
     ///------------------------
 
     public function getDataById($idData)
@@ -146,12 +184,7 @@ class Course_model extends CI_Model
         return $sql->result_array();
     }
 
-    public function getAllType()
-    {
-        $sql = "select * from tbltype_aset";
-        $qry = $this->db->query($sql);
-        return $qry->result_array();
-    }
+
 
     public function getAllJenis()
     {

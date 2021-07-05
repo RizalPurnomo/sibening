@@ -7,7 +7,7 @@
         console.log(idData);
         $.ajax({
             success: function(html) {
-                var url = "<?php echo base_url(); ?>admin/peserta/edit/" + idData;
+                var url = "<?php echo base_url(); ?>admin/course/edit/" + idData;
                 window.location.href = url;
             }
         });
@@ -23,10 +23,10 @@
             if (result.isConfirmed) {
                 $.ajax({
                     type: "POST",
-                    url: "<?php echo base_url(); ?>admin/peserta/delete/" + idData,
+                    url: "<?php echo base_url(); ?>admin/course/delete/" + idData,
                     success: function(html) {
                         console.log(html);
-                        var url = "<?php echo base_url(); ?>admin/peserta/";
+                        var url = "<?php echo base_url(); ?>admin/course/";
                         window.location.href = url;
                     }
                 })
@@ -44,7 +44,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark">Peserta</h1>
+            <h1 class="m-0 text-dark">Course</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -65,8 +65,8 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <a href="<?php echo base_url(); ?>admin/peserta/add" class="btn btn-app">
-                                <i class="fas fa-user"></i> Tambah User
+                            <a href="<?php echo base_url(); ?>admin/course/add" class="btn btn-app">
+                                <i class="fas fa-user"></i> Tambah Course
                             </a>
                             <div class="card-tools">
                                 <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -81,40 +81,38 @@
                                     <thead>
                                         <tr>
                                             <th>No</th>
-                                            <th>Id User</th>
-                                            <th>Email</th>
-                                            <th>Nama Peserta</th>
-                                            <th>Last Login</th>
+                                            <th>Id Course</th>
+                                            <th>Kategory</th>
+                                            <th>Title</th>
+                                            <th>JPL</th>
                                             <th style="width:15%">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php if (!empty($peserta)) {
-                                            for ($a = 0; $a < count($peserta); $a++) { ?>
-                                                <?php $idpeserta = $peserta[$a]['idpeserta']; ?>
-                                                <tr id="peserta<?php echo $idpeserta; ?>">
+                                        <?php if (!empty($course)) {
+                                            for ($a = 0; $a < count($course); $a++) { ?>
+                                                <?php $idcourse = $course[$a]['idcourse']; ?>
+                                                <tr id="course<?php echo $idcourse; ?>">
                                                     <td><?php echo $a + 1 ?></td>
-                                                    <td><?php echo $idpeserta ?></td>
-                                                    <td><?php echo $peserta[$a]['email'] ?></td>
-                                                    <td><?php echo $peserta[$a]['namapeserta'] ?></td>
-                                                    <td><?php echo $peserta[$a]['lastlogin'] ?></td>
+                                                    <td><?php echo $idcourse ?></td>
+                                                    <td><?php echo $course[$a]['kategori'] ?></td>
+                                                    <td><?php echo $course[$a]['title'] ?></td>
+                                                    <td><?php echo $course[$a]['jpl'] ?></td>
                                                     <td>
-                                                        <a class="btn btn-large btn-primary" href="javascript:selectData('peserta<?php echo $peserta[$a]['idpeserta']; ?>')">Edit</a>
-                                                        | <a class="btn btn-large btn-danger" href="javascript:deleteData('peserta<?php echo $peserta[$a]['idpeserta']; ?>')">Delete</a>
+                                                        <a class="btn btn-large btn-primary" href="javascript:selectData('course<?php echo $course[$a]['idcourse']; ?>')">Edit</a>
+                                                        | <a class="btn btn-large btn-danger" href="javascript:deleteData('course<?php echo $course[$a]['idcourse']; ?>')">Delete</a>
                                                     </td>
                                                 </tr>
                                         <?php }
                                         } ?>
                                     </tbody>
                                     <tfoot>
-                                        <tr>
-                                            <th>No</th>
-                                            <th>Id User</th>
-                                            <th>Email</th>
-                                            <th>Nama Peserta</th>
-                                            <th>Last Login</th>
-                                            <th style="width:15%">Aksi</th>
-                                        </tr>
+                                        <th>No</th>
+                                        <th>Id Course</th>
+                                        <th>Kategory</th>
+                                        <th>Title</th>
+                                        <th>JPL</th>
+                                        <th style="width:15%">Aksi</th>
                                     </tfoot>
                                 </table>
                             </div>
