@@ -99,8 +99,9 @@
                                                     <td><?php echo $course[$a]['title'] ?></td>
                                                     <td><?php echo $course[$a]['jpl'] ?></td>
                                                     <td>
+                                                        <a class="btn btn-large btn-success" href="<?php echo base_url('admin/course/question/') . $course[$a]['idcourse']; ?>">Question</a>
                                                         <a class="btn btn-large btn-primary" href="javascript:selectData('course<?php echo $course[$a]['idcourse']; ?>')">Edit</a>
-                                                        | <a class="btn btn-large btn-danger" href="javascript:deleteData('course<?php echo $course[$a]['idcourse']; ?>')">Delete</a>
+                                                        <a class="btn btn-large btn-danger" href="javascript:deleteData('course<?php echo $course[$a]['idcourse']; ?>')">Delete</a>
                                                     </td>
                                                 </tr>
                                         <?php }

@@ -50,7 +50,8 @@
 <script src="<?php echo base_url(); ?>assets/dist/js/adminlte.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="<?php echo base_url(); ?>assets/dist/js/demo.js"></script>
-
+<!-- Summernote -->
+<script src="<?php echo base_url(); ?>assets/plugins/summernote/summernote-bs4.min.js"></script>
 <!-- OPTIONAL SCRIPTS -->
 <script src="<?php echo base_url(); ?>assets/dist/js/demo.js"></script>
 
@@ -65,9 +66,16 @@
 
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+
+
 <!-- PAGE SCRIPTS -->
 <!-- <script src="<?php echo base_url(); ?>assets/dist/js/pages/dashboard2.js"></script> -->
 <script>
+    // SUMMERNOTE
+    $(function () {
+        $('.textarea').summernote()
+    })
+    
     //DATATABLE
     $(function() {
         $("#example1").DataTable();

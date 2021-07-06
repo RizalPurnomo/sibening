@@ -71,7 +71,7 @@
                     <div class="container">
                         <div class="content-video">
                             <!-- Tempatkan Video Disini -->
-                            <iframe width="560" height="315" src="<?php echo $course[0]['linkmateri']; ?>" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                            <iframe width="560" height="315" src="<?php echo $course[0]['materi']; ?>" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
                         </div>
                         <footer>
                             <h3><?php echo $course[0]['title']; ?></h3>

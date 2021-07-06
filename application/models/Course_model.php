@@ -168,12 +168,21 @@ class Course_model extends CI_Model
         return $qry->result_array();
     }
 
-    // CREATE TABLE `mkategori` (
-    //     `idkategori` int(11) NOT NULL AUTO_INCREMENT,
-    //     `kategori` varchar(50) DEFAULT NULL,
-    //     PRIMARY KEY (`idkategori`)
-    //   )
-        
+    //Question
+    public function getQuestionById($idcourse){
+        $sql = "SELECT * FROM mquestion 
+            WHERE idcourse='$idcourse'";
+        $qry = $this->db->query($sql);
+        return $qry->result_array();
+    }    
+
+    public function updateQuestion($id, $data, $tabel)
+    {
+        $this->db->where('idquestion', $id);
+        $this->db->update($tabel, $data);
+        return  "Data " . $id . " Berhasil Diupdate";
+    } 
+
 
     ///------------------------
 
@@ -183,6 +192,8 @@ class Course_model extends CI_Model
         $sql = $this->db->query($query);
         return $sql->result_array();
     }
+
+    
 
 
 

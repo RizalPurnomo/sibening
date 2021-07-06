@@ -71,4 +71,36 @@ class Course extends CI_Controller
         $this->course_model->updateData($idData, $course, 'mcourse');
         print_r($this->input->post());
     }
+
+    function question($idCourse)
+    {
+        $q = $this->course_model->getQuestionById($idCourse);
+        if(count($q)<1){ //tambahkan question kosong
+            for ($a = 0; $a < 10; $a++) {
+                $data = array(
+                    'idcourse' => $idCourse,
+                    'question' => '',
+                    'pila' => '',
+                    'pilb' => '',
+                    'pilc' => '',
+                    'pild' => '',
+                    'pile' => '',
+                    'key' => ''
+                );
+                $this->course_model->saveData($data, 'mquestion');
+
+            }
+        }
+        $data['question'] = $this->course_model->getQuestionById($idCourse);
+        $this->load->view('admin/master/question', $data);
+    }
+
+    public function updateQuestion($idData)
+    {
+        $data = $this->input->post('question');
+        $this->course_model->updateQuestion($idData, $data, 'mquestion');
+        print_r($this->input->post());
+    }
+
+
 }
