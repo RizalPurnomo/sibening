@@ -14,7 +14,11 @@
               'soal3': $("#soal3").val(),
               'soal4': $("#soal4").val(),
               'soal5': $("#soal5").val(),
-              'soal6': $("#soal6").val()
+              'soal6': $("#soal6").val(),
+              'soal7': $("#soal7").val(),
+              'soal8': $("#soal8").val(),
+              'soal9': $("#soal9").val(),
+              'soal10': $("#soal10").val()
       },
       "answer": {
             'no1': $('input[name="1"]:checked').val(),
@@ -22,7 +26,12 @@
             'no3': $('input[name="3"]:checked').val(),
             'no4': $('input[name="4"]:checked').val(),
             'no5': $('input[name="5"]:checked').val(),
-            'no6': $('input[name="6"]:checked').val()
+            'no6': $('input[name="6"]:checked').val(),
+            'no7': $('input[name="7"]:checked').val(),
+            'no8': $('input[name="8"]:checked').val(),
+            'no9': $('input[name="9"]:checked').val(),
+            'no10': $('input[name="10"]:checked').val()
+
       }
     }
     // console.log(dataArray);

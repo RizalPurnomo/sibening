@@ -92,6 +92,8 @@ class Course extends CI_Controller
             }
         }
         $data['question'] = $this->course_model->getQuestionById($idCourse);
+        // echo "<pre/>";
+        // print_r($data);
         $this->load->view('admin/master/question', $data);
     }
 

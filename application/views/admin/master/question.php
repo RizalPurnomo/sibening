@@ -7,7 +7,7 @@
     function updateQuestion(id) {
         var dataArray = {
             "question" : {
-                "idcourse": id,
+                "idcourse": $("#idcourse").val(),
                 "question": $("#question" + id ).val(),
                 "pila": $("#answer" + id + "a" ).val(),
                 "pilb": $("#answer" + id + "b" ).val(),
@@ -68,6 +68,7 @@
                         <h3 class="card-title">
                             <i class="fas fa-chart-pie mr-1"></i>
                             Input Data Question
+                            <input type="hidden" class="form-control" id="idcourse" value="<?php echo $question[0]['idcourse']; ?>">
                         </h3>
                         <div class="card-tools">
                             <ul class="nav nav-pills ml-auto">
@@ -91,9 +92,7 @@
                                             <div class="card-body pad">
                                                 <div class="mb-1">
                                                     <textarea class="textarea" id="question<?php echo $question[$a]['idquestion']; ?>" placeholder="Place some text here"
-                                                            style="width: 100%; height: 300px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 5px;">
-                                                        <?php echo $question[$a]['question'] ; ?>
-                                                    </textarea>
+                                                            style="width: 100%; height: 300px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 5px;"><?php echo trim($question[$a]['question']) ; ?></textarea>
                                                 </div>
                                             </div>
                                             </h3>
@@ -101,31 +100,31 @@
                                                 <div class="form-group row">
                                                     <label for="inputPassword3" class="col-sm-1 col-form-label d-flex justify-content-center">A</label>
                                                     <div class="col-sm-11">
-                                                        <textarea id="answer<?php echo $question[$a]['idquestion']; ?>a" style="width: 100%; height: 50px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 5px;"></textarea>
+                                                        <textarea id="answer<?php echo $question[$a]['idquestion']; ?>a" style="width: 100%; height: 50px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 5px;"><?php echo trim($question[$a]['pila']) ; ?></textarea>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
                                                     <label for="inputPassword3" class="col-sm-1 col-form-label d-flex justify-content-center" >B</label>
                                                     <div class="col-sm-11">
-                                                        <textarea id="answer<?php echo $question[$a]['idquestion']; ?>b" style="width: 100%; height: 50px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 5px;"></textarea>
+                                                        <textarea id="answer<?php echo $question[$a]['idquestion']; ?>b" style="width: 100%; height: 50px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 5px;"><?php echo trim($question[$a]['pilb']) ; ?></textarea>
                                                     </div>
                                                 </div> 
                                                 <div class="form-group row">
                                                     <label for="inputPassword3" class="col-sm-1 col-form-label d-flex justify-content-center">C</label>
                                                     <div class="col-sm-11">
-                                                        <textarea id="answer<?php echo $question[$a]['idquestion']; ?>c" style="width: 100%; height: 50px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 5px;"></textarea>
+                                                        <textarea id="answer<?php echo $question[$a]['idquestion']; ?>c" style="width: 100%; height: 50px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 5px;"><?php echo $question[$a]['pilc'] ; ?></textarea>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
                                                     <label for="inputPassword3" class="col-sm-1 col-form-label d-flex justify-content-center">D</label>
                                                     <div class="col-sm-11">
-                                                        <textarea id="answer<?php echo $question[$a]['idquestion']; ?>d" style="width: 100%; height: 50px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 5px;"></textarea>
+                                                        <textarea id="answer<?php echo $question[$a]['idquestion']; ?>d" style="width: 100%; height: 50px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 5px;"><?php echo $question[$a]['pild'] ; ?></textarea>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
                                                     <label for="inputPassword3" class="col-sm-1 col-form-label d-flex justify-content-center">E</label>
                                                     <div class="col-sm-11">
-                                                        <textarea id="answer<?php echo $question[$a]['idquestion']; ?>e" style="width: 100%; height: 50px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 5px;"></textarea>
+                                                        <textarea id="answer<?php echo $question[$a]['idquestion']; ?>e" style="width: 100%; height: 50px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 5px;"><?php echo $question[$a]['pile'] ; ?></textarea>
                                                     </div>
                                                 </div> 
                                                 <hr/>   
@@ -134,11 +133,11 @@
                                                     <div class="col-sm-11">
                                                         <select id="key<?php echo $question[$a]['idquestion']; ?>" class="form-control select2" style="width: 100%;" id="key">
                                                             <option value="">-- Select Key --</option>
-                                                            <option value="A">A</option>
-                                                            <option value="B">B</option>
-                                                            <option value="C">C</option>
-                                                            <option value="D">D</option>
-                                                            <option value="E">E</option>
+                                                            <option value="A" <?php echo $question[$a]['key'] == 'A' ? 'selected' : '' ?> >A</option>
+                                                            <option value="B" <?php echo $question[$a]['key'] == 'B' ? 'selected' : '' ?>>B</option>
+                                                            <option value="C" <?php echo $question[$a]['key'] == 'C' ? 'selected' : '' ?>>C</option>
+                                                            <option value="D" <?php echo $question[$a]['key'] == 'D' ? 'selected' : '' ?>>D</option>
+                                                            <option value="E" <?php echo $question[$a]['key'] == 'E' ? 'selected' : '' ?>>E</option>
                                                         </select>
                                                     </div>
                                                 </div>                                        

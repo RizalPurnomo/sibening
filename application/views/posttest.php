@@ -14,7 +14,11 @@
               'soal3': $("#soal3").val(),
               'soal4': $("#soal4").val(),
               'soal5': $("#soal5").val(),
-              'soal6': $("#soal6").val()
+              'soal6': $("#soal6").val(),
+              'soal7': $("#soal7").val(),
+              'soal8': $("#soal8").val(),
+              'soal9': $("#soal9").val(),
+              'soal10': $("#soal10").val()
       },
       "answer": {
             'no1': $('input[name="1"]:checked').val(),
@@ -22,7 +26,11 @@
             'no3': $('input[name="3"]:checked').val(),
             'no4': $('input[name="4"]:checked').val(),
             'no5': $('input[name="5"]:checked').val(),
-            'no6': $('input[name="6"]:checked').val()
+            'no6': $('input[name="6"]:checked').val(),
+            'no7': $('input[name="7"]:checked').val(),
+            'no8': $('input[name="8"]:checked').val(),
+            'no9': $('input[name="9"]:checked').val(),
+            'no10': $('input[name="10"]:checked').val()
       }
     }
     // console.log(dataArray);
@@ -100,35 +108,35 @@
 
                                       <div class="form-group clearfix">
                                           <div class="icheck-success d-inline">
-                                              <input value="A" type="radio" name="<?php echo $a +1 ; ?>" id="<?php echo $a +1 ; ?>pila" <?php if($postTest[$a]['answer']=='A'){echo 'checked';}  ?> >
+                                              <input value="A" type="radio" name="<?php echo $a +1 ; ?>" id="<?php echo $a +1 ; ?>pila" <?php if($postTest[$a]['answerpost']=='A'){echo 'checked';}  ?> >
                                               <label for="<?php echo $a +1 ; ?>pila">
                                                   <?php echo $postTest[$a]['pila'] ?>
                                               </label>
                                           </div>
                                           <br/><br/>
                                           <div class="icheck-success d-inline">
-                                              <input value="B" type="radio" name="<?php echo $a +1 ; ?>" id="<?php echo $a +1 ; ?>pilb" <?php if($postTest[$a]['answer']=='B'){echo 'checked';}  ?> >
+                                              <input value="B" type="radio" name="<?php echo $a +1 ; ?>" id="<?php echo $a +1 ; ?>pilb" <?php if($postTest[$a]['answerpost']=='B'){echo 'checked';}  ?> >
                                               <label for="<?php echo $a +1 ; ?>pilb">
                                                   <?php echo $postTest[$a]['pilb'] ?>
                                               </label>
                                           </div>
                                           <br/><br/>
                                           <div class="icheck-success d-inline">
-                                              <input value="C" type="radio" name="<?php echo $a +1 ; ?>" id="<?php echo $a +1 ; ?>pilc" <?php if($postTest[$a]['answer']=='C'){echo 'checked';}  ?> >
+                                              <input value="C" type="radio" name="<?php echo $a +1 ; ?>" id="<?php echo $a +1 ; ?>pilc" <?php if($postTest[$a]['answerpost']=='C'){echo 'checked';}  ?> >
                                               <label for="<?php echo $a +1 ; ?>pilc">
                                                   <?php echo $postTest[$a]['pilc'] ?>
                                               </label>
                                           </div>
                                           <br/><br/>
                                           <div class="icheck-success d-inline">
-                                              <input value="D" type="radio" name="<?php echo $a +1 ; ?>" id="<?php echo $a +1 ; ?>pild"  <?php if($postTest[$a]['answer']=='D'){echo 'checked';}  ?> >
+                                              <input value="D" type="radio" name="<?php echo $a +1 ; ?>" id="<?php echo $a +1 ; ?>pild"  <?php if($postTest[$a]['answerpost']=='D'){echo 'checked';}  ?> >
                                               <label for="<?php echo $a +1 ; ?>pild">
                                                   <?php echo $postTest[$a]['pild'] ?>
                                               </label>
                                           </div>
                                           <br/><br/>
                                           <div class="icheck-success d-inline">
-                                              <input value="E" type="radio" name="<?php echo $a +1 ; ?>" id="<?php echo $a +1 ; ?>pile"  <?php if($postTest[$a]['answer']=='E'){echo 'checked';}  ?> >
+                                              <input value="E" type="radio" name="<?php echo $a +1 ; ?>" id="<?php echo $a +1 ; ?>pile"  <?php if($postTest[$a]['answerpost']=='E'){echo 'checked';}  ?> >
                                               <label for="<?php echo $a +1 ; ?>pile">
                                                   <?php echo $postTest[$a]['pile'] ?>
                                               </label>

@@ -81,7 +81,7 @@
                                     <thead>
                                         <tr>
                                             <th>No</th>
-                                            <th>Id Course</th>
+                                            <th style="display:none;">Id Course</th>
                                             <th>Kategory</th>
                                             <th>Title</th>
                                             <th>JPL</th>
@@ -94,7 +94,7 @@
                                                 <?php $idcourse = $course[$a]['idcourse']; ?>
                                                 <tr id="course<?php echo $idcourse; ?>">
                                                     <td><?php echo $a + 1 ?></td>
-                                                    <td><?php echo $idcourse ?></td>
+                                                    <td style="display:none;"><?php echo $idcourse ?></td>
                                                     <td><?php echo $course[$a]['kategori'] ?></td>
                                                     <td><?php echo $course[$a]['title'] ?></td>
                                                     <td><?php echo $course[$a]['jpl'] ?></td>
@@ -109,7 +109,7 @@
                                     </tbody>
                                     <tfoot>
                                         <th>No</th>
-                                        <th>Id Course</th>
+                                        <th style="display:none;">Id Course</th>
                                         <th>Kategory</th>
                                         <th>Title</th>
                                         <th>JPL</th>

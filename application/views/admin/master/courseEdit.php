@@ -18,6 +18,7 @@
                 "kategori": $("#kategori").val(),
                 "title": $("#title").val(),
                 "jpl": $("#jpl").val(),
+                "materi": $("#materi").val()
             }
         }
 
@@ -113,6 +114,31 @@
                                     <input type="text" class="form-control" id="jpl" placeholder="JPL" value="<?php echo $course[0]['jpl']; ?>">
                                 </div>
                             </div>
+                            <div class="form-group row">
+                                <div class="col-md-12">
+                                    <div class="card card-outline card-info">
+                                        <div class="card-header">
+                                            <h3 class="card-title">
+                                                Materi
+                                            </h3>
+                                            <!-- tools box -->
+                                            <div class="card-tools">
+                                                <button type="button" class="btn btn-tool btn-sm" data-card-widget="collapse" data-toggle="tooltip"
+                                                        title="Collapse">
+                                                <i class="fas fa-minus"></i></button>
+                                            </div>
+                                            <!-- /. tools -->
+                                        </div>
+                                        <!-- /.card-header -->
+                                        <div class="card-body pad">
+                                            <div class="mb-3">
+                                                <textarea class="textarea" id="materi" placeholder="Place some text here"
+                                                        style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"><?php echo $course[0]['materi']; ?></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>                                
+                            </div>                            
                         </div>
                         <!-- /.card-body -->
                         <div class="card-footer">
@@ -137,3 +163,5 @@
 
 
   <?php $this->load->view('admin/footer'); ?>
+
+

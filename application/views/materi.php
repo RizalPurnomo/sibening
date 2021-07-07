@@ -60,7 +60,7 @@
             <div class="card card-primary">
               <div class="card-header">
                 <h3 class="card-title">
-                    <input type="text" id="idgetcourse" value="<?php echo $course[0]['idgetcourse']; ?>">
+                    <input type="hidden" id="idgetcourse" value="<?php echo $course[0]['idgetcourse']; ?>">
                     MATERI <?php echo $course[0]['title']; ?>
                 </h3>
               </div>
@@ -69,10 +69,13 @@
               <form role="form">
                 <div class="card-body">
                     <div class="container">
-                        <div class="content-video">
-                            <!-- Tempatkan Video Disini -->
-                            <iframe width="560" height="315" src="<?php echo $course[0]['materi']; ?>" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+                      <div class="card card-primary card-outline">
+                        <div class="card-body">
+                          <?php echo $course[0]['materi']; ?>
                         </div>
+                      </div>
+
                         <footer>
                             <h3><?php echo $course[0]['title']; ?></h3>
                         </footer>

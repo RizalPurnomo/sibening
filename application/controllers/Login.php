@@ -7,7 +7,7 @@ class Login extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->model(array('peserta_model'));
+		$this->load->model(array('peserta_model','course_model'));
 		// if (!empty($this->session->userdata('username'))) {
 		// 	redirect('dashboard');
 		// }
@@ -17,7 +17,11 @@ class Login extends CI_Controller
 	{
 		// echo "Session " . $this->session->userdata('username');
 		if ($this->session->userdata('email')) {
-			$this->load->view('course');
+			$idpeserta = $this->session->userdata('idpeserta');
+			$data['getcourse'] = $this->course_model->getCourse($idpeserta);
+			$data['course'] = $this->course_model->allCourse();
+			$data['hasil'] = $this->course_model->getCourseHasilById('6');
+			$this->load->view('course',$data);
 		} else {
 			$this->load->view('login');
 		}

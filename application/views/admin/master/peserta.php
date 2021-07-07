@@ -81,7 +81,7 @@
                                     <thead>
                                         <tr>
                                             <th>No</th>
-                                            <th>Id User</th>
+                                            <th  style="display:none;">Id User</th>
                                             <th>Email</th>
                                             <th>Nama Peserta</th>
                                             <th>Last Login</th>
@@ -94,7 +94,7 @@
                                                 <?php $idpeserta = $peserta[$a]['idpeserta']; ?>
                                                 <tr id="peserta<?php echo $idpeserta; ?>">
                                                     <td><?php echo $a + 1 ?></td>
-                                                    <td><?php echo $idpeserta ?></td>
+                                                    <td  style="display:none;"><?php echo $idpeserta ?></td>
                                                     <td><?php echo $peserta[$a]['email'] ?></td>
                                                     <td><?php echo $peserta[$a]['namapeserta'] ?></td>
                                                     <td><?php echo $peserta[$a]['lastlogin'] ?></td>
@@ -109,7 +109,7 @@
                                     <tfoot>
                                         <tr>
                                             <th>No</th>
-                                            <th>Id User</th>
+                                            <th  style="display:none;">Id User</th>
                                             <th>Email</th>
                                             <th>Nama Peserta</th>
                                             <th>Last Login</th>

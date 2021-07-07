@@ -134,7 +134,7 @@
                     <h3 class="card-title">Enrolled Course</h3>
                 </div>
                 <!-- /.card-header -->
-                <div class="card-body">
+                <div class="card-body table-responsive">
                     <table id="example1" class="table table-bordered table-striped">
                         <thead>
                         <tr>
@@ -221,7 +221,7 @@
                     <h3 class="card-title">Available Course</h3>
                 </div>
                 <!-- /.card-header -->
-                <div class="card-body">
+                <div class="card-body  table-responsive">
                     <table id="example3" class="table table-bordered table-striped">
                         <thead>
                         <tr>
