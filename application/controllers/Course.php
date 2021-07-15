@@ -8,7 +8,7 @@ class Course extends CI_Controller
     {
         parent::__construct();
         $this->load->model(array('course_model'));
-        if (empty($this->session->userdata('email'))) {
+        if (empty($this->session->userdata('username'))) {
             redirect('login');
         }
     }
@@ -18,7 +18,7 @@ class Course extends CI_Controller
         $idpeserta = $this->session->userdata('idpeserta');
         $data['getcourse'] = $this->course_model->getCourse($idpeserta);
         $data['course'] = $this->course_model->allCourse();
-        $data['hasil'] = $this->course_model->getCourseHasilById('6');
+        // $data['hasil'] = $this->course_model->getCourseHasilById('6');
         // echo "<pre/>";
         // print_r($data);
         $this->load->view('course',$data);
@@ -141,7 +141,7 @@ class Course extends CI_Controller
     public function enrollCourse($idCourse){
         $data = array(
             "datecourse" => date("Y/m/d h:i:s"),
-            "idpeserta" => $this->session->userdata('idpeserta'),
+            "idpeserta" => $this->session->userdata('id'),
             "idcourse" => $idCourse,
             "flag" => "pre"
         ); 

@@ -5,7 +5,7 @@
 
 <script type="text/javascript">
     function savePeserta() {
-        if ($("#email").val() == "" || $("#password").val() == "" || $("#nama").val() == "") {
+        if ($("#username").val() == "" || $("#password").val() == "" || $("#nama").val() == "") {
             Swal.fire({
                 icon: 'warning',
                 text: 'Harap Melengkapi Data!',
@@ -15,9 +15,9 @@
 
         var dataArray = {
             "peserta": {
-                "email": $("#email").val(),
-                "namapeserta": $("#nama").val(),
-                "password": CryptoJS.MD5($("#password").val()).toString(),
+                "username": $("#username").val(),
+                "nama_lengkap": $("#nama").val(),
+                "pass": CryptoJS.MD5($("#password").val()).toString(),
             }
         }
 
@@ -83,15 +83,15 @@
                     <div class="card-body">
                         <div class="card-body">
                             <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">Email</label>
+                                <label class="col-sm-2 col-form-label">Username</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="email" placeholder="Email">
+                                    <input type="text" class="form-control" id="username" placeholder="Username">
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">Nama Peserta</label>
+                                <label class="col-sm-2 col-form-label">Nama Lengkap</label>
                                 <div class="col-sm-10">
-                                    <input type="email" class="form-control" id="nama" placeholder="Nama Peserta">
+                                    <input type="text" class="form-control" id="nama" placeholder="Nama Lengkap">
                                 </div>
                             </div>
                             <div class="form-group row">

@@ -28,7 +28,7 @@ class Peserta extends CI_Controller
     public function saveData()
     {
         $data = $this->input->post('peserta');
-        $this->peserta_model->saveData($data, 'aauth_users');
+        $this->peserta_model->saveData($data, 'mpeserta');
         print_r($this->input->post());
     }
 
@@ -43,14 +43,14 @@ class Peserta extends CI_Controller
     public function updateData($idData)
     {
         $peserta = $this->input->post('peserta');
-        $this->peserta_model->updateData($idData, $peserta, 'aauth_users');
+        $this->peserta_model->updateData($idData, $peserta, 'mpeserta');
         print_r($this->input->post());
     }
 
     function delete($idData)
     {
         if (isset($idData)) {
-            $this->peserta_model->deleteData($idData, "aauth_users");
+            $this->peserta_model->deleteData($idData, "mpeserta");
         }
         return "Data Berhasil Di Delete";
     }
@@ -58,7 +58,7 @@ class Peserta extends CI_Controller
     public function resetPassword($idData)
     {
         $peserta = $this->input->post('peserta');
-        $this->peserta_model->updateData($idData, $peserta, 'aauth_users');
+        $this->peserta_model->updateData($idData, $peserta, 'mpeserta');
         print_r($this->input->post());
     }
 }

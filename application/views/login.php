@@ -51,7 +51,7 @@ $appName = $this->db->query($query)->result_array()[0]['appname'];
 
                 <?php echo form_open('login/login'); ?>
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control" name="email" placeholder="E-Mail">
+                    <input type="text" class="form-control" name="username" placeholder="Username">
                     <div class="input-group-append">
                         <div class="input-group-text">
                             <span class="fas fa-user"></span>

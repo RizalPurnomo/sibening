@@ -65,9 +65,9 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <a href="<?php echo base_url(); ?>admin/peserta/add" class="btn btn-app">
+                            <!-- <a href="<?php echo base_url(); ?>admin/peserta/add" class="btn btn-app">
                                 <i class="fas fa-user"></i> Tambah User
-                            </a>
+                            </a> -->
                             <div class="card-tools">
                                 <button type="button" class="btn btn-tool" data-card-widget="collapse">
                                     <i class="fas fa-minus"></i>
@@ -82,10 +82,10 @@
                                         <tr>
                                             <th>No</th>
                                             <th  style="display:none;">Id User</th>
-                                            <th>Email</th>
+                                            <th>Username</th>
                                             <th>Nama Peserta</th>
                                             <th>Last Login</th>
-                                            <th style="width:15%">Aksi</th>
+                                            <!-- <th style="width:15%">Aksi</th> -->
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -95,13 +95,13 @@
                                                 <tr id="peserta<?php echo $idpeserta; ?>">
                                                     <td><?php echo $a + 1 ?></td>
                                                     <td  style="display:none;"><?php echo $idpeserta ?></td>
-                                                    <td><?php echo $peserta[$a]['email'] ?></td>
+                                                    <td><?php echo $peserta[$a]['username'] ?></td>
                                                     <td><?php echo $peserta[$a]['namapeserta'] ?></td>
                                                     <td><?php echo $peserta[$a]['lastlogin'] ?></td>
-                                                    <td>
-                                                        <a class="btn btn-large btn-primary" href="javascript:selectData('peserta<?php echo $peserta[$a]['idpeserta']; ?>')">Edit</a>
-                                                        | <a class="btn btn-large btn-danger" href="javascript:deleteData('peserta<?php echo $peserta[$a]['idpeserta']; ?>')">Delete</a>
-                                                    </td>
+                                                    <!-- <td>
+                                                        <a class="btn btn-large btn-primary" href="javascript:selectData('peserta<?php echo $peserta[$a]['id']; ?>')">Edit</a>
+                                                        | <a class="btn btn-large btn-danger" href="javascript:deleteData('peserta<?php echo $peserta[$a]['id']; ?>')">Delete</a>
+                                                    </td> -->
                                                 </tr>
                                         <?php }
                                         } ?>
@@ -110,10 +110,10 @@
                                         <tr>
                                             <th>No</th>
                                             <th  style="display:none;">Id User</th>
-                                            <th>Email</th>
+                                            <th>Username</th>
                                             <th>Nama Peserta</th>
                                             <th>Last Login</th>
-                                            <th style="width:15%">Aksi</th>
+                                            <!-- <th style="width:15%">Aksi</th> -->
                                         </tr>
                                     </tfoot>
                                 </table>

@@ -67,7 +67,7 @@
                     <div class="card-header">
                         <h3 class="card-title">
                             <i class="fas fa-chart-pie mr-1"></i>
-                            Input Data Question
+                            Input Data Question <b><?php echo $question[0]['title']; ?></b>
                             <input type="hidden" class="form-control" id="idcourse" value="<?php echo $question[0]['idcourse']; ?>">
                         </h3>
                         <div class="card-tools">
@@ -90,6 +90,7 @@
                                         <div class="timeline-item">
                                             <h3 class="timeline-header">
                                             <div class="card-body pad">
+                                                Soal Nomor <?php echo $a+1; ?>
                                                 <div class="mb-1">
                                                     <textarea class="textarea" id="question<?php echo $question[$a]['idquestion']; ?>" placeholder="Place some text here"
                                                             style="width: 100%; height: 300px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 5px;"><?php echo trim($question[$a]['question']) ; ?></textarea>

@@ -9,24 +9,24 @@ class Peserta_model extends CI_Model
         parent::__construct();
     }
 
-    public function getValidPeserta($email, $password)
+    public function getValidPeserta($username, $password)
     {
-        $sql = "SELECT * FROM aauth_users 
- 				where username='" . $email . "' and pass='" . $password . "'";
+        $sql = "SELECT * FROM mpeserta 
+ 				where username='" . $username . "' and password='" . $password . "'";
         $qry = $this->db->query($sql);
         return $qry->result_array();
     }
 
-    public function updateLastLogin($email, $data, $tabel)
+    public function updateLastLogin($username, $data, $tabel)
     {
-        $this->db->where('id', $email);
+        $this->db->where('idpeserta', $username);
         $this->db->update($tabel, $data);
-        return  "Data " . $email . " Berhasil Diupdate";
+        return  "Data " . $username . " Berhasil Diupdate";
     }
 
     public function getAllPeserta()
     {
-        $sql = "SELECT * FROM aauth_users  order by id desc";
+        $sql = "SELECT * FROM mpeserta  order by idpeserta desc";
         $qry = $this->db->query($sql);
         return $qry->result_array();
     }
@@ -38,20 +38,20 @@ class Peserta_model extends CI_Model
 
     public function updateData($id, $data, $tabel)
     {
-        $this->db->where('id', $id);
+        $this->db->where('idpeserta', $id);
         $this->db->update($tabel, $data);
         return  "Data " . $id . " Berhasil Diupdate";
     }
 
     public function deleteData($id, $tabel)
     {
-        $this->db->where('id', $id);
+        $this->db->where('idpeserta', $id);
         $this->db->delete($tabel);
     }
 
     public function getPesertaById($id)
     {
-        $query = "SELECT * FROM aauth_users WHERE id='$id'";
+        $query = "SELECT * FROM mpeserta WHERE idpeserta='$id'";
         $sql = $this->db->query($query);
         return $sql->result_array();
     }

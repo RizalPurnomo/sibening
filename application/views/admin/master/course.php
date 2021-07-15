@@ -25,9 +25,23 @@
                     type: "POST",
                     url: "<?php echo base_url(); ?>admin/course/delete/" + idData,
                     success: function(html) {
-                        console.log(html);
-                        var url = "<?php echo base_url(); ?>admin/course/";
-                        window.location.href = url;
+                        if(html=="true"){
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Data Berhasil Disimpan',
+                                showConfirmButton: false,
+                                timer: 1500
+                            })
+                            window.location.href = "<?php echo base_url(); ?>admin/course/";
+                        }else{
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Data Gagal Disimpan karena data relasi sudah terisi',
+                                showConfirmButton: false,
+                                timer: 1500
+                            })                            
+                        }
+                        // console.log(html);
                     }
                 })
             } else {
@@ -59,8 +73,8 @@
 
     <!-- Main content -->
     <section class="content">
-      <div class="container-fluid">
-        <!-- Small boxes (Stat box) -->
+        <div class="container-fluid">
+            <!-- Small boxes (Stat box) -->
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
@@ -113,7 +127,7 @@
                                         <th>Kategory</th>
                                         <th>Title</th>
                                         <th>JPL</th>
-                                        <th style="width:15%">Aksi</th>
+                                        <th>Aksi</th>
                                     </tfoot>
                                 </table>
                             </div>
@@ -124,10 +138,10 @@
                 </div>
                 <!-- /.card -->
             </div>
-        <!-- /.row -->
-        <!-- Main row -->
+            <!-- /.row -->
+            <!-- Main row -->
 
-      </div><!-- /.container-fluid -->
+        </div><!-- /.container-fluid -->
     </section>
     <!-- /.content -->
   </div>

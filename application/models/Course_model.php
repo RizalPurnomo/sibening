@@ -22,7 +22,7 @@ class Course_model extends CI_Model
 
     public function allCourse()
     {
-        $sql = "SELECT a.idcourse AS idcourses,a.* FROM mcourse a";
+        $sql = "SELECT a.idcourse AS idcourses,a.* FROM mcourse a ORDER BY idcourse desc";
         $qry = $this->db->query($sql);
         return $qry->result_array();
         // echo $sql;
@@ -38,7 +38,7 @@ class Course_model extends CI_Model
     public function getCourseDetailById($idgetcourse){
         $sql = "SELECT * FROM getcourse a
             INNER JOIN mcourse b ON a.idcourse=b.idcourse
-            INNER JOIN mpeserta c ON c.idpeserta=a.idpeserta
+            INNER JOIN aauth_users c ON c.id=a.idpeserta
             WHERE idgetcourse='$idgetcourse'";
         $qry = $this->db->query($sql);
         return $qry->result_array();
@@ -170,8 +170,9 @@ class Course_model extends CI_Model
 
     //Question
     public function getQuestionById($idcourse){
-        $sql = "SELECT * FROM mquestion 
-            WHERE idcourse='$idcourse'";
+        $sql = "SELECT * FROM mquestion a
+            INNER JOIN mcourse b ON a.idcourse=b.idcourse 
+            WHERE a.idcourse='$idcourse'";
         $qry = $this->db->query($sql);
         return $qry->result_array();
     }    

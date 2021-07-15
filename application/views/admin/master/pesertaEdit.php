@@ -22,7 +22,7 @@
         if (password) {
             var dataArray = {
                 "peserta": {
-                    "password": CryptoJS.MD5(password).toString()
+                    "pass": CryptoJS.MD5(password).toString()
                 }
             }
 
@@ -40,14 +40,14 @@
                         timer: 1500
                     })
                     console.log(result);
-                    window.location = "<?php echo base_url(); ?>admin/peserta";
+                    // window.location = "<?php echo base_url(); ?>admin/peserta";
                 }
             })
         }
     }
 
     function updatePeserta() {
-        if ($("#email").val() == "" || $("#password").val() == "" || $("#nama").val() == "") {
+        if ($("#username").val() == "" || $("#password").val() == "" || $("#nama").val() == "") {
             Swal.fire({
                 icon: 'warning',
                 text: 'Harap Melengkapi Data!',
@@ -57,8 +57,8 @@
 
         var dataArray = {
             "peserta": {
-                "email": $("#email").val(),
-                "namapeserta": $("#nama").val()
+                "username": $("#username").val(),
+                "nama_lengkap": $("#nama").val()
             }
         }
 
@@ -126,19 +126,19 @@
                             <div class="form-group row">
                                 <label for="inputEmail3" class="col-sm-2 col-form-label">Id Peserta</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="idpeserta" value="<?php echo $peserta[0]['idpeserta']; ?>" disabled placeholder="User Id">
+                                    <input type="text" class="form-control" id="idpeserta" value="<?php echo $peserta[0]['id']; ?>" disabled placeholder="User Id">
                                 </div>
                             </div>                            
                             <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">Email</label>
+                                <label class="col-sm-2 col-form-label">Username</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="email" placeholder="Email" value="<?php echo $peserta[0]['email']; ?>">
+                                    <input type="text" class="form-control" id="username" placeholder="Username" value="<?php echo $peserta[0]['username']; ?>">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Nama Peserta</label>
                                 <div class="col-sm-10">
-                                    <input type="email" class="form-control" id="nama" placeholder="Nama Peserta" value="<?php echo $peserta[0]['namapeserta']; ?>">
+                                    <input type="text" class="form-control" id="nama" placeholder="Nama Lengkap" value="<?php echo $peserta[0]['nama_lengkap']; ?>">
                                 </div>
                             </div>
                             <div class="form-group row">

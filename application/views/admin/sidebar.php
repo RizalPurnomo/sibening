@@ -10,6 +10,8 @@
         $master = ($this->uri->segment(2) == 'peserta' || $this->uri->segment(2) == 'course' ? 'menu-open' : '');
         $peserta = ($this->uri->segment(2) == 'peserta' ? 'active' : '');
         $course = ($this->uri->segment(2) == 'course' ? 'active' : '');        
+        $transaksi = ($this->uri->segment(2) == 'aksescourse' ? 'menu-open' : '');
+        $aksescourse = ($this->uri->segment(2) == 'aksescourse' ? 'active' : '');
     ?>
 
     <?php
@@ -50,12 +52,6 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="<?php echo base_url(); ?>" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>User</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
                             <a href="<?php echo base_url(); ?>admin/peserta" class="nav-link <?php echo $peserta; ?>">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Peserta</p>
@@ -69,7 +65,23 @@
                         </li>                        
                     </ul>
                 </li>
-
+                <li class="nav-item has-treeview <?php echo $transaksi; ?>">
+                    <a href="#" class="nav-link ">
+                        <i class="nav-icon fas fa-circle"></i>
+                        <p>
+                            Transaksi
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="<?php echo base_url(); ?>admin/aksescourse" class="nav-link <?php echo $aksescourse; ?>">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Akses Course</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

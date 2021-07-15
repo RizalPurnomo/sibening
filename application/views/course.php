@@ -134,17 +134,18 @@
                     <h3 class="card-title">Enrolled Course</h3>
                 </div>
                 <!-- /.card-header -->
+
                 <div class="card-body table-responsive">
                     <table id="example1" class="table table-bordered table-striped">
                         <thead>
-                        <tr>
-                            <th>No</th>
-                            <!-- <th>Id Get Course</th> -->
-                            <th>Date</th>
-                            <th>title</th>
-                            <th>JPL</th>
-                            <th>Action</th>
-                        </tr>
+                          <tr>
+                              <th>No</th>
+                              <!-- <th>Id Get Course</th> -->
+                              <th>Date</th>
+                              <th>title</th>
+                              <th>JPL</th>
+                              <th>Action</th>
+                          </tr>
                         </thead>
                         <tbody>
                         <?php 

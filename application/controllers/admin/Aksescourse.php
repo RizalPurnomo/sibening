@@ -1,13 +1,13 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Course extends CI_Controller
+class Aksescourse extends CI_Controller
 {
 
     public function __construct()
     {
         parent::__construct();
-        $this->load->model(array('course_model'));
+        $this->load->model(array('aksescourse_model'));
         if (empty($this->session->userdata('realname'))) {
             redirect('login');
         }
@@ -15,9 +15,23 @@ class Course extends CI_Controller
 
     public function index()
     {
-        $data['course'] = $this->course_model->allCourse();
-        $this->load->view('admin/master/course',$data);
+        $data['kategori'] = $this->aksescourse_model->allkategori();
+        $data['bagian'] = $this->aksescourse_model->allbagian();
+        $this->load->view('admin/master/aksescourse',$data);
     }
+
+    public function getaksescoursebykategori($idkategori)
+    {
+        $data['bagian'] = $this->aksescourse_model->allbagian();
+        $data['kategori'] = $this->aksescourse_model->allkategori();
+        $data['aksescourse'] = $this->aksescourse_model->getaksescoursebykategori($idkategori);
+        echo json_encode($data);
+        // print_r($data);
+        // $this->load->view('admin/master/aksescourse',$data);
+    }
+
+
+    //----------------------
 
     public function add()
     {
