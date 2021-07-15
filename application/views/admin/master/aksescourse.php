@@ -19,7 +19,7 @@
 
                 for (x in arr['bagian']) {
                     for (j in arr['aksescourse']) {
-                        checked = arr['bagian'][x]['bagian_id'] == arr['aksescourse'][j]['idbagian'] ? 'checked' : '';
+                        checked[j] = arr['bagian'][x]['bagian_id'] == arr['aksescourse'][j]['idbagian'] ? 'checked' : '';
                     }
                     txt +=`
                         <li>
