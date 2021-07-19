@@ -35,4 +35,18 @@ class Aksescourse_model extends CI_Model
         $sql = $this->db->query($query);
         return $sql->result_array();
     }
+
+
+
+
+    public function saveData($data, $tabel)
+    {
+        $this->db->insert($tabel, $data);
+    }
+
+    public function deleteAksesCourse($id, $tabel)
+    {
+        $this->db->where('idkategori', $id);
+        $this->db->delete($tabel);
+    }
 }

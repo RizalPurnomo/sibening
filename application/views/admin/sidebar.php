@@ -7,11 +7,13 @@
     </script>
 
     <?php
-        $master = ($this->uri->segment(2) == 'peserta' || $this->uri->segment(2) == 'course' ? 'menu-open' : '');
+        $master = ($this->uri->segment(2) == 'peserta' || $this->uri->segment(2) == 'course' || $this->uri->segment(2) == 'import' ? 'menu-open' : '');
         $peserta = ($this->uri->segment(2) == 'peserta' ? 'active' : '');
-        $course = ($this->uri->segment(2) == 'course' ? 'active' : '');        
-        $transaksi = ($this->uri->segment(2) == 'aksescourse' ? 'menu-open' : '');
+        $course = ($this->uri->segment(2) == 'course' ? 'active' : '');      
+        $import = ($this->uri->segment(2) == 'import' ? 'active' : '');        
+        $report = ($this->uri->segment(2) == 'report' ? 'menu-open' : '');
         $aksescourse = ($this->uri->segment(2) == 'aksescourse' ? 'active' : '');
+        $terdaftar = ($this->uri->segment(2) == 'report' ? 'active' : '');     
     ?>
 
     <?php
@@ -62,26 +64,38 @@
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Course</p>
                             </a>
-                        </li>                        
+                        </li> 
+                        <li class="nav-item">
+                            <a href="<?php echo base_url(); ?>admin/import" class="nav-link <?php echo $import; ?>">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Import Question</p>
+                            </a>
+                        </li>                                                
                     </ul>
                 </li>
-                <li class="nav-item has-treeview <?php echo $transaksi; ?>">
+                <li class="nav-item has-treeview ">
+                    <a href="<?php echo base_url(); ?>admin/aksescourse" class="nav-link <?php echo $aksescourse; ?>">
+                            <i class="nav-icon fas fa-circle"></i>
+                            <p>Akses Course</p>
+                        </a>
+                </li>
+                <li class="nav-item has-treeview <?php echo $report; ?>">
                     <a href="#" class="nav-link ">
                         <i class="nav-icon fas fa-circle"></i>
                         <p>
-                            Transaksi
+                            Report
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="<?php echo base_url(); ?>admin/aksescourse" class="nav-link <?php echo $aksescourse; ?>">
+                            <a href="<?php echo base_url(); ?>admin/report/pesertaTerdaftar" class="nav-link <?php echo $terdaftar; ?>">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Akses Course</p>
+                                <p>Peserta Terdaftar</p>
                             </a>
-                        </li>
+                        </li>                        
                     </ul>
-                </li>
+                </li>            
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

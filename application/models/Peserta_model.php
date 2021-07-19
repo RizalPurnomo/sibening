@@ -55,4 +55,16 @@ class Peserta_model extends CI_Model
         $sql = $this->db->query($query);
         return $sql->result_array();
     }
+
+
+    public function getPesertaTerdaftar()
+    {
+        $sql = "SELECT * FROM getcourse a
+            INNER JOIN mpeserta b ON a.idpeserta=b.idpeserta
+            INNER JOIN mcourse c ON c.idcourse=a.idcourse
+            INNER JOIN mkategori d ON d.idkategori=c.idkategori
+            ORDER BY datecourse DESC";
+        $qry = $this->db->query($sql);
+        return $qry->result_array();
+    }
 }

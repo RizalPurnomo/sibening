@@ -15,10 +15,11 @@
 
         var dataArray = {
             "course": {
-                "kategori": $("#kategori").val(),
+                // "kategori": $("#kategori").val(),
                 "title": $("#title").val(),
                 "jpl": $("#jpl").val(),
-                "materi": $("#materi").val()
+                "materi": $("#materi").val(),
+                "idkategori" : $("#kategori").val()
             }
         }
 
@@ -89,7 +90,7 @@
                                     <select class="form-control select2" style="width: 100%;" id="kategori">
                                         <option value="">-- Select Category--</option>
                                         <?php for ($a = 0; $a < count($kategori); $a++) {  ?>
-                                            <option value="<?php echo $kategori[$a]['kategori'] ?>">
+                                            <option value="<?php echo $kategori[$a]['idkategori'] ?>">
                                                 <?php echo $kategori[$a]['kategori']  ?>
                                             </option>
                                         <?php } ?>

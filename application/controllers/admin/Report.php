@@ -1,13 +1,13 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Aksescourse extends CI_Controller
+class Report extends CI_Controller
 {
 
     public function __construct()
     {
         parent::__construct();
-        $this->load->model(array('aksescourse_model'));
+        $this->load->model(array('peserta_model'));
         if (empty($this->session->userdata('realname'))) {
             redirect('login');
         }
@@ -15,41 +15,38 @@ class Aksescourse extends CI_Controller
 
     public function index()
     {
-        $data['kategori'] = $this->aksescourse_model->allkategori();
-        $data['bagian'] = $this->aksescourse_model->allbagian();
-        $this->load->view('admin/master/aksescourse',$data);
+        $this->load->view('admin/master/backupQuestion');
     }
 
-    // public function get($id){
+    public function pesertaTerdaftar(){
+        $data['peserta'] = $this->peserta_model->getPesertaTerdaftar();
+        $this->load->view('admin/report/pesertaTerdaftar',$data);
+    }
 
-    // }
-
-    public function getaksescoursebykategori($idkategori)
+    public function importQuestion()
     {
-        $data['bagian'] = $this->aksescourse_model->allbagian();
-        $data['kategori'] = $this->aksescourse_model->allkategori();
-        $data['aksescourse'] = $this->aksescourse_model->getaksescoursebykategori($idkategori);
-        echo json_encode($data);
-    }
-
-    public function deleteupdateakses($idkategori){
-        $this->aksescourse_model->deleteAksesCourse($idkategori, "aksescourse");
-
-        $aksescourse = $this->input->post('aksescourse');
-        print_r($aksescourse);
-        for ($a = 0; $a < count($aksescourse); $a++) {
-            $data = array(
-                'idbagian' => $aksescourse[$a],
-                'idkategori' => $idkategori
-            );
-            $this->aksescourse_model->saveData($data, 'aksescourse');
-            print_r($this->input->post());
+        $file_mimes = array('text/x-comma-separated-values', 'text/comma-separated-values', 'application/octet-stream', 'application/vnd.ms-excel', 'application/x-csv', 'text/x-csv', 'text/csv', 'application/csv', 'application/excel', 'application/vnd.msexcel', 'text/plain', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        if (isset($_FILES['upload_file']['name']) && in_array($_FILES['upload_file']['type'], $file_mimes)) {
+            $arr_file = explode('.', $_FILES['upload_file']['name']);
+            $extension = end($arr_file);
+            if ('csv' == $extension) {
+                $reader = new \PhpOffice\PhpSpreadsheet\Reader\Csv();
+            } else {
+                $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
+            }
+            $spreadsheet = $reader->load($_FILES['upload_file']['tmp_name']);
+            $sheetData = $spreadsheet->getActiveSheet()->toArray();
+            $data['sheetData'] = $sheetData;
+            // echo "<pre>";
+            // print_r($data);
+            $this->load->view('admin/master/backupPreviewQuestion', $data);
         }
-    }
+    }    
 
 
-    //----------------------
 
+
+    //------------------------
     public function add()
     {
         $data['kategori'] = $this->course_model->getAllKategori();

@@ -67,6 +67,48 @@
                     <div class="card-header">
                         <h3 class="card-title">
                             <i class="fas fa-chart-pie mr-1"></i>
+                            Import Question
+                        </h3>
+                        <div class="card-tools">
+
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="container-fluid">
+
+                            <h3><u>Import/Export using phpspreadsheet in codeigniter</u></h3>
+                            <?php echo form_open_multipart('admin/course/importQuestion', array('name' => 'spreadsheet')); ?>
+                            <table align="center" cellpadding="5">
+                                <tr>
+                                    <td>File :</td>
+                                    <td><input type="file" size="40px" name="upload_file" /></td>
+                                    <td class="error"><?php echo form_error('name'); ?></td>
+                                    <td colspan="5" align="center">
+                                        <input type="submit" value="Import Question" />
+                                    </td>
+                                </tr>
+                            </table>
+                            <?php echo form_close(); ?>
+
+
+
+                        </div>
+
+
+                    </div>
+                </div>
+                <!-- ./card-body -->
+            </div>
+            <!-- /.card -->
+        </div>
+        <!-- /.row -->
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            <i class="fas fa-chart-pie mr-1"></i>
                             Input Data Question <b><?php echo $question[0]['title']; ?></b>
                             <input type="hidden" class="form-control" id="idcourse" value="<?php echo $question[0]['idcourse']; ?>">
                         </h3>
@@ -161,7 +203,8 @@
             </div>
             <!-- /.card -->
         </div>
-        <!-- /.row -->
+        <!-- /.row -->        
+
         <!-- Main row -->
 
       </div><!-- /.container-fluid -->

@@ -17,7 +17,7 @@ class Course extends CI_Controller
     {
         $idpeserta = $this->session->userdata('idpeserta');
         $data['getcourse'] = $this->course_model->getCourse($idpeserta);
-        $data['course'] = $this->course_model->allCourse();
+        $data['course'] = $this->course_model->availableCourse($idpeserta);
         // $data['hasil'] = $this->course_model->getCourseHasilById('6');
         // echo "<pre/>";
         // print_r($data);
@@ -141,7 +141,7 @@ class Course extends CI_Controller
     public function enrollCourse($idCourse){
         $data = array(
             "datecourse" => date("Y/m/d h:i:s"),
-            "idpeserta" => $this->session->userdata('id'),
+            "idpeserta" => $this->session->userdata('idpeserta'),
             "idcourse" => $idCourse,
             "flag" => "pre"
         ); 

@@ -11,7 +11,8 @@ $appName = $this->db->query($query)->result_array()[0]['appname'];
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title><?php echo $appName; ?> | <?php echo $this->uri->segment(1); ?></title>
-
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/fontawesome-free/css/all.min.css">
     <!-- overlayScrollbars -->

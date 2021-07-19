@@ -3,6 +3,35 @@
 
 <script type="text/javascript">
 
+    function updateaksescourse(id){
+        var selected = [];
+        $('#divaksescourse input:checked').each(function() {
+            selected.push($(this).attr('value'));
+        });
+
+        var dataArray = {
+            "aksescourse": selected
+        }
+
+        $.ajax({
+            type: "POST",
+            data: dataArray,
+            url: "<?php echo base_url(); ?>admin/aksescourse/deleteupdateakses/" + id,
+            success: function(result) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Data Berhasil Disimpan',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+
+                console.log(result);
+                // window.location = "<?php echo base_url(); ?>admin/aksescourse";
+
+            }
+        })
+    }
+
     function selectData(id){
         let idkategori = $("#" + id + " td")[1].innerHTML;
         let kategori = $("#" + id + " td")[2].innerHTML;
@@ -15,52 +44,25 @@
                 console.log(arr);
                 txt="";
                 txtjudul = kategori;
-                txtupdate='<button onclick="updateaksescourse()" class="btn btn-info">Update</button>';      
+                txtupdate=`<button onclick="updateaksescourse(${idkategori})" class="btn btn-info">Update</button>`;      
 
                 for (x in arr['bagian']) {
-                    for (j in arr['aksescourse']) {
-                        checked[j] = arr['bagian'][x]['bagian_id'] == arr['aksescourse'][j]['idbagian'] ? 'checked' : '';
-                    }
+
                     txt +=`
                         <li>
-                            <input class="custom-control-input" type="checkbox" id="customCheckbox${x}" value="${arr['bagian'][x]['bagian_id']}" >
+                            <input class="custom-control-input" type="checkbox" id="customCheckbox${x}" name="customCheckbox${x}" value="${arr['bagian'][x]['bagian_id']}" `    
+                                for (y in arr['aksescourse']) {
+                                    if(arr['bagian'][x]['bagian_id'] == arr['aksescourse'][y]['idbagian']){
+                                        txt +='checked'
+                                    }else{
+                                        ''
+                                    }                                 }
+                            txt += ` >
                             <label for="customCheckbox${x}" class="custom-control-label">${arr['bagian'][x].bagian_nama}</label>
                         </li>`;
                 }
 
-
-                document.getElementById("divaksescourse").innerHTML = txt;
-                document.getElementById("divjudul").innerHTML = txtjudul;
-                document.getElementById("divupdate").innerHTML = txtupdate;
-
-
-                return;
-                if(arr['aksescourse'].length<1){
-                    txt="";
-                    txtjudul="";
-                    txtupdate="";
-                }else{
-                    txt = "";
-                            for (x in arr['bagian']) {
-                                checked = "";
-                                for (j in arr['aksescourse']) {
-                                    // arr['bagian'][x]['bagian_id'] == arr['aksescourse'][j]['idbagian'] ? checked='checked' : checked='';
-                                    if(arr['bagian'][x]['bagian_id'] == arr['aksescourse'][j]['idbagian']){
-                                        checked='checked';
-                                    }else{
-                                        checked='';
-                                    }
-                                    
-                                    txt +=`                                                    
-                                        <li>
-                                            <input class="custom-control-input" type="checkbox" id="customCheckbox${x}" value="${arr['bagian'][x]['bagian_id']}" ${checked}>
-                                            <label for="customCheckbox${x}" class="custom-control-label">${arr['bagian'][x].bagian_nama}</label>
-                                        </li>`;
-                                }
-                            }
-                    txtjudul = kategori;
-                    txtupdate='<button onclick="updateaksescourse()" class="btn btn-info">Update</button>';
-                }
+                console.log(txt);
                 document.getElementById("divaksescourse").innerHTML = txt;
                 document.getElementById("divjudul").innerHTML = txtjudul;
                 document.getElementById("divupdate").innerHTML = txtupdate;
