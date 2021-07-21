@@ -129,7 +129,12 @@
                                                     <td style="display:none;"><?php echo $idkategori ?></td>
                                                     <td><?php echo $kategori[$a]['kategori'] ?></td>
                                                     <td>
-                                                        <a class="btn btn-large btn-primary" href="javascript:selectData('kategori<?php echo $kategori[$a]['idkategori']; ?>')">Pilih</a>
+                                                        <a class="btn btn-primary btn-sm" href="javascript:selectData('kategori<?php echo $kategori[$a]['idkategori']; ?>')">
+                                                            <i class="fas fa-folder">
+                                                            </i>
+                                                            Pilih
+                                                        </a>                                                        
+                                                        <!-- <a class="btn btn-large btn-primary" href="javascript:selectData('kategori<?php echo $kategori[$a]['idkategori']; ?>')">Pilih</a> -->
                                                     </td>
                                                 </tr>
                                         <?php }

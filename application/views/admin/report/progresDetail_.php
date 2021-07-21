@@ -82,16 +82,14 @@
                 </thead>
                 <tbody>`
                   for (x in arr) {
-                    salahPre = "";
-                    salahPost = "";
-                    if(arr[x]['benar']=="n"){salahPre='bgcolor="red"';}
-                    if(arr[x]['benarpost']=="n"){salahPost='bgcolor="red"';}
+                    salah = "";
+                    if(arr[x]['benar']=="n"){salah='bgcolor="red"';}
                     txt +=`<tr>
                               <td>${(parseInt(x) + parseInt(1))} </td> 
                               <td>${arr[x]['question']}</td>
                               <td>${arr[x]['key']}</td>
-                              <td ${salahPre}>${arr[x]['answer']}</td>
-                              <td ${salahPost}>${arr[x]['answerpost']}</td>
+                              <td ${salah}>${arr[x]['answer']}</td>
+                              <td>${arr[x]['answerpost']}</td>
                           </tr>`;
                   }
                 `</tbody>
@@ -204,31 +202,11 @@
 
                                         ?>
                                         <!-- <?php print_r($getcourse[$a]); ?> -->
-                                        <a class="btn btn-info btn-sm <?php echo $pre; ?>" href="<?php echo base_url('course/preTest/') . $getcourse[$a]['idgetcourse']; ?>">
-                                          <i class="fas fa-pencil-alt">
-                                          </i>
-                                          Pre
-                                        </a>   
-                                        <a class="btn btn-primary btn-sm <?php echo $materi; ?>" href="<?php echo base_url('course/materi/') . $getcourse[$a]['idgetcourse']; ?>">
-                                          <i class="fas fa-folder">
-                                          </i>
-                                          Materi
-                                        </a>    
-                                        <a class="btn btn-info btn-sm <?php echo $post; ?>" href="<?php echo base_url('course/postTest/') . $getcourse[$a]['idgetcourse']; ?>">
-                                          <i class="fas fa-pencil-alt">
-                                          </i>
-                                          Post
-                                        </a>    
-                                        <a class="btn btn-danger btn-sm <?php echo $delete; ?>" href="javascript:deleteData('<?php echo $getcourse[$a]['idgetcourse']; ?>')">
-                                          <i class="fas fa-trash">
-                                          </i>
-                                          Delete
-                                        </a>                                          
-                                        <a class="btn btn-primary btn-sm <?php echo $finish; ?>" href="javascript:showModal('<?php echo $getcourse[$a]['idgetcourse']; ?>')">
-                                          <i class="fas fa-folder">
-                                          </i>
-                                          Finish
-                                        </a>  
+                                        <a class="btn btn-large btn-primary <?php echo $pre; ?>" href="<?php echo base_url('course/preTest/') . $getcourse[$a]['idgetcourse']; ?>">Pre</a>
+                                        <a class="btn btn-large btn-primary <?php echo $materi; ?>" href="<?php echo base_url('course/materi/') . $getcourse[$a]['idgetcourse']; ?>">Materi</a>
+                                        <a class="btn btn-large btn-primary <?php echo $post; ?>" href="<?php echo base_url('course/postTest/') . $getcourse[$a]['idgetcourse']; ?>">Post</a>
+                                        <a class="btn btn-large btn-danger <?php echo $delete; ?>" href="javascript:deleteData('<?php echo $getcourse[$a]['idgetcourse']; ?>')">Delete</a>
+                                        <a class="btn btn-large btn-success <?php echo $finish; ?>" href="javascript:showModal('<?php echo $getcourse[$a]['idgetcourse']; ?>')" >Hasil</a> <!-- data-toggle="modal" data-target="#modal-lg"  | href="<?php echo base_url('course/hasil/') . $getcourse[$a]['idgetcourse']; ?>"-->
                                     </td>
                                 </tr>
                         <?php }
@@ -283,11 +261,7 @@
                                     <td><?php echo $course[$a]['title'] ?></td>
                                     <td><?php echo $course[$a]['jpl'] ?></td>
                                     <td>
-                                      <a class="btn btn-primary btn-sm <?php echo $courses; ?>" href="javascript:selectedCourse('<?php echo $course[$a]['idcourses']; ?>')">
-                                          <i class="fas fa-folder">
-                                          </i>
-                                          Enroll
-                                      </a>                                       
+                                        <a class="btn btn-large btn-primary <?php echo $courses; ?>" href="javascript:selectedCourse('<?php echo $course[$a]['idcourses']; ?>')">Enroll</a>
                                     </td>
                                 </tr>
                         <?php }
@@ -302,74 +276,41 @@
           </div>
           <!-- /.col-md-6 -->
             <div class="col-lg-3">
-              <div class="card card-primary card-outline">
-                  <div class="card-header">
+                <div class="card card-primary card-outline">
+                    <div class="card-header">
                     <center><h5>Course Information</h5></center>
-                  </div>
-                  <div class="card-body">
-                    <div class="row">
-                      <table width=100% border="0">
-                        <tr>
-                          <td width=50%>
-                            <center>
-                              Finish VS Enrolled
-                              <?php 
-                                $percentageFinishEnroll = ($enrollFinished/$enrolled)*100;
-                              ?>
-                              <div class="progress progress-sm">
-                                <div class="progress-bar bg-green" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100" style="width: <?php echo $percentageFinishEnroll; ?>%">
-                                </div>
-                              </div>
-                              <small>
-                                <?php echo $enrollFinished; ?> / <?php echo $enrolled; ?>
-                              </small>                                   
-                            </center>                                
-                          </td>
-                          <td width=50%>
-                            <center>
-                              Get JPL VS Target
-                              <?php 
-                                $percentageJplTarget = ($getJPL/$targetJPL)*100;
-                              ?>
-                              <div class="progress progress-sm">
-                                <div class="progress-bar bg-green" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100" style="width: <?php echo $percentageJplTarget; ?>%">
-                                </div>
-                              </div>
-                              <small>
-                                <?php echo $getJPL; ?> / <?php echo $targetJPL; ?>
-                              </small>                                                                     
-                            </center>                                
-                          </td>
-                        </tr>
-                        <tr>
-                          <td width=50%>
-                            <center>
-                              Precentage JPL
-                              <?php 
-                                $percentage = ($JPLFinished/$targetJPL)*100;
-                              ?>
-                              <div class="progress progress-sm">
-                                <div class="progress-bar bg-green" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100" style="width: <?php echo $percentage; ?>%">
-                                </div>
-                              </div>
-                              <small>
-                                  <?php echo $percentage; ?>% Complete
-                              </small>                                 
-                            </center>                                
-                          </td>
-                          <td width=50%>
-                            <center>
-                              JPL Finish <br/>
-                              <span class="badge badge-success"><?php echo $JPLFinished; ?></span>
-                              <!-- <h1><?php echo $JPLFinished; ?></h1> -->
-                            </center>                                
-                          </td>
-                        </tr>
-                      </table>
                     </div>
-                  
-                  </div>
-              </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <center>
+                            Finish VS Enrolled
+                            <h1><?php echo $enrollFinished; ?> / <?php echo $enrolled; ?></h1>
+                            </center>
+                        </div>
+                        <div class="col-lg-6">
+                            <center>
+                            Get JPL VS Target
+                            <h1><?php echo $getJPL; ?> / <?php echo $targetJPL; ?> </h1>
+                            </center>
+                        </div>                        
+                        <!-- <div class = "vertical"></div> -->
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <center>
+                            Precentage JPL
+                            <h1><?php echo ($JPLFinished/$targetJPL)*100 ?>%</h1>
+                            </center>
+                        </div>
+                        <div class="col-lg-6">
+                            <center>
+                            JPL Finish
+                            <h1><?php echo $JPLFinished; ?></h1>
+                            </center>
+                        </div>                        
+                        <!-- <div class = "vertical"></div> -->
+                    </div>                    
+                </div>
             </div>
           <!-- /.col-md-6 -->
         </div>

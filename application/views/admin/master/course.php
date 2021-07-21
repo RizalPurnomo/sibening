@@ -113,9 +113,21 @@
                                                     <td><?php echo $course[$a]['title'] ?></td>
                                                     <td><?php echo $course[$a]['jpl'] ?></td>
                                                     <td>
-                                                        <a class="btn btn-large btn-success" href="<?php echo base_url('admin/course/question/') . $course[$a]['idcourse']; ?>">Question</a>
-                                                        <a class="btn btn-large btn-primary" href="javascript:selectData('course<?php echo $course[$a]['idcourse']; ?>')">Edit</a>
-                                                        <a class="btn btn-large btn-danger" href="javascript:deleteData('course<?php echo $course[$a]['idcourse']; ?>')">Delete</a>
+                                                        <a class="btn btn-primary btn-sm" href="<?php echo base_url('admin/course/question/') . $course[$a]['idcourse']; ?>">
+                                                            <i class="fas fa-folder">
+                                                            </i>
+                                                            Question
+                                                        </a>
+                                                        <a class="btn btn-info btn-sm" href="javascript:selectData('course<?php echo $course[$a]['idcourse']; ?>')">
+                                                            <i class="fas fa-pencil-alt">
+                                                            </i>
+                                                            Edit
+                                                        </a>   
+                                                        <a class="btn btn-danger btn-sm" href="javascript:deleteData('course<?php echo $course[$a]['idcourse']; ?>')">
+                                                            <i class="fas fa-trash">
+                                                            </i>
+                                                            Delete
+                                                        </a>                                                                                                                                                                        
                                                     </td>
                                                 </tr>
                                         <?php }

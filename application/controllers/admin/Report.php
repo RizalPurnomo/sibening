@@ -7,7 +7,7 @@ class Report extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->model(array('peserta_model'));
+        $this->load->model(array('peserta_model','course_model'));
         if (empty($this->session->userdata('realname'))) {
             redirect('login');
         }
@@ -18,30 +18,53 @@ class Report extends CI_Controller
         $this->load->view('admin/master/backupQuestion');
     }
 
-    public function pesertaTerdaftar(){
-        $data['peserta'] = $this->peserta_model->getPesertaTerdaftar();
-        $this->load->view('admin/report/pesertaTerdaftar',$data);
+    public function progresPeserta(){
+        $data['peserta'] = $this->peserta_model->getAllPeserta();
+        $data['progress'] = $this->course_model->progressPeserta();
+        $data['getJplFinish'] = $this->course_model->getJplFinish();
+        $this->load->view('admin/report/progresPeserta',$data);
     }
 
-    public function importQuestion()
-    {
-        $file_mimes = array('text/x-comma-separated-values', 'text/comma-separated-values', 'application/octet-stream', 'application/vnd.ms-excel', 'application/x-csv', 'text/x-csv', 'text/csv', 'application/csv', 'application/excel', 'application/vnd.msexcel', 'text/plain', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-        if (isset($_FILES['upload_file']['name']) && in_array($_FILES['upload_file']['type'], $file_mimes)) {
-            $arr_file = explode('.', $_FILES['upload_file']['name']);
-            $extension = end($arr_file);
-            if ('csv' == $extension) {
-                $reader = new \PhpOffice\PhpSpreadsheet\Reader\Csv();
-            } else {
-                $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
-            }
-            $spreadsheet = $reader->load($_FILES['upload_file']['tmp_name']);
-            $sheetData = $spreadsheet->getActiveSheet()->toArray();
-            $data['sheetData'] = $sheetData;
-            // echo "<pre>";
-            // print_r($data);
-            $this->load->view('admin/master/backupPreviewQuestion', $data);
-        }
+    public function logCourse(){
+        $data['peserta'] = $this->peserta_model->getPesertaTerdaftar();
+        // $data['progress'] = $this->course_model->progressPeserta();
+        $this->load->view('admin/report/logCourse',$data);
+    }
+
+    public function progresDetail($idpeserta){
+        $data['getcourse'] = $this->course_model->getCourse($idpeserta);
+        $data['course'] = $this->course_model->availableCourse($idpeserta);
+        $data['peserta'] = $this->peserta_model->getPesertaById($idpeserta);
+        $this->load->view('admin/report/progresDetail',$data);
     }    
+
+    public function preTest($idGetCourse)
+    {
+        $data['preTest'] = $this->course_model->getPreTest($idGetCourse);
+        $data['peserta'] = $this->peserta_model->getPesertaById($data['preTest'][0]['idpeserta']);
+        $data['idgetcourse'] = $idGetCourse;
+        $this->load->view('admin/report/preTest',$data);
+    }    
+
+    // public function importQuestion()
+    // {
+    //     $file_mimes = array('text/x-comma-separated-values', 'text/comma-separated-values', 'application/octet-stream', 'application/vnd.ms-excel', 'application/x-csv', 'text/x-csv', 'text/csv', 'application/csv', 'application/excel', 'application/vnd.msexcel', 'text/plain', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+    //     if (isset($_FILES['upload_file']['name']) && in_array($_FILES['upload_file']['type'], $file_mimes)) {
+    //         $arr_file = explode('.', $_FILES['upload_file']['name']);
+    //         $extension = end($arr_file);
+    //         if ('csv' == $extension) {
+    //             $reader = new \PhpOffice\PhpSpreadsheet\Reader\Csv();
+    //         } else {
+    //             $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
+    //         }
+    //         $spreadsheet = $reader->load($_FILES['upload_file']['tmp_name']);
+    //         $sheetData = $spreadsheet->getActiveSheet()->toArray();
+    //         $data['sheetData'] = $sheetData;
+    //         // echo "<pre>";
+    //         // print_r($data);
+    //         $this->load->view('admin/master/backupPreviewQuestion', $data);
+    //     }
+    // }    
 
 
 

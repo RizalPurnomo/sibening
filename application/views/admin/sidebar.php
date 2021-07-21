@@ -13,7 +13,8 @@
         $import = ($this->uri->segment(2) == 'import' ? 'active' : '');        
         $report = ($this->uri->segment(2) == 'report' ? 'menu-open' : '');
         $aksescourse = ($this->uri->segment(2) == 'aksescourse' ? 'active' : '');
-        $terdaftar = ($this->uri->segment(2) == 'report' ? 'active' : '');     
+        $progres = ($this->uri->segment(3) == 'progresPeserta' ? 'active' : '');  
+        $logCourse = ($this->uri->segment(3) == 'logCourse' ? 'active' : '');     
     ?>
 
     <?php
@@ -89,11 +90,17 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="<?php echo base_url(); ?>admin/report/pesertaTerdaftar" class="nav-link <?php echo $terdaftar; ?>">
+                            <a href="<?php echo base_url(); ?>admin/report/progresPeserta" class="nav-link <?php echo $progres; ?>">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Peserta Terdaftar</p>
+                                <p>Progres Peserta</p>
                             </a>
-                        </li>                        
+                        </li> 
+                        <li class="nav-item">
+                            <a href="<?php echo base_url(); ?>admin/report/logCourse" class="nav-link <?php echo $logCourse; ?>">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Log Course</p>
+                            </a>
+                        </li>                                                
                     </ul>
                 </li>            
             </ul>

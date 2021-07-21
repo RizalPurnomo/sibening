@@ -52,7 +52,7 @@ class Course_model extends CI_Model
     public function getCourseDetailById($idgetcourse){
         $sql = "SELECT * FROM getcourse a
             INNER JOIN mcourse b ON a.idcourse=b.idcourse
-            INNER JOIN aauth_users c ON c.id=a.idpeserta
+            INNER JOIN mpeserta c ON c.idpeserta=a.idpeserta
             WHERE idgetcourse='$idgetcourse'";
         $qry = $this->db->query($sql);
         return $qry->result_array();
@@ -173,6 +173,14 @@ class Course_model extends CI_Model
         $this->db->delete($tabel);
     }
 
+    public function getJplFinish(){
+        $sql = "SELECT SUM(jpl) AS jplFinish FROM getcourse a
+            INNER JOIN mcourse b ON a.idcourse=b.idcourse
+            WHERE flag='finish'";
+        $qry = $this->db->query($sql);
+        return $qry->result_array();
+    }
+
 
 
     //Kategory
@@ -198,6 +206,22 @@ class Course_model extends CI_Model
         $this->db->update($tabel, $data);
         return  "Data " . $id . " Berhasil Diupdate";
     } 
+
+    //Report
+    public function progressPeserta(){
+        $sql = "SELECT 
+            a.namapeserta, 
+            SUM(IF(flag!='finish',1,0)) AS progres, 
+            SUM(IF(flag='finish',1,0)) AS finish, 
+            SUM(IF(flag='finish',c.jpl,0)) AS jplfinish, 
+            a.* 
+            FROM mpeserta a
+            LEFT JOIN getcourse b ON a.idpeserta=b.`idpeserta`
+            LEFT JOIN mcourse c ON c.idcourse=b.idcourse
+            GROUP BY a.idpeserta";
+        $qry = $this->db->query($sql);
+        return $qry->result_array();
+    }    
 
 
     ///------------------------
