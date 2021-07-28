@@ -23,7 +23,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://192.168.101.93/sibening/';
+$config['base_url'] = 'http://192.168.101.54/sibening/';
 
 /*
 |--------------------------------------------------------------------------
@@ -136,7 +136,7 @@ $config['subclass_prefix'] = 'MY_';
 | Note: This will NOT disable or override the CodeIgniter-specific
 |	autoloading (application/config/autoload.php)
 */
-$config['composer_autoload'] = 'vendor/autoload.php';
+$config['composer_autoload'] = 'assets/vendor/autoload.php';
 
 /*
 |--------------------------------------------------------------------------

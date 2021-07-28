@@ -1364,16 +1364,46 @@ CREATE TABLE `aksescourse` (
   `idbagian` int(11) DEFAULT NULL,
   `idkategori` int(11) DEFAULT NULL,
   PRIMARY KEY (`idaksescourse`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `aksescourse` */
 
 insert  into `aksescourse`(`idaksescourse`,`idbagian`,`idkategori`) values 
 (1,34,9),
-(2,34,1),
-(3,32,1),
-(4,33,1),
-(5,35,1);
+(15,33,11),
+(16,1,1),
+(17,2,1),
+(18,3,1),
+(19,5,1),
+(20,6,1),
+(21,8,1),
+(22,9,1),
+(23,10,1),
+(24,11,1),
+(25,12,1),
+(26,13,1),
+(27,14,1),
+(28,15,1),
+(29,16,1),
+(30,17,1),
+(31,18,1),
+(32,19,1),
+(33,20,1),
+(34,21,1),
+(35,22,1),
+(36,23,1),
+(37,24,1),
+(38,25,1),
+(39,26,1),
+(40,27,1),
+(41,28,1),
+(42,29,1),
+(43,34,1),
+(44,32,1),
+(45,33,1),
+(46,35,1),
+(47,36,1),
+(48,37,1);
 
 /*Table structure for table `answer` */
 
@@ -1389,7 +1419,7 @@ CREATE TABLE `answer` (
   PRIMARY KEY (`idanswer`),
   KEY `idgetcourse` (`idgetcourse`),
   CONSTRAINT `answer_ibfk_1` FOREIGN KEY (`idgetcourse`) REFERENCES `getcourse` (`idgetcourse`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=109 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=129 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `answer` */
 
@@ -1403,7 +1433,27 @@ insert  into `answer`(`idanswer`,`idgetcourse`,`idquestion`,`answer`,`key`,`bena
 (105,20,24,'A','D','n'),
 (106,20,25,'A','E','n'),
 (107,20,26,'A','C','n'),
-(108,20,27,'A','E','n');
+(108,20,27,'A','E','n'),
+(109,21,18,'A','A','y'),
+(110,21,19,'B','A','n'),
+(111,21,20,'B','E','n'),
+(112,21,21,'C','B','n'),
+(113,21,22,'C','D','n'),
+(114,21,23,'E','C','n'),
+(115,21,24,'A','D','n'),
+(116,21,25,'B','E','n'),
+(117,21,26,'C','C','y'),
+(118,21,27,'C','E','n'),
+(119,25,136,'A','A','y'),
+(120,25,137,'B','B','y'),
+(121,25,138,'C','C','y'),
+(122,25,139,'B','D','n'),
+(123,25,140,'C','E','n'),
+(124,25,141,'B','A','n'),
+(125,25,142,'E','B','n'),
+(126,25,143,'D','C','n'),
+(127,25,144,'C','D','n'),
+(128,25,145,'C','E','n');
 
 /*Table structure for table `answerpost` */
 
@@ -1417,7 +1467,7 @@ CREATE TABLE `answerpost` (
   `key` varchar(10) DEFAULT NULL,
   `benarpost` varchar(2) DEFAULT NULL,
   PRIMARY KEY (`idanswerpost`)
-) ENGINE=InnoDB AUTO_INCREMENT=79 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=99 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `answerpost` */
 
@@ -1431,7 +1481,27 @@ insert  into `answerpost`(`idanswerpost`,`idgetcourse`,`idquestion`,`answerpost`
 (75,20,24,'D','D','y'),
 (76,20,25,'E','E','y'),
 (77,20,26,'C','C','y'),
-(78,20,27,'E','E','y');
+(78,20,27,'E','E','y'),
+(79,21,18,'B','A','n'),
+(80,21,19,'D','A','n'),
+(81,21,20,'D','E','n'),
+(82,21,21,'E','B','n'),
+(83,21,22,'B','D','n'),
+(84,21,23,'B','C','n'),
+(85,21,24,'C','D','n'),
+(86,21,25,'C','E','n'),
+(87,21,26,'E','C','n'),
+(88,21,27,'C','E','n'),
+(89,25,136,'B','A','n'),
+(90,25,137,'C','B','n'),
+(91,25,138,'D','C','n'),
+(92,25,139,'B','D','n'),
+(93,25,140,'B','E','n'),
+(94,25,141,'C','A','n'),
+(95,25,142,'C','B','n'),
+(96,25,143,'E','C','n'),
+(97,25,144,'B','D','n'),
+(98,25,145,'C','E','n');
 
 /*Table structure for table `getcourse` */
 
@@ -1447,14 +1517,17 @@ CREATE TABLE `getcourse` (
   KEY `idpeserta` (`idpeserta`),
   KEY `idcourse` (`idcourse`),
   CONSTRAINT `getcourse_ibfk_2` FOREIGN KEY (`idcourse`) REFERENCES `mcourse` (`idcourse`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `getcourse` */
 
 insert  into `getcourse`(`idgetcourse`,`datecourse`,`idpeserta`,`idcourse`,`flag`) values 
 (20,'2021-07-08 03:03:40',1,6,'finish'),
-(21,'2021-07-08 06:09:54',2,6,'pre'),
-(22,'2021-07-08 06:26:07',5,6,'pre');
+(21,'2021-07-08 06:09:54',2,6,'finish'),
+(22,'2021-07-08 06:26:07',5,6,'pre'),
+(23,'2021-07-16 08:54:48',2,9,'pre'),
+(25,'2021-07-21 03:11:42',1,9,'finish'),
+(26,'2021-07-23 03:11:24',1,12,'pre');
 
 /*Table structure for table `mbagian` */
 
@@ -1511,19 +1584,21 @@ DROP TABLE IF EXISTS `mcourse`;
 
 CREATE TABLE `mcourse` (
   `idcourse` int(11) NOT NULL AUTO_INCREMENT,
-  `kategori` varchar(20) DEFAULT NULL,
   `title` varchar(50) DEFAULT NULL,
   `jpl` int(11) DEFAULT NULL,
   `materi` text DEFAULT NULL,
+  `idkategori` int(11) DEFAULT NULL,
   PRIMARY KEY (`idcourse`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `mcourse` */
 
-insert  into `mcourse`(`idcourse`,`kategori`,`title`,`jpl`,`materi`) values 
-(6,'Data dan Informasi','Ujian Rekrutmen Pranata Komputer',1,'<p><a href=\"https://docs.google.com/forms/d/e/1FAIpQLSdmDdQ6D3pTBvxCM63fZY9uZ310FAqwy2b37_HnvSoA_oOsFA/formResponse\" target=\"_blank\">Link Ujian</a><br></p>'),
-(7,'Dokter','Course Kategori Dokter',2,'<p>Course Kategori Dokter</p><p><a href=\"http://192.168.101.93/sibening/admin\" target=\"_blank\">Link</a><br></p>'),
-(9,'Umum','Course Kategori Umum',2,'<p>Course Kategori Umum</p>');
+insert  into `mcourse`(`idcourse`,`title`,`jpl`,`materi`,`idkategori`) values 
+(6,'Ujian Rekrutmen Pranata Komputer',1,'<p><a href=\"https://docs.google.com/forms/d/e/1FAIpQLSdmDdQ6D3pTBvxCM63fZY9uZ310FAqwy2b37_HnvSoA_oOsFA/formResponse\" target=\"_blank\">Link Ujian</a><br></p>',9),
+(7,'Course Kategori Dokter',2,'<p>Course Kategori Dokter</p><p><a href=\"http://192.168.101.93/sibening/admin\" target=\"_blank\">Link</a><br></p>',2),
+(9,'Course Kategori Umum',2,'<p>Course Kategori Umum</p>',1),
+(11,'Course Kategori Perencanaan',1,'<p>Course Kategori Perencanaan<br></p>',10),
+(12,'Umum 2',1,'<p>Materi Umum ke&nbsp;</p>',1);
 
 /*Table structure for table `mkategori` */
 
@@ -1571,7 +1646,7 @@ CREATE TABLE `mpeserta` (
 
 insert  into `mpeserta`(`idpeserta`,`username`,`namapeserta`,`password`,`lastlogin`,`bagian_id`) values 
 (1,'rizalpurnomo@gmail.com','Rizal Purnomo','c6318323cc5693ce1f8d220cc9a5030e','2021-07-05 08:21:31',34),
-(2,'sidikpurnomo@gmail.com','Sidik Purnomo','eb6b3f6d9a488a9ecb28738cc9911ed8','2021-07-05 08:21:07',34),
+(2,'sidikpurnomo@gmail.com','Sidik Purnomo','c6318323cc5693ce1f8d220cc9a5030e','2021-07-05 08:21:07',33),
 (5,'husnulfakhri@gmail.com','Husnul Fakhri','a6870fd395279883571ee16d0c8a0960',NULL,34);
 
 /*Table structure for table `mprofile` */
@@ -1607,7 +1682,7 @@ CREATE TABLE `mquestion` (
   PRIMARY KEY (`idquestion`),
   KEY `idcourse` (`idcourse`),
   CONSTRAINT `mquestion_ibfk_1` FOREIGN KEY (`idcourse`) REFERENCES `mcourse` (`idcourse`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=166 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `mquestion` */
 
@@ -1631,7 +1706,37 @@ insert  into `mquestion`(`idquestion`,`idcourse`,`nomor`,`question`,`pila`,`pilb
 (34,7,NULL,'','','','','','',''),
 (35,7,NULL,'','','','','','',''),
 (36,7,NULL,'','','','','','',''),
-(37,7,NULL,'','','','','','','');
+(37,7,NULL,'','','','','','',''),
+(136,9,NULL,'Question No 1','1A','1B','1C','1D','1E','A'),
+(137,9,NULL,'Question No 2','2A','2B','2C','2D','2E','B'),
+(138,9,NULL,'Question No 3','3A','3B','3C','3D','3E','C'),
+(139,9,NULL,'Question No 4','4A','4B','4C','4D','4E','D'),
+(140,9,NULL,'Question No 5','5A','5B','5C','5D','5E','E'),
+(141,9,NULL,'Question No 6','6A','6B','6C','6D','6E','A'),
+(142,9,NULL,'Question No 7','7A','7B','7C','7D','7E','B'),
+(143,9,NULL,'Question No 8','8A','8B','8C','8D','8E','C'),
+(144,9,NULL,'Question No 9','9A','9B','9C','9D','9E','D'),
+(145,9,NULL,'Question No 10','10A','10B','10C','10D','10E','E'),
+(146,11,NULL,'Question No 1','1A','1B','1C','1D','1E','A'),
+(147,11,NULL,'Question No 2','2A','2B','2C','2D','2E','B'),
+(148,11,NULL,'Question No 3','3A','3B','3C','3D','3E','C'),
+(149,11,NULL,'Question No 4','4A','4B','4C','4D','4E','D'),
+(150,11,NULL,'Question No 5','5A','5B','5C','5D','5E','E'),
+(151,11,NULL,'Question No 6','6A','6B','6C','6D','6E','A'),
+(152,11,NULL,'Question No 7','7A','7B','7C','7D','7E','B'),
+(153,11,NULL,'Question No 8','8A','8B','8C','8D','8E','C'),
+(154,11,NULL,'Question No 9','9A','9B','9C','9D','9E','D'),
+(155,11,NULL,'Question No 10','10A','10B','10C','10D','10E','E'),
+(156,12,NULL,'Question  No1','1A','1B','1C','1D','1E','A'),
+(157,12,NULL,'Question  No2','2A','2B','2C','2D','2E','B'),
+(158,12,NULL,'Question  No3','3A','3B','3C','3D','3E','C'),
+(159,12,NULL,'Question  No4','4A','4B','4C','4D','4E','D'),
+(160,12,NULL,'Question  No5','5A','5B','5C','5D','5E','E'),
+(161,12,NULL,'Question  No6','6A','6B','6C','6D','6E','A'),
+(162,12,NULL,'Question  No7','7A','7B','7C','7D','7E','B'),
+(163,12,NULL,'Question  No8','8A','8B','8C','8D','8E','C'),
+(164,12,NULL,'Question  No9','9A','9B','9C','9D','9E','D'),
+(165,12,NULL,'Question  No10','10A','10B','10C','10D','10E','E');
 
 /*Table structure for table `muser` */
 
@@ -1649,7 +1754,7 @@ CREATE TABLE `muser` (
 /*Data for the table `muser` */
 
 insert  into `muser`(`iduser`,`username`,`realname`,`password`,`lastlogin`) values 
-(1,'rizal','Rizal Purnomo','c6318323cc5693ce1f8d220cc9a5030e','2021-07-15 08:27:38');
+(1,'rizal','Rizal Purnomo','c6318323cc5693ce1f8d220cc9a5030e','2021-07-27 13:27:18');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

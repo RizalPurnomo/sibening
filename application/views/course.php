@@ -146,7 +146,7 @@
                               <th>Date</th>
                               <th>title</th>
                               <th>JPL</th>
-                              <th>Action</th>
+                              <th style="width:21%">Action</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -204,30 +204,30 @@
 
                                         ?>
                                         <!-- <?php print_r($getcourse[$a]); ?> -->
-                                        <a class="btn btn-info btn-sm <?php echo $pre; ?>" href="<?php echo base_url('course/preTest/') . $getcourse[$a]['idgetcourse']; ?>">
+                                        <a class="btn btn-info btn-sm <?php echo $pre; ?>" href="<?php echo base_url('course/preTest/') . $getcourse[$a]['idgetcourse']; ?>" title="Pre" >
                                           <i class="fas fa-pencil-alt">
                                           </i>
-                                          Pre
+                                          <!-- Pre -->
                                         </a>   
-                                        <a class="btn btn-primary btn-sm <?php echo $materi; ?>" href="<?php echo base_url('course/materi/') . $getcourse[$a]['idgetcourse']; ?>">
+                                        <a class="btn btn-primary btn-sm <?php echo $materi; ?>" href="<?php echo base_url('course/materi/') . $getcourse[$a]['idgetcourse']; ?>" title="Materi" >
                                           <i class="fas fa-folder">
                                           </i>
-                                          Materi
+                                          <!-- Materi -->
                                         </a>    
-                                        <a class="btn btn-info btn-sm <?php echo $post; ?>" href="<?php echo base_url('course/postTest/') . $getcourse[$a]['idgetcourse']; ?>">
+                                        <a class="btn btn-info btn-sm <?php echo $post; ?>" href="<?php echo base_url('course/postTest/') . $getcourse[$a]['idgetcourse']; ?>" title="Post" >
                                           <i class="fas fa-pencil-alt">
                                           </i>
-                                          Post
+                                          <!-- Post -->
                                         </a>    
-                                        <a class="btn btn-danger btn-sm <?php echo $delete; ?>" href="javascript:deleteData('<?php echo $getcourse[$a]['idgetcourse']; ?>')">
+                                        <a class="btn btn-danger btn-sm <?php echo $delete; ?>" href="javascript:deleteData('<?php echo $getcourse[$a]['idgetcourse']; ?>')" title="Delete" >
                                           <i class="fas fa-trash">
                                           </i>
-                                          Delete
+                                          <!-- Delete -->
                                         </a>                                          
-                                        <a class="btn btn-primary btn-sm <?php echo $finish; ?>" href="javascript:showModal('<?php echo $getcourse[$a]['idgetcourse']; ?>')">
-                                          <i class="fas fa-folder">
+                                        <a class="btn btn-success btn-sm <?php echo $finish; ?>" href="javascript:showModal('<?php echo $getcourse[$a]['idgetcourse']; ?>')">
+                                          <i class="fa fa-check">
                                           </i>
-                                          Finish
+                                          Hasil
                                         </a>  
                                     </td>
                                 </tr>
@@ -284,7 +284,7 @@
                                     <td><?php echo $course[$a]['jpl'] ?></td>
                                     <td>
                                       <a class="btn btn-primary btn-sm <?php echo $courses; ?>" href="javascript:selectedCourse('<?php echo $course[$a]['idcourses']; ?>')">
-                                          <i class="fas fa-folder">
+                                          <i class="fa fa-plus">
                                           </i>
                                           Enroll
                                       </a>                                       

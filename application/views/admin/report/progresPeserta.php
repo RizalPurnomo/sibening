@@ -1,8 +1,9 @@
 <?php $this->load->view('admin/header'); ?>
 <?php $this->load->view('admin/sidebar'); ?>
 
-<script type="text/javascript">
 
+<script type="text/javascript">
+  
 
 </script>
 
@@ -30,7 +31,73 @@
     <section class="content">
         <div class="container-fluid">
             <!-- Small boxes (Stat box) -->
+            <?php 
+              $totalPeserta = count($peserta);
+              $targetJPL = $totalPeserta * 20;
+              $jplFinish = $getJplFinish[0]['jplFinish'];
+              $percentageGlobal = round(($jplFinish / $targetJPL )*100); 
+            ?>
+            <div class="row">
+              <div class="col-12 col-sm-6 col-md-3">
+                <div class="info-box">
+                  <span class="info-box-icon bg-info elevation-1"><i class="fas fa-users"></i></span>
 
+                  <div class="info-box-content">
+                    <span class="info-box-text">Total Peserta</span>
+                    <span class="info-box-number">
+                      <?php echo $totalPeserta; ?> Peserta
+                    </span>
+                  </div>
+                  <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+              </div>
+              <!-- /.col -->
+              <div class="col-12 col-sm-6 col-md-3">
+                <div class="info-box mb-3">
+                  <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-shopping-cart"></i></span>
+
+                  <div class="info-box-content">
+                    <span class="info-box-text">Target JPL Selesai</span>
+                    <span class="info-box-number"><?php echo $targetJPL; ?> JPL</span>
+                  </div>
+                  <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+              </div>
+              <!-- /.col -->
+
+              <!-- fix for small devices only -->
+              <div class="clearfix hidden-md-up"></div>
+
+              <div class="col-12 col-sm-6 col-md-3">
+                <div class="info-box mb-3">
+                  <span class="info-box-icon bg-success elevation-1"><i class="fas fa-thumbs-up"></i></span>
+
+                  <div class="info-box-content">
+                    <span class="info-box-text">JPL Finish</span>
+                    <span class="info-box-number"><?php echo $jplFinish; ?> JPL</span>
+                  </div>
+                  <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+              </div>
+              <!-- /.col -->
+              <div class="col-12 col-sm-6 col-md-3">
+                <div class="info-box mb-3">
+                  <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-cog"></i></span>
+
+                  <div class="info-box-content">
+                    <span class="info-box-text">Progress</span>
+                    <span class="info-box-number"><?php echo $percentageGlobal; ?> %</span>
+                  </div>
+                  <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+              </div>
+              <!-- /.col -->
+            
+            </div> 
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
@@ -44,24 +111,7 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                          <div class="row invoice-info">
-                              <?php 
-                                $totalPeserta = count($peserta);
-                                $targetJPL = $totalPeserta * 20;
-                                $jplFinish = $getJplFinish[0]['jplFinish'];
-                                $percentageGlobal = round(($jplFinish / $targetJPL )*100); 
-                              ?>
-                              <address>
-                                Total Peserta <br>
-                                Target JPL Selesai <br>
-                                JPL Finish <br>
-                              </address>
-                              <address>
-                                 : <?php echo $totalPeserta; ?><br>
-                                 : <?php echo $targetJPL; ?><br>
-                                 : <?php echo $jplFinish; ?><br>
-                              </address>
-                            </div>
+
                             <div class="progress progress-sm">
                               <div class="progress-bar bg-green" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100" style="width: <?php echo $percentageGlobal; ?>%">
                               </div>
@@ -73,7 +123,7 @@
                     <!-- ./card-body -->
                 </div>
                 <!-- /.card -->
-            </div> 
+            </div>
 
             <div class="row">
                 <div class="col-md-12">
@@ -127,7 +177,7 @@
                                                     </td>
                                                     <td>
                                                       <a class="btn btn-primary btn-sm" href="<?php echo base_url('admin/report/progresDetail/') . $progress[$a]['idpeserta']; ?>">
-                                                          <i class="fas fa-folder">
+                                                          <i class="fa fa-bars">
                                                           </i>
                                                           Detail
                                                       </a>                                                      
@@ -164,5 +214,8 @@
 
   <!-- /.content-wrapper -->
 
+  <script type="text/javascript">
+
+  </script>
 
   <?php $this->load->view('admin/footer'); ?>

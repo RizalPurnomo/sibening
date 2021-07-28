@@ -160,7 +160,7 @@ function showModal(idgetcourse){
                                               Post
                                           </a> 
                                           <a class="btn btn-success btn-sm <?php echo $finish; ?>" href="javascript:showModal('<?php echo $getcourse[$a]['idgetcourse']; ?>')">
-                                              <i class="fas fa-folder">
+                                              <i class="fa fa-check">
                                               </i>
                                               Hasil
                                           </a>                                                                                                                      
