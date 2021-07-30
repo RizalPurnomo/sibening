@@ -35,6 +35,13 @@ class Peserta_model extends CI_Model
         return $qry->result_array();
     }
 
+    public function getAllUser()
+    {
+        $sql = "SELECT * FROM aauth_users";
+        $qry = $this->db->query($sql);
+        return $qry->result_array();
+    }
+
     public function saveData($data, $tabel)
     {
         $this->db->insert($tabel, $data);
@@ -46,6 +53,14 @@ class Peserta_model extends CI_Model
         $this->db->update($tabel, $data);
         return  "Data " . $id . " Berhasil Diupdate";
     }
+
+    public function updateUser($id, $data, $tabel)
+    {
+        $this->db->where('id', $id);
+        $this->db->update($tabel, $data);
+        return  "Data " . $id . " Berhasil Diupdate";
+    }
+
 
     public function deleteData($id, $tabel)
     {

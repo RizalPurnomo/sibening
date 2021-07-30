@@ -102,18 +102,67 @@ class Syncron extends CI_Controller
     }    
 
     function getApi(){
-        //$url="http://10.10.10.252/api/getsiswa.php";
-        $url="http://localhost/ananda/api/getsiswa.php";
-        $get_url = file_get_contents($url);
-        $data = json_decode($get_url);
-
-        // $data_array = array(
-        //     'datalist' => $data
-        // );
-        return $data;
-        //print_array($data_array);
-        //$this->load->view('json/json_list',$data_array);
+        
+        $conn = $this->urlExists('10.50.171.111');
+        if ($conn == true) {
+            //$url="http://10.10.10.252/api/getsiswa.php";
+            $url="http://localhost/sibening/api/getUser.php";
+            $get_url = file_get_contents($url);
+            $data['server'] = json_decode($get_url,true);
+            $data['lokal'] = $this->peserta_model->getAllUser();
+            // echo "<pre/>";
+            // print_r($data);
+            $this->load->view('admin/syncron',$data);
+        }else{
+            echo "Tidak Terkoneksi dengan Server PHC Matraman, Harap Koneksikan dahulu dengan server";
+        }
     }
+
+    public function saveSyncronUser()
+    {
+        $jum = count($this->input->post('id'));
+        //insert Batch
+        for ($i = 0; $i < $jum; $i++) {
+            $dataUser = array(
+                'email'  => $this->input->post('email')[$i],
+                'pass'  => $this->input->post('pass')[$i],
+                'username'  => $this->input->post('username')[$i],
+                'banned'  => $this->input->post('banned')[$i],
+                'nama_lengkap'  => $this->input->post('nama_lengkap')[$i],
+                'nip'   => $this->input->post('nip')[$i],
+            );
+            $this->peserta_model->updateUser($this->input->post('id')[$i],$dataUser, 'aauth_users');
+        }
+        echo "Berhasil Disimpan";
+
+        // if(empty($q)){ //tambahkan question kosong
+        //     $this->savedQuestion();
+        // }else{
+        //     $this->course_model->deleteCourse($this->input->post('idCourse'), 'rzl_m_question');
+        //     $this->savedQuestion();
+        // }
+        // $data['question'] = $this->course_model->getQuestionById($this->input->post('idCourse'));
+        // $this->load->view('admin/master/question' , $data);
+
+
+    }    
+
+    function urlExists($url=NULL)  
+    {  
+        if($url == NULL) return false;  
+        $ch = curl_init($url);  
+        curl_setopt($ch, CURLOPT_TIMEOUT, 5);  
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);  
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);  
+        $data = curl_exec($ch);  
+        $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);  
+        curl_close($ch);  
+        if($httpcode>=200 && $httpcode<300){  
+            return true;  
+        } else {  
+            return false;  
+        }  
+    }  
 
 
 }

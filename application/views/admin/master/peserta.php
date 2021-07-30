@@ -65,9 +65,9 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <!-- <a href="<?php echo base_url(); ?>admin/peserta/add" class="btn btn-app">
-                                <i class="fas fa-user"></i> Tambah User
-                            </a> -->
+                            <a href="<?php echo base_url(); ?>admin/syncron/getApi" class="btn btn-app">
+                                <i class="fa fa-download"></i> Syncron Data Dari Server PHC
+                            </a>
                             <div class="card-tools">
                                 <button type="button" class="btn btn-tool" data-card-widget="collapse">
                                     <i class="fas fa-minus"></i>

@@ -39,7 +39,7 @@
               }else{
                 $jplFinish = $getJplFinish[0]['jplFinish'];
               }
-              $percentageGlobal = round(($jplFinish / $targetJPL )*100); 
+              $percentageGlobal = ($jplFinish / $targetJPL )*100; 
             ?>
             <div class="row">
               <div class="col-12 col-sm-6 col-md-3">
@@ -120,7 +120,7 @@
                               <div class="progress-bar bg-green" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100" style="width: <?php echo $percentageGlobal; ?>%">
                               </div>
                             </div>
-                            <?php echo $percentageGlobal; ?>% Complete
+                            <?php echo round($percentageGlobal); ?>% Complete
                         </div>
 
                     </div>
