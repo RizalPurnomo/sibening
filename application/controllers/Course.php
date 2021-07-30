@@ -8,36 +8,50 @@ class Course extends CI_Controller
     {
         parent::__construct();
         $this->load->model(array('course_model'));
-        if (empty($this->session->userdata('username'))) {
+        // if (empty($this->session->userdata('nip'))) {
+        //     redirect('login');
+        // }
+        $this->load->library("Aauth");
+        if (!$this->aauth->is_loggedin()) {
+            $this->session->set_flashdata('message_type', 'error');
+            $this->session->set_flashdata('messages', 'Please login first.');
             redirect('login');
-        }
+        }          
     }
 
     public function index()
     {
-        $idpeserta = $this->session->userdata('idpeserta');
+        // print_r($this->session->userdata());
+        // exit;
+        // $idpeserta = $this->session->userdata('idpeserta');
+        $idpeserta = $this->session->userdata('nip');
         $data['getcourse'] = $this->course_model->getCourse($idpeserta);
         $data['course'] = $this->course_model->availableCourse($idpeserta);
-        // $data['hasil'] = $this->course_model->getCourseHasilById('6');
-        // echo "<pre/>";
-        // print_r($data);
         $this->load->view('course',$data);
     }
 
     public function preTest($idGetCourse)
     {
-        $data['preTest'] = $this->course_model->getPreTest($idGetCourse);
-        $data['idgetcourse'] = $idGetCourse;
-        $this->load->view('preTest',$data);
+        $preTest = $this->course_model->getPreTest($idGetCourse);
+        if(count($preTest)!=10){
+            echo "Data Soal Belum Siap";
+        }else{
+            $data['preTest'] = $preTest;
+            $data['idgetcourse'] = $idGetCourse;
+            $this->load->view('preTest',$data);
+        }
     }
 
     public function postTest($idGetCourse)
     {
-        $data['postTest'] = $this->course_model->getPostTest($idGetCourse);
-        $data['idgetcourse'] = $idGetCourse;
-        // echo "<pre/>";
-        // print_r($data);
-        $this->load->view('postTest',$data);
+        $postTest = $this->course_model->getPostTest($idGetCourse);
+        if(count($postTest)!=10){
+            echo "Data Soal Belum Siap";
+        }else{
+            $data['postTest'] = $postTest;
+            $data['idgetcourse'] = $idGetCourse;
+            $this->load->view('postTest',$data);
+        }
     }    
 
     public function materi($idGetCourse)
@@ -50,7 +64,7 @@ class Course extends CI_Controller
         $dataTest = array(
             'flag' => 'post'
         ); //update flag
-        $this->course_model->updateFlag($idGetCourse, $dataTest, 'getcourse');
+        $this->course_model->updateFlag($idGetCourse, $dataTest, 'rzl_getcourse');
     }
 
     public function hasil($idGetCourse)
@@ -63,7 +77,7 @@ class Course extends CI_Controller
     function deleteCourse($idGetCourse)
     {
         if (isset($idGetCourse)) {
-            $this->course_model->deleteData($idGetCourse, "getcourse");
+            $this->course_model->deleteData($idGetCourse, "rzl_getcourse");
         }
         return "Data Berhasil Di Delete";
     }
@@ -90,15 +104,15 @@ class Course extends CI_Controller
             );    
 
             if($sdhJawab==''){//save answer
-                $this->course_model->saveData($data, 'answer');
+                $this->course_model->saveData($data, 'rzl_answer');
             }else{//update answer
-                $this->course_model->updateData($sdhJawab, $data, 'answer');
+                $this->course_model->updateData($sdhJawab, $data, 'rzl_answer');
             }
 
             $dataTest = array(
                 'flag' => 'materi'
             ); //update flag
-            $this->course_model->updateFlag($idGetCourse, $dataTest, 'getcourse');
+            $this->course_model->updateFlag($idGetCourse, $dataTest, 'rzl_getcourse');
 
         }
     }
@@ -125,15 +139,15 @@ class Course extends CI_Controller
             );    
 
             if($sdhJawabPost==''){//save answer
-                $this->course_model->saveData($data, 'answerpost');
+                $this->course_model->saveData($data, 'rzl_answerpost');
             }else{//update answer
-                $this->course_model->updateDataPost($sdhJawabPost, $data, 'answerpost');
+                $this->course_model->updateDataPost($sdhJawabPost, $data, 'rzl_answerpost');
             }
 
             $dataTest = array(
                 'flag' => 'finish'
             ); //update flag
-            $this->course_model->updateFlag($idGetCourse, $dataTest, 'getcourse');
+            $this->course_model->updateFlag($idGetCourse, $dataTest, 'rzl_getcourse');
 
         }
     }    
@@ -141,11 +155,11 @@ class Course extends CI_Controller
     public function enrollCourse($idCourse){
         $data = array(
             "datecourse" => date("Y/m/d h:i:s"),
-            "idpeserta" => $this->session->userdata('idpeserta'),
+            "nip" => $this->session->userdata('nip'),
             "idcourse" => $idCourse,
             "flag" => "pre"
         ); 
-        $this->course_model->saveData($data, 'getcourse');
+        $this->course_model->saveData($data, 'rzl_getcourse');
     }
 
 

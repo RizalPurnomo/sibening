@@ -314,7 +314,11 @@
                             <center>
                               Finish VS Enrolled
                               <?php 
-                                $percentageFinishEnroll = ($enrollFinished/$enrolled)*100;
+                                if($enrolled<1){
+                                  $percentageFinishEnroll =0;  
+                                }else{
+                                  $percentageFinishEnroll = ($enrollFinished/$enrolled)*100;
+                                }
                               ?>
                               <div class="progress progress-sm">
                                 <div class="progress-bar bg-green" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100" style="width: <?php echo $percentageFinishEnroll; ?>%">

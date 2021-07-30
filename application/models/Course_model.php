@@ -13,17 +13,17 @@ class Course_model extends CI_Model
 
     public function getCourse($idpeserta)
     {
-        $sql = "SELECT * FROM getcourse a
-                INNER JOIN mcourse b ON a.idcourse=b.idcourse
-                WHERE a.idpeserta = '$idpeserta'";
+        $sql = "SELECT * FROM rzl_getcourse a
+                INNER JOIN rzl_m_course b ON a.idcourse=b.idcourse
+                WHERE a.nip = '$idpeserta'";
         $qry = $this->db->query($sql);
         return $qry->result_array();
     }
 
     public function allCourse()
     {
-        $sql = "SELECT a.idcourse AS idcourses,a.*,b.* FROM mcourse a
-            INNER JOIN mkategori b ON a.idkategori=b.idkategori 
+        $sql = "SELECT a.idcourse AS idcourses,a.*,b.* FROM rzl_m_course a
+            INNER JOIN rzl_m_kategori b ON a.idkategori=b.idkategori 
             ORDER BY idcourse DESC";
         $qry = $this->db->query($sql);
         return $qry->result_array();
@@ -32,66 +32,66 @@ class Course_model extends CI_Model
 
     public function availableCourse($idpeserta)
     {
-        $sql = "SELECT d.idcourse AS idcourses,a.*,b.*,c.*,d.* FROM aksescourse a
-            INNER JOIN mpeserta b ON a.idbagian=b.bagian_id
-            INNER JOIN mkategori c ON c.idkategori=a.idkategori
-            INNER JOIN mcourse d ON d.idkategori=a.idkategori
-            WHERE idpeserta='$idpeserta'";
+        $sql = "SELECT d.idcourse AS idcourses,a.*,b.*,c.*,d.* FROM rzl_aksescourse a
+            INNER JOIN m_pegawai b ON a.idbagian=b.bagian
+            INNER JOIN rzl_m_kategori c ON c.idkategori=a.idkategori
+            INNER JOIN rzl_m_course d ON d.idkategori=a.idkategori
+            WHERE nip='$idpeserta'";
         $qry = $this->db->query($sql);
         return $qry->result_array();
         // echo $sql;
     }    
 
     public function getCourseById($idcourse){
-        $sql = "SELECT * FROM mcourse a
+        $sql = "SELECT * FROM rzl_m_course a
             WHERE idcourse='$idcourse'";
         $qry = $this->db->query($sql);
         return $qry->result_array();
     }
 
     public function getCourseDetailById($idgetcourse){
-        $sql = "SELECT * FROM getcourse a
-            INNER JOIN mcourse b ON a.idcourse=b.idcourse
-            INNER JOIN mpeserta c ON c.idpeserta=a.idpeserta
+        $sql = "SELECT * FROM rzl_getcourse a
+            INNER JOIN rzl_m_course b ON a.idcourse=b.idcourse
+            INNER JOIN m_pegawai c ON c.nip=a.nip
             WHERE idgetcourse='$idgetcourse'";
         $qry = $this->db->query($sql);
         return $qry->result_array();
     }
 
     public function getCourseHasilById($idgetcourse){
-        $sql = "SELECT * FROM mquestion a
-            inner JOIN answer b ON a.idquestion=b.idquestion
-            inner JOIN answerpost c ON c.idquestion=a.idquestion
-            INNER JOIN getcourse d ON d.idgetcourse=c.idgetcourse
-            INNER JOIN mcourse e ON e.idcourse=d.idcourse
-            INNER JOIN mpeserta f ON f.idpeserta=d.idpeserta
+        $sql = "SELECT * FROM rzl_m_question a
+            INNER JOIN rzl_answer b ON a.idquestion=b.idquestion
+            INNER JOIN rzl_answerpost c ON c.idquestion=a.idquestion
+            INNER JOIN rzl_getcourse d ON d.idgetcourse=c.idgetcourse
+            INNER JOIN rzl_m_course e ON e.idcourse=d.idcourse
+            INNER JOIN m_pegawai f ON f.nip=d.nip
             WHERE b.idgetcourse='$idgetcourse' AND c.idgetcourse='$idgetcourse'";
         $qry = $this->db->query($sql);
         return $qry->result_array();
     }
 
     public function getPreTest($idgetcourse){
-        $sql = "SELECT c.idquestion as idsoal,a.*,b.*,c.*,d.* FROM getcourse a
-            INNER JOIN mcourse b ON a.idcourse=b.idcourse
-            LEFT JOIN mquestion c ON c.idcourse=a.idcourse 
-            LEFT JOIN answer d ON d.idquestion=c.idquestion AND d.idgetcourse=a.idgetcourse
+        $sql = "SELECT c.idquestion AS idsoal,a.*,b.*,c.*,d.* FROM rzl_getcourse a
+            INNER JOIN rzl_m_course b ON a.idcourse=b.idcourse
+            LEFT JOIN rzl_m_question c ON c.idcourse=a.idcourse 
+            LEFT JOIN rzl_answer d ON d.idquestion=c.idquestion AND d.idgetcourse=a.idgetcourse  
             WHERE a.idgetcourse='$idgetcourse'";
         $qry = $this->db->query($sql);
         return $qry->result_array();
     }
 
     public function getPostTest($idgetcourse){
-        $sql = "SELECT c.idquestion AS idsoal,a.*,b.*,c.*,d.* FROM getcourse a
-            INNER JOIN mcourse b ON a.idcourse=b.idcourse
-            LEFT JOIN mquestion c ON c.idcourse=a.idcourse 
-            LEFT JOIN answerpost d ON d.idquestion=c.idquestion AND d.idgetcourse=a.idgetcourse
+        $sql = "SELECT c.idquestion AS idsoal,a.*,b.*,c.*,d.* FROM rzl_getcourse a
+            INNER JOIN rzl_m_course b ON a.idcourse=b.idcourse
+            LEFT JOIN rzl_m_question c ON c.idcourse=a.idcourse 
+            LEFT JOIN rzl_answerpost d ON d.idquestion=c.idquestion AND d.idgetcourse=a.idgetcourse
             WHERE a.idgetcourse='$idgetcourse'";
         $qry = $this->db->query($sql);
         return $qry->result_array();
     }
 
     public function getSudahDijawab($idgetcourse,$idquestion){
-        $sql = "SELECT * FROM answer
+        $sql = "SELECT * FROM rzl_answer
             WHERE idgetcourse='$idgetcourse' AND idquestion='$idquestion'";
         $qry = $this->db->query($sql)->result_array();
         if(empty($qry)){
@@ -102,7 +102,7 @@ class Course_model extends CI_Model
     }
 
     public function getSudahDijawabPost($idgetcourse,$idquestion){
-        $sql = "SELECT * FROM answerpost
+        $sql = "SELECT * FROM rzl_answerpost
             WHERE idgetcourse='$idgetcourse' AND idquestion='$idquestion'";
         $qry = $this->db->query($sql)->result_array();
         if(empty($qry)){
@@ -113,16 +113,16 @@ class Course_model extends CI_Model
     }
 
     public function getJawabanBenar($idquestion){
-        $sql = "SELECT * FROM mquestion
+        $sql = "SELECT * FROM rzl_m_question
             WHERE idquestion='$idquestion'";
         $qry = $this->db->query($sql);
         return $qry->result_array();
     }
 
     public function hasil($idgetcourse){
-        $sql = "SELECT * FROM mquestion a
-            LEFT JOIN answer b ON a.idquestion=b.idquestion
-            LEFT JOIN answerpost c ON a.idquestion=c.idquestion 
+        $sql = "SELECT * FROM rzl_m_question a
+            LEFT JOIN rzl_answer b ON a.idquestion=b.idquestion
+            LEFT JOIN rzl_answerpost c ON a.idquestion=c.idquestion 
             WHERE b.idgetcourse='$idgetcourse'";
         $qry = $this->db->query($sql);
         return $qry->result_array();
@@ -174,8 +174,8 @@ class Course_model extends CI_Model
     }
 
     public function getJplFinish(){
-        $sql = "SELECT SUM(jpl) AS jplFinish FROM getcourse a
-            INNER JOIN mcourse b ON a.idcourse=b.idcourse
+        $sql = "SELECT SUM(jpl) AS jplFinish FROM rzl_getcourse a
+            INNER JOIN rzl_m_course b ON a.idcourse=b.idcourse
             WHERE flag='finish'";
         $qry = $this->db->query($sql);
         return $qry->result_array();
@@ -186,15 +186,15 @@ class Course_model extends CI_Model
     //Kategory
     public function getAllKategori()
     {
-        $sql = "SELECT * FROM mkategori";
+        $sql = "SELECT * FROM rzl_m_kategori";
         $qry = $this->db->query($sql);
         return $qry->result_array();
     }
 
     //Question
     public function getQuestionById($idcourse){
-        $sql = "SELECT * FROM mquestion a
-            INNER JOIN mcourse b ON a.idcourse=b.idcourse 
+        $sql = "SELECT * FROM rzl_m_question a
+            INNER JOIN rzl_m_course b ON a.idcourse=b.idcourse 
             WHERE a.idcourse='$idcourse'";
         $qry = $this->db->query($sql);
         return $qry->result_array();
@@ -210,46 +210,19 @@ class Course_model extends CI_Model
     //Report
     public function progressPeserta(){
         $sql = "SELECT 
-            a.namapeserta, 
+            a.nama_pegawai, 
             SUM(IF(flag!='finish',1,0)) AS progres, 
             SUM(IF(flag='finish',1,0)) AS finish, 
             SUM(IF(flag='finish',c.jpl,0)) AS jplfinish, 
             a.* 
-            FROM mpeserta a
-            LEFT JOIN getcourse b ON a.idpeserta=b.`idpeserta`
-            LEFT JOIN mcourse c ON c.idcourse=b.idcourse
-            GROUP BY a.idpeserta";
+            FROM m_pegawai a
+            LEFT JOIN rzl_getcourse b ON a.nip=b.nip
+            LEFT JOIN rzl_m_course c ON c.idcourse=b.idcourse
+            WHERE a.is_active='1'   
+            GROUP BY a.nip";
         $qry = $this->db->query($sql);
         return $qry->result_array();
     }    
-
-
-    ///------------------------
-
-    public function getDataById($idData)
-    {
-        $query = "SELECT * FROM tblaset WHERE id_aset='$idData'";
-        $sql = $this->db->query($query);
-        return $sql->result_array();
-    }
-
-    
-
-
-
-    public function getAllJenis()
-    {
-        $sql = "select * from tbljenis_aset";
-        $qry = $this->db->query($sql);
-        return $qry->result_array();
-    }
-
-    public function getAllNama()
-    {
-        $sql = "select * from tblnama_aset";
-        $qry = $this->db->query($sql);
-        return $qry->result_array();
-    }
 
 
 }

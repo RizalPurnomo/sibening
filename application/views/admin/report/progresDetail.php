@@ -3,7 +3,7 @@
 
 <script type="text/javascript">
 
-function showModal(idgetcourse){
+  function showModal(idgetcourse){
     // alert(idgetcourse);
     $.ajax({
       type: "POST",
@@ -12,16 +12,7 @@ function showModal(idgetcourse){
         arr = JSON.parse(result);
         console.log(arr);
         txt = "";
-        txt = `<div>
-                <div class="form-group row">
-                    <label class="col-sm-3 col-form-label">Nama Peserta</label>
-                    <label class="col-sm-9 col-form-label">: ${arr[0]['namapeserta']}</label>
-                </div>
-                <div class="form-group row">
-                    <label class="col-sm-3 col-form-label">Judul</label>
-                    <label class="col-sm-9 col-form-label">: ${arr[0]['title']}</label>
-                </div>                
-              </div>                  
+        txt = `                  
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                     <tr>
@@ -34,14 +25,16 @@ function showModal(idgetcourse){
                 </thead>
                 <tbody>`
                   for (x in arr) {
-                    salah = "";
-                    if(arr[x]['benar']=="n"){salah='bgcolor="red"';}
+                    salahPre = "";
+                    salahPost = "";
+                    if(arr[x]['benar']=="n"){salahPre='bgcolor="red"';}
+                    if(arr[x]['benarpost']=="n"){salahPost='bgcolor="red"';}
                     txt +=`<tr>
                               <td>${(parseInt(x) + parseInt(1))} </td> 
                               <td>${arr[x]['question']}</td>
                               <td>${arr[x]['key']}</td>
-                              <td ${salah}>${arr[x]['answer']}</td>
-                              <td>${arr[x]['answerpost']}</td>
+                              <td ${salahPre}>${arr[x]['answer']}</td>
+                              <td ${salahPost}>${arr[x]['answerpost']}</td>
                           </tr>`;
                   }
                 `</tbody>
@@ -52,7 +45,7 @@ function showModal(idgetcourse){
     })
     $('#modal-lg').modal('show'); 
   }
-
+  
 </script>
 
   <!-- Content Wrapper. Contains page content -->
@@ -62,7 +55,7 @@ function showModal(idgetcourse){
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark">Report Detail - <?php echo $peserta[0]['namapeserta'] ?></h1>
+            <h1 class="m-0 text-dark">Report Detail - <?php echo $peserta[0]['nama_pegawai'] ?></h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -154,7 +147,7 @@ function showModal(idgetcourse){
                                               </i>
                                               Pre
                                           </a>    
-                                          <a class="btn btn-info btn-sm <?php echo $post; ?>" href="<?php echo base_url('course/postTest/') . $getcourse[$a]['idgetcourse']; ?>">
+                                          <a class="btn btn-info btn-sm <?php echo $post; ?>" href="<?php echo base_url('admin/report/postTest/') . $getcourse[$a]['idgetcourse']; ?>">
                                               <i class="fas fa-pencil-alt">
                                               </i>
                                               Post
@@ -190,7 +183,11 @@ function showModal(idgetcourse){
                                 <center>
                                   Finish VS Enrolled
                                   <?php 
-                                    $percentageFinishEnroll = ($enrollFinished/$enrolled)*100;
+                                    if($enrolled<1){
+                                      $percentageFinishEnroll=0;  
+                                    }else{
+                                      $percentageFinishEnroll = ($enrollFinished/$enrolled)*100;
+                                    }
                                   ?>
                                   <div class="progress progress-sm">
                                     <div class="progress-bar bg-green" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100" style="width: <?php echo $percentageFinishEnroll; ?>%">

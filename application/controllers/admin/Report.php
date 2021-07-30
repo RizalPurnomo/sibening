@@ -8,9 +8,16 @@ class Report extends CI_Controller
     {
         parent::__construct();
         $this->load->model(array('peserta_model','course_model'));
-        if (empty($this->session->userdata('realname'))) {
-            redirect('login');
-        }
+        // if (empty($this->session->userdata('nip'))) {
+        //     redirect('login');
+        // }
+        $this->load->library("Aauth");
+        if (!$this->aauth->is_loggedin()) {
+            $this->session->set_flashdata('message_type', 'error');
+            $this->session->set_flashdata('messages', 'Please login first.');
+            redirect('admin/login');
+        }        
+
     }
 
     public function index()
@@ -40,11 +47,30 @@ class Report extends CI_Controller
 
     public function preTest($idGetCourse)
     {
-        $data['preTest'] = $this->course_model->getPreTest($idGetCourse);
-        $data['peserta'] = $this->peserta_model->getPesertaById($data['preTest'][0]['idpeserta']);
-        $data['idgetcourse'] = $idGetCourse;
-        $this->load->view('admin/report/preTest',$data);
+        $preTest = $this->course_model->getPreTest($idGetCourse);
+        if(count($preTest)!=10){
+            echo "Data Soal Belum Siap";
+        }else{
+            $data['preTest'] = $preTest;
+            $data['peserta'] = $this->peserta_model->getPesertaById($data['preTest'][0]['nip']);
+            $data['idgetcourse'] = $idGetCourse;
+            $this->load->view('admin/report/preTest',$data);
+        }
     }    
+
+    public function postTest($idGetCourse)
+    {
+        $postTest = $this->course_model->getPostTest($idGetCourse);
+        if(count($postTest)!=10){
+            echo "Data Soal Belum Siap";
+        }else{
+            $data['postTest'] = $postTest;
+            $data['peserta'] = $this->peserta_model->getPesertaById($data['postTest'][0]['nip']);
+            $data['idgetcourse'] = $idGetCourse;          
+            $this->load->view('admin/report/postTest',$data);
+        }
+    } 
+
 
 
 

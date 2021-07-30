@@ -58,10 +58,10 @@
                                     <tbody>
                                         <?php if (!empty($peserta)) {
                                             for ($a = 0; $a < count($peserta); $a++) { ?>
-                                                <?php $idpeserta = $peserta[$a]['idpeserta']; ?>
+                                                <?php $idpeserta = $peserta[$a]['nip']; ?>
                                                 <tr id="getcourse<?php echo $idpeserta; ?>">
                                                     <td><?php echo $a + 1 ?></td>
-                                                    <td><?php echo $peserta[$a]['namapeserta'] ?></td>
+                                                    <td><?php echo $peserta[$a]['nama_pegawai'] ?></td>
                                                     <td><?php echo $peserta[$a]['datecourse'] ?></td>
                                                     <td><?php echo $peserta[$a]['title'] ?></td>
                                                     <td><?php echo $peserta[$a]['jpl'] ?></td>

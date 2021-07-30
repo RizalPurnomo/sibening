@@ -2,7 +2,7 @@
 <html lang="en">
 
 <?php
-$query = "SELECT * FROM mprofile WHERE id='1'";
+$query = "SELECT * FROM rzl_m_profile WHERE id='1'";
 $appName = $this->db->query($query)->result_array()[0]['appname'];
 ?>
 

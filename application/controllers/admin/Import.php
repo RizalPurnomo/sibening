@@ -13,6 +13,13 @@ class Import extends CI_Controller {
         // if (empty($this->session->userdata('username'))) {
         //     redirect('login');
         // }
+        $this->load->library("Aauth");
+        if (!$this->aauth->is_loggedin()) {
+            $this->session->set_flashdata('message_type', 'error');
+            $this->session->set_flashdata('messages', 'Please login first.');
+            redirect('admin/login');
+        }        
+
     }     
 
     public function index() {
@@ -45,14 +52,16 @@ class Import extends CI_Controller {
     {
         // echo $this->input->post('idCourse');
         $q = $this->course_model->getQuestionById($this->input->post('idCourse'));
-        print_r($q);
+        // print_r($q);
         // exit;
         if(empty($q)){ //tambahkan question kosong
             $this->savedQuestion();
         }else{
-            $this->course_model->deleteCourse($this->input->post('idCourse'), 'mquestion');
+            $this->course_model->deleteCourse($this->input->post('idCourse'), 'rzl_m_question');
             $this->savedQuestion();
         }
+        $data['question'] = $this->course_model->getQuestionById($this->input->post('idCourse'));
+        $this->load->view('admin/master/question' , $data);
 
 
     }
@@ -72,7 +81,7 @@ class Import extends CI_Controller {
                 'pile'  => $this->input->post('pile')[$i],
                 'key'   => $this->input->post('key')[$i],
             );
-            $this->course_model->saveData($dataQuestion, 'mquestion');
+            $this->course_model->saveData($dataQuestion, 'rzl_m_question');
         }
         echo "Berhasil Disimpan";
     }
@@ -110,11 +119,13 @@ class Import extends CI_Controller {
             $barisAwal++;
         }
 
+        $sheet->setCellValue('A2', 'Note : Jangan merubah format dan hanya diisi di kolom berwarna!!');
+
         //Memberi Warna hijau di kolom available edit
         $sheet->getStyle('B4:H13')->getFill()
             ->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)
             ->getStartColor()->setARGB('E6FFBA');      
-        $sheet->getStyle('A16:C16')->getFill()
+        $sheet->getStyle('A2:C2')->getFill()
             ->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)
             ->getStartColor()->setARGB('FF4739');              
 
@@ -141,9 +152,6 @@ class Import extends CI_Controller {
 
         //Set Wrap
         $sheet->getStyle('B4:H13')->getAlignment()->setWrapText(true);
-
-
-        $sheet->setCellValue('A16', 'Note : Jangan merubah format dan hanya diisi di kolom berwarna!!');
         
         $writer = new Xlsx($spreadsheet); // instantiate Xlsx
         $filename = 'Import Question - ' . $data['course'][0]['title']; // set filename for excel file to be exported

@@ -56,7 +56,7 @@ class Import extends CI_Controller
         if(empty($q)){ //tambahkan question kosong
             $this->savedQuestion();
         }else{
-            $this->course_model->deleteCourse($this->input->post('idCourse'), 'mquestion');
+            $this->course_model->deleteCourse($this->input->post('idCourse'), 'rzl_m_question');
             $this->savedQuestion();
         }
 
@@ -78,7 +78,7 @@ class Import extends CI_Controller
                 'pile'  => $this->input->post('pile')[$i],
                 'key'   => $this->input->post('key')[$i],
             );
-            $this->course_model->saveData($dataQuestion, 'mquestion');
+            $this->course_model->saveData($dataQuestion, 'rzl_m_question');
         }
         echo "Berhasil Disimpan";
     }

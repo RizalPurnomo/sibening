@@ -7,9 +7,15 @@ class Dashboard extends CI_Controller
     {
         parent::__construct();
         $this->load->model(array('course_model'));
-        if (empty($this->session->userdata('email'))) {
+        // if (empty($this->session->userdata('nip'))) {
+        //     redirect('login');
+        // }
+        $this->load->library("Aauth");
+        if (!$this->aauth->is_loggedin()) {
+            $this->session->set_flashdata('message_type', 'error');
+            $this->session->set_flashdata('messages', 'Please login first.');
             redirect('login');
-        }
+        }                  
     }
 
     public function index()

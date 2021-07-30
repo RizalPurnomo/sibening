@@ -13,12 +13,12 @@
         $import = ($this->uri->segment(2) == 'import' ? 'active' : '');        
         $report = ($this->uri->segment(2) == 'report' ? 'menu-open' : '');
         $aksescourse = ($this->uri->segment(2) == 'aksescourse' ? 'active' : '');
-        $progres = ($this->uri->segment(3) == 'progresPeserta' ? 'active' : '');  
+        $progres = ($this->uri->segment(3) == 'progresPeserta' || $this->uri->segment(3)== 'progresDetail' ? 'active' : '');  
         $logCourse = ($this->uri->segment(3) == 'logCourse' ? 'active' : '');     
     ?>
 
     <?php
-    $query = "SELECT * FROM mprofile WHERE id='1'";
+    $query = "SELECT * FROM rzl_m_profile WHERE id='1'";
     $appName = $this->db->query($query)->result_array()[0]['appname'];
     ?>
 
@@ -36,7 +36,7 @@
                 <img src="<?php echo base_url(); ?>assets/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block"><?php echo $this->session->userdata('realname'); ?></a>
+                <a href="#" class="d-block"><?php echo $this->session->userdata('nama_lengkap'); ?></a>
             </div>
         </div>
 

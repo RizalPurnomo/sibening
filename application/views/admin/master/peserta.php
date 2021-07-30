@@ -81,23 +81,23 @@
                                     <thead>
                                         <tr>
                                             <th>No</th>
-                                            <th  style="display:none;">Id User</th>
-                                            <th>Username</th>
+                                            <th  style="display:none;">NIP</th>
                                             <th>Nama Peserta</th>
-                                            <th>Last Login</th>
+                                            <th>Bagian</th>
+                                            <th>Jabatan</th>
                                             <!-- <th style="width:15%">Aksi</th> -->
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php if (!empty($peserta)) {
                                             for ($a = 0; $a < count($peserta); $a++) { ?>
-                                                <?php $idpeserta = $peserta[$a]['idpeserta']; ?>
+                                                <?php $idpeserta = $peserta[$a]['nip']; ?>
                                                 <tr id="peserta<?php echo $idpeserta; ?>">
                                                     <td><?php echo $a + 1 ?></td>
                                                     <td  style="display:none;"><?php echo $idpeserta ?></td>
-                                                    <td><?php echo $peserta[$a]['username'] ?></td>
-                                                    <td><?php echo $peserta[$a]['namapeserta'] ?></td>
-                                                    <td><?php echo $peserta[$a]['lastlogin'] ?></td>
+                                                    <td><?php echo $peserta[$a]['nama_pegawai'] ?></td>
+                                                    <td><?php echo $peserta[$a]['bagian_nama'] ?></td>
+                                                    <td><?php echo $peserta[$a]['nama_jabatan'] ?></td>
                                                     <!-- <td>
                                                         <a class="btn btn-large btn-primary" href="javascript:selectData('peserta<?php echo $peserta[$a]['id']; ?>')">Edit</a>
                                                         | <a class="btn btn-large btn-danger" href="javascript:deleteData('peserta<?php echo $peserta[$a]['id']; ?>')">Delete</a>
@@ -110,9 +110,9 @@
                                         <tr>
                                             <th>No</th>
                                             <th  style="display:none;">Id User</th>
-                                            <th>Username</th>
                                             <th>Nama Peserta</th>
-                                            <th>Last Login</th>
+                                            <th>Bagian</th>
+                                            <th>Jabatan</th>
                                             <!-- <th style="width:15%">Aksi</th> -->
                                         </tr>
                                     </tfoot>

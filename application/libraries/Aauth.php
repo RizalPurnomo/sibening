@@ -309,6 +309,7 @@ class Aauth {
 				'username' => $row->username,
 				'email' => $row->email,
 				'nama_lengkap'=> $row->nama_lengkap,
+				'nip'=> $row->nip,
 				'loggedin' => TRUE
 			);
 

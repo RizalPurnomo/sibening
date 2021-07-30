@@ -10,7 +10,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
     <?php
-        $query = "SELECT * FROM mprofile WHERE id='1'";
+        $query = "SELECT * FROM rzl_m_profile WHERE id='1'";
         $appName = $this->db->query($query)->result_array()[0]['appname'];
     ?>
 
@@ -90,7 +90,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <!-- Right navbar links -->
       <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
           <li class="nav-item">
-            <p class="nav-link"><?php echo $this->session->userdata('namapeserta') ?></p>
+            <p class="nav-link"><?php echo $this->session->userdata('nama_lengkap') ?></p>
             
           </li>
         <!-- Messages Dropdown Menu -->

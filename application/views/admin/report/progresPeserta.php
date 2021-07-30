@@ -34,7 +34,11 @@
             <?php 
               $totalPeserta = count($peserta);
               $targetJPL = $totalPeserta * 20;
-              $jplFinish = $getJplFinish[0]['jplFinish'];
+              if($getJplFinish[0]['jplFinish']==""){
+                $jplFinish=0;  
+              }else{
+                $jplFinish = $getJplFinish[0]['jplFinish'];
+              }
               $percentageGlobal = round(($jplFinish / $targetJPL )*100); 
             ?>
             <div class="row">
@@ -154,10 +158,10 @@
                                     <tbody>
                                         <?php if (!empty($progress)) {
                                             for ($a = 0; $a < count($progress); $a++) { ?>
-                                                <?php $idpeserta = $progress[$a]['idpeserta']; ?>
+                                                <?php $idpeserta = $progress[$a]['nip']; ?>
                                                 <tr id="progress<?php echo $idpeserta; ?>">
                                                     <td><?php echo $a + 1 ?></td>
-                                                    <td><?php echo $progress[$a]['namapeserta'] ?></td>
+                                                    <td><?php echo $progress[$a]['nama_pegawai'] ?></td>
                                                     <td><?php echo $progress[$a]['progres'] ?></td>
                                                     <td><?php echo $progress[$a]['finish'] ?></td>
                                                     <td><?php echo $progress[$a]['jplfinish'] ?></td>
@@ -176,7 +180,7 @@
                                                       </small>                                                      
                                                     </td>
                                                     <td>
-                                                      <a class="btn btn-primary btn-sm" href="<?php echo base_url('admin/report/progresDetail/') . $progress[$a]['idpeserta']; ?>">
+                                                      <a class="btn btn-primary btn-sm" href="<?php echo base_url('admin/report/progresDetail/') . $progress[$a]['nip']; ?>">
                                                           <i class="fa fa-bars">
                                                           </i>
                                                           Detail

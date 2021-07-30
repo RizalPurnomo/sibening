@@ -32,7 +32,7 @@
                         <div class="card-header">
                             <h3 class="card-title">
                             <input type="hidden" id="idgetcourse" value="<?php echo $idgetcourse; ?>">
-                            PRE TEST <?php echo $preTest[0]['title']; ?>
+                            PRE TEST <?php echo $postTest[0]['title']; ?>
                             </h3>
                         </div>
                         <!-- /.card-header -->
@@ -41,50 +41,50 @@
                             <div class="card-body">
                                 <!-- The time line -->
                                 <div class="timeline">
-                                    <?php if (!empty($preTest)) {
-                                    for ($a = 0; $a < count($preTest); $a++) { ?>
+                                    <?php if (!empty($postTest)) {
+                                    for ($a = 0; $a < count($postTest); $a++) { ?>
                                             <div>
                                             <i class="fas bg-blue"><?php echo $a +1 ; ?></i>
                                             <div class="timeline-item">
                                                 <h3 class="timeline-header">
-                                                    <input type="hidden" id="soal<?php echo $a +1 ; ?>" value="<?php echo $preTest[$a]['idsoal'] ?>">
-                                                    <label> <?php echo $preTest[$a]['question'] ?> </label>
+                                                    <input type="hidden" id="soal<?php echo $a +1 ; ?>" value="<?php echo $postTest[$a]['idsoal'] ?>">
+                                                    <label> <?php echo $postTest[$a]['question'] ?> </label>
                                                 </h3>
                                                 <div class="timeline-body">
 
                                                     <div class="form-group clearfix">
                                                         <div class="icheck-success d-inline">
-                                                            <input value="A" type="radio" name="<?php echo $a +1 ; ?>" id="<?php echo $a +1 ; ?>pila" <?php if($preTest[$a]['answer']=='A'){echo 'checked';}  ?> >
+                                                            <input value="A" type="radio" name="<?php echo $a +1 ; ?>" id="<?php echo $a +1 ; ?>pila" <?php if($postTest[$a]['answerpost']=='A'){echo 'checked';}  ?> >
                                                             <label for="<?php echo $a +1 ; ?>pila">
-                                                                <?php echo $preTest[$a]['pila'] ?>
+                                                                <?php echo $postTest[$a]['pila'] ?>
                                                             </label>
                                                         </div>
                                                         <br/><br/>
                                                         <div class="icheck-success d-inline">
-                                                            <input value="B" type="radio" name="<?php echo $a +1 ; ?>" id="<?php echo $a +1 ; ?>pilb" <?php if($preTest[$a]['answer']=='B'){echo 'checked';}  ?> >
+                                                            <input value="B" type="radio" name="<?php echo $a +1 ; ?>" id="<?php echo $a +1 ; ?>pilb" <?php if($postTest[$a]['answerpost']=='B'){echo 'checked';}  ?> >
                                                             <label for="<?php echo $a +1 ; ?>pilb">
-                                                                <?php echo $preTest[$a]['pilb'] ?>
+                                                                <?php echo $postTest[$a]['pilb'] ?>
                                                             </label>
                                                         </div>
                                                         <br/><br/>
                                                         <div class="icheck-success d-inline">
-                                                            <input value="C" type="radio" name="<?php echo $a +1 ; ?>" id="<?php echo $a +1 ; ?>pilc" <?php if($preTest[$a]['answer']=='C'){echo 'checked';}  ?> >
+                                                            <input value="C" type="radio" name="<?php echo $a +1 ; ?>" id="<?php echo $a +1 ; ?>pilc" <?php if($postTest[$a]['answerpost']=='C'){echo 'checked';}  ?> >
                                                             <label for="<?php echo $a +1 ; ?>pilc">
-                                                                <?php echo $preTest[$a]['pilc'] ?>
+                                                                <?php echo $postTest[$a]['pilc'] ?>
                                                             </label>
                                                         </div>
                                                         <br/><br/>
                                                         <div class="icheck-success d-inline">
-                                                            <input value="D" type="radio" name="<?php echo $a +1 ; ?>" id="<?php echo $a +1 ; ?>pild"  <?php if($preTest[$a]['answer']=='D'){echo 'checked';}  ?> >
+                                                            <input value="D" type="radio" name="<?php echo $a +1 ; ?>" id="<?php echo $a +1 ; ?>pild"  <?php if($postTest[$a]['answerpost']=='D'){echo 'checked';}  ?> >
                                                             <label for="<?php echo $a +1 ; ?>pild">
-                                                                <?php echo $preTest[$a]['pild'] ?>
+                                                                <?php echo $postTest[$a]['pild'] ?>
                                                             </label>
                                                         </div>
                                                         <br/><br/>
                                                         <div class="icheck-success d-inline">
-                                                            <input value="E" type="radio" name="<?php echo $a +1 ; ?>" id="<?php echo $a +1 ; ?>pile"  <?php if($preTest[$a]['answer']=='E'){echo 'checked';}  ?> >
+                                                            <input value="E" type="radio" name="<?php echo $a +1 ; ?>" id="<?php echo $a +1 ; ?>pile"  <?php if($postTest[$a]['answerpost']=='E'){echo 'checked';}  ?> >
                                                             <label for="<?php echo $a +1 ; ?>pile">
-                                                                <?php echo $preTest[$a]['pile'] ?>
+                                                                <?php echo $postTest[$a]['pile'] ?>
                                                             </label>
                                                         </div>                                                                                                                                                
                                                     </div>
@@ -101,7 +101,7 @@
                             <!-- /.card-body -->
 
                             <div class="card-footer">
-                            <!-- <a href="#" class="btn btn-primary" onclick="simpanPreTest()">Simpan</a> -->
+                            <!-- <a href="#" class="btn btn-primary" onclick="simpanpostTest()">Simpan</a> -->
                             </div>
                         </form>
                     </div>          

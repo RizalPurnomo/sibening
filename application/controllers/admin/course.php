@@ -8,9 +8,16 @@ class Course extends CI_Controller
     {
         parent::__construct();
         $this->load->model(array('course_model'));
-        if (empty($this->session->userdata('realname'))) {
-            redirect('login');
-        }
+        // if (empty($this->session->userdata('nip'))) {
+        //     redirect('login');
+        // }
+        $this->load->library("Aauth");
+        if (!$this->aauth->is_loggedin()) {
+            $this->session->set_flashdata('message_type', 'error');
+            $this->session->set_flashdata('messages', 'Please login first.');
+            redirect('admin/login');
+        }        
+
     }
 
     public function index()
@@ -29,7 +36,7 @@ class Course extends CI_Controller
     public function saveData()
     {
         $data = $this->input->post('course');
-        $this->course_model->saveData($data, 'mcourse');
+        $this->course_model->saveData($data, 'rzl_m_course');
         print_r($this->input->post());
     }
 
@@ -45,14 +52,14 @@ class Course extends CI_Controller
     public function updateData($idData)
     {
         $course = $this->input->post('course');
-        $this->course_model->updateData($idData, $course, 'mcourse');
+        $this->course_model->updateData($idData, $course, 'rzl_m_course');
         print_r($this->input->post());
     }
 
     public function updateCourse($idData)
     {
         $course = $this->input->post('course');
-        $this->course_model->updateCourse($idData, $course, 'mcourse');
+        $this->course_model->updateCourse($idData, $course, 'rzl_m_course');
         print_r($this->input->post());
     }
 
@@ -62,7 +69,7 @@ class Course extends CI_Controller
         if (isset($idData)) {
             $cekquestion = $this->course_model->getQuestionById($idData);
             if(count($cekquestion)<1){
-                $this->course_model->deleteCourse($idData, "mcourse");
+                $this->course_model->deleteCourse($idData, "rzl_m_course");
                 echo "true";
             }else{
                 echo "false";
@@ -74,7 +81,7 @@ class Course extends CI_Controller
     public function resetPassword($idData)
     {
         $course = $this->input->post('course');
-        $this->course_model->updateData($idData, $course, 'mcourse');
+        $this->course_model->updateData($idData, $course, 'rzl_m_course');
         print_r($this->input->post());
     }
 
@@ -93,7 +100,7 @@ class Course extends CI_Controller
                     'pile' => '',
                     'key' => ''
                 );
-                $this->course_model->saveData($data, 'mquestion');
+                $this->course_model->saveData($data, 'rzl_m_question');
 
             }
         }
@@ -106,7 +113,7 @@ class Course extends CI_Controller
     public function updateQuestion($idData)
     {
         $data = $this->input->post('question');
-        $this->course_model->updateQuestion($idData, $data, 'mquestion');
+        $this->course_model->updateQuestion($idData, $data, 'rzl_m_question');
         print_r($this->input->post());
     }
 
