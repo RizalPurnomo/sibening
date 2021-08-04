@@ -22,7 +22,7 @@ class Peserta extends CI_Controller
 
     public function index()
     {
-        $data['peserta'] = $this->peserta_model->getAllPeserta();
+        $data['peserta'] = $this->peserta_model->getAllPesertaAktif();
         $this->load->view('admin/master/peserta',$data);
     }
 

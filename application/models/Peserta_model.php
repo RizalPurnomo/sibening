@@ -24,13 +24,20 @@ class Peserta_model extends CI_Model
         return  "Data " . $username . " Berhasil Diupdate";
     }
 
-    public function getAllPeserta()
+    public function getAllPesertaAktif()
     {
         $sql = "SELECT * FROM m_pegawai a
             LEFT JOIN m_bagian b ON a.bagian= b.bagian_id 
             LEFT JOIN m_jabatan c on c.id_jabatan=a.jabatan
             WHERE a.is_active='1'   
             ORDER BY nip DESC";
+        $qry = $this->db->query($sql);
+        return $qry->result_array();
+    }
+
+    public function getAllPeserta()
+    {
+        $sql = "SELECT * FROM m_pegawai";
         $qry = $this->db->query($sql);
         return $qry->result_array();
     }
@@ -57,6 +64,13 @@ class Peserta_model extends CI_Model
     public function updateUser($id, $data, $tabel)
     {
         $this->db->where('id', $id);
+        $this->db->update($tabel, $data);
+        return  "Data " . $id . " Berhasil Diupdate";
+    }
+
+    public function updatePeserta($id, $data, $tabel)
+    {
+        $this->db->where('id_pegawai', $id);
         $this->db->update($tabel, $data);
         return  "Data " . $id . " Berhasil Diupdate";
     }

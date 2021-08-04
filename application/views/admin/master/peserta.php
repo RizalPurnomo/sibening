@@ -107,7 +107,7 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <a href="javascript:syncronData()" class="btn btn-app"> <!--  <?php echo base_url(); ?>admin/syncron/getApi -->
+                            <a href="<?php echo base_url(); ?>admin/syncron" class="btn btn-app"> <!-- javascript:syncronData()  -->
                                 <i class="fa fa-download"></i> Syncron Data Dari Server PHC
                             </a>
                             <div class="card-tools">

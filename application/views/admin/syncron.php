@@ -2,39 +2,47 @@
 <?php $this->load->view('admin/sidebar'); ?>
 
 <script type="text/javascript">
-    function selectData(id) {
-        let idData = $("#" + id + " td")[1].innerHTML;
-        console.log(idData);
-        $.ajax({
-            success: function(html) {
-                var url = "<?php echo base_url(); ?>admin/peserta/edit/" + idData;
-                window.location.href = url;
-            }
-        });
-    }
-
-    function deleteData(id) {
-        let idData = $("#" + id + " td")[1].innerHTML;
+    function syncronData() {
         Swal.fire({
-            title: 'Apakah yakin data akan di hapus?',
-            showCancelButton: true,
-            confirmButtonText: `Delete`,
-        }).then((result) => {
-            if (result.isConfirmed) {
-                $.ajax({
-                    type: "POST",
-                    url: "<?php echo base_url(); ?>admin/peserta/delete/" + idData,
-                    success: function(html) {
-                        console.log(html);
-                        var url = "<?php echo base_url(); ?>admin/peserta/";
-                        window.location.href = url;
+            text: 'Please Wait...',
+            timer: 5000,
+            showConfirmButton: false,
+            timerProgressBar: true,
+            didOpen: () => {
+                Swal.showLoading()
+                timerInterval = setInterval(() => {
+                const content = Swal.getHtmlContainer()
+                if (content) {
+                    const b = content.querySelector('b')
+                    if (b) {
+                    b.textContent = Swal.getTimerLeft()
                     }
-                })
-            } else {
-                return;
+                }
+                }, 100)
+            },
+            willClose: () => {
+                clearInterval(timerInterval)
             }
         })
-    }
+        // return;
+        $.ajax({
+            type: "POST",
+            url: "<?php echo base_url(); ?>admin/syncron/getApi" ,
+            success: function(html) {
+                console.log(html);
+                if(html!=""){
+                    var url = "<?php echo base_url(); ?>admin/syncron/saveSyncron";
+                    window.location.href = url;
+                }else{
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Tidak Terkoneksi dengan Server PHC Matraman, Harap Koneksikan dahulu dengan server'
+                    })
+                }
+            }
+        })
+    }  
 </script>
 
   <!-- Content Wrapper. Contains page content -->
@@ -62,162 +70,10 @@
       <div class="container-fluid">
         <!-- Small boxes (Stat box) -->
             <div class="row">
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <!-- <a href="<?php echo base_url(); ?>admin/peserta/add" class="btn btn-app">
-                                <i class="fas fa-user"></i> Tambah User
-                            </a> -->
-                            <div class="card-tools">
-                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                                    <i class="fas fa-minus"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <!-- /.card-header -->
-                        <div class="card-body">
-                            <div class="box-body table-responsive">
-                                <?php echo form_open('admin/syncron/saveSyncronUser'); ?>
-                                <table class="table table-bordered table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th>No</th>
-                                            <th>Id</th>
-                                            <th>Email</th>
-                                            <th>Password</th>
-                                            <th>Username</th>
-                                            <th>banned</th>
-                                            <th>nama_lengkap</th>
-                                            <th>nip</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php 
-                                            for ($a = 0; $a < count($server); $a++) { 
-                                                $id="";
-                                                $email="";
-                                                $pass="";
-                                                $username="";
-                                                $banned="";
-                                                $nama_lengkap="";
-                                                $nip="";
-                                        ?>
-                                                <tr>
-                                                    <td rowspan="2" style='text-align: center; vertical-align: middle;'><?php echo $a + 1 ?></td>
-                                                    <td <?php 
-                                                            if ($server[$a]['id']!=$lokal[$a]['id']) {
-                                                                $id = "bgcolor='red'";
-                                                                echo $id;
-                                                            }
-                                                        ?> 
-                                                    >
-                                                        <input name="id[]" type="hidden" value="<?php echo $server[$a]['id'] ?>"/>
-                                                        <?php echo $server[$a]['id'] ?>
-                                                    </td>
+                <a href="javascript:syncronData()" class="btn btn-app"> <!--  <?php echo base_url(); ?>admin/syncron/getApi -->
+                    <i class="fa fa-download"></i> Syncron Data Dari Server PHC
+                </a>
 
-                                                    <td <?php 
-                                                            if ($server[$a]['email']!=$lokal[$a]['email']) {
-                                                                $email = "bgcolor='red'";
-                                                                echo $email;
-                                                            }
-                                                        ?> 
-                                                    >
-                                                        <input name="email[]" type="hidden" value="<?php echo $server[$a]['email'] ?>"/>
-                                                        <?php echo $server[$a]['email'] ?>
-                                                    </td>
-
-                                                    <td <?php 
-                                                            if ($server[$a]['pass']!=$lokal[$a]['pass']) {
-                                                                $pass = "bgcolor='red'";
-                                                                echo $pass;
-
-                                                            }
-                                                        ?> 
-                                                    >
-                                                        <input name="pass[]" type="hidden" value="<?php echo $server[$a]['pass'] ?>"/>
-                                                        <?php echo $server[$a]['pass'] ?>
-                                                    </td>    
-
-                                                    <td <?php 
-                                                            if ($server[$a]['username']!=$lokal[$a]['username']) {
-                                                                $username = "bgcolor='red'";
-                                                                echo $username;
-                                                            }
-                                                        ?> 
-                                                    >
-                                                        <input name="username[]" type="hidden" value="<?php echo $server[$a]['username'] ?>"/>
-                                                        <?php echo $server[$a]['username'] ?>
-                                                    </td> 
-
-                                                    <td <?php 
-                                                            if ($server[$a]['banned']!=$lokal[$a]['banned']) {
-                                                                $banned = "bgcolor='red'";
-                                                                echo $banned;
-                                                            }
-                                                        ?> 
-                                                    >
-                                                        <input name="banned[]" type="hidden" value="<?php echo $server[$a]['banned'] ?>"/>
-                                                        <?php echo $server[$a]['banned'] ?>
-                                                    </td> 
-
-                                                    <td <?php 
-                                                            if ($server[$a]['nama_lengkap']!=$lokal[$a]['nama_lengkap']) {
-                                                                $nama_lengkap = "bgcolor='red'";
-                                                                echo $nama_lengkap;
-                                                            }
-                                                        ?> 
-                                                    >
-                                                        <input name="nama_lengkap[]" type="hidden" value="<?php echo $server[$a]['nama_lengkap'] ?>"/>
-                                                        <?php echo $server[$a]['nama_lengkap'] ?>
-                                                    </td> 
-
-                                                    <td <?php 
-                                                            if ($server[$a]['nip']!=$lokal[$a]['nip']) {
-                                                                $nip = "bgcolor='red'";
-                                                                echo $nip;
-                                                            }
-                                                        ?> 
-                                                    >
-                                                        <input name="nip[]" type="hidden" value="<?php echo $server[$a]['nip'] ?>"/>
-                                                        <?php echo $server[$a]['nip'] ?>
-                                                    </td> 
-                                                </tr>
-                                                <tr>
-                                                    <td <?php echo $id; ?> ><?php echo $lokal[$a]['id'] ?></td>
-                                                    <td <?php echo $email; ?> ><?php echo $lokal[$a]['email'] ?></td>
-                                                    <td <?php echo $pass; ?> ><?php echo $lokal[$a]['pass'] ?></td>
-                                                    <td <?php echo $username; ?>><?php echo $lokal[$a]['username'] ?></td>
-                                                    <td <?php echo $banned; ?>><?php echo $lokal[$a]['banned'] ?></td>
-                                                    <td <?php echo $nama_lengkap; ?>><?php echo $lokal[$a]['nama_lengkap'] ?></td>
-                                                    <td <?php echo $nip; ?>><?php echo $lokal[$a]['nip'] ?></td>
-                                                </tr>   
-                                        <?php
-                                            } 
-                                        ?>
-                                    </tbody>
-                                    <tfoot>
-                                        <tr>
-                                            <th>No</th>
-                                            <th>Id</th>
-                                            <th>Email</th>
-                                            <th>Password</th>
-                                            <th>Username</th>
-                                            <th>banned</th>
-                                            <th>nama_lengkap</th>
-                                            <th>nip</th>
-                                        </tr>
-                                    </tfoot>
-                                </table>
-                            </div>
-                        </div>
-                        <div class="card-footer">
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </div>                        
-
-                    </div>
-                    <!-- ./card-body -->
-                </div>
-                <!-- /.card -->
             </div>
         <!-- /.row -->
         <!-- Main row -->

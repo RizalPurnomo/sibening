@@ -7,10 +7,11 @@
     </script>
 
     <?php
-        $master = ($this->uri->segment(2) == 'peserta' || $this->uri->segment(2) == 'course' || $this->uri->segment(2) == 'import' ? 'menu-open' : '');
+        $master = ($this->uri->segment(2) == 'peserta' || $this->uri->segment(2) == 'course' || $this->uri->segment(2) == 'import' || $this->uri->segment(2) == 'syncron' ? 'menu-open' : '');
         $peserta = ($this->uri->segment(2) == 'peserta' ? 'active' : '');
         $course = ($this->uri->segment(2) == 'course' ? 'active' : '');      
         $import = ($this->uri->segment(2) == 'import' ? 'active' : '');        
+        $syncron = ($this->uri->segment(2) == 'syncron' ? 'active' : '');        
         $report = ($this->uri->segment(2) == 'report' ? 'menu-open' : '');
         $aksescourse = ($this->uri->segment(2) == 'aksescourse' ? 'active' : '');
         $progres = ($this->uri->segment(3) == 'progresPeserta' || $this->uri->segment(3)== 'progresDetail' ? 'active' : '');  
@@ -71,7 +72,13 @@
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Import Question</p>
                             </a>
-                        </li>                                                
+                        </li>   
+                        <li class="nav-item">
+                            <a href="<?php echo base_url(); ?>admin/syncron" class="nav-link <?php echo $syncron; ?>">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Syncron</p>
+                            </a>
+                        </li>                                                                        
                     </ul>
                 </li>
                 <li class="nav-item has-treeview ">
