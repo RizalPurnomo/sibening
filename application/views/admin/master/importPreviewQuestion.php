@@ -38,6 +38,9 @@
                 </h3>
 
             </div>
+            <!-- <?php echo $sheetData[3]['1']; ?><br/>
+            <input type="text" value="<?php echo $sheetData[3]['1']; ?>"/><br/>
+            <input type="text" value='Perhatikan kode berikut : $x = 1; do { echo $x." "; $x++; } while ($x > 2); Program tersebut menghasilkan output.'/> -->
             <div class="card-body">
                 <div class="box-body table-responsive">
                     <?php echo form_open('admin/import/saveQuestion'); ?>
@@ -70,13 +73,13 @@
                                   ?>
                                     <tr>
                                         <td><?php echo $no; ?></td>
-                                        <td><input name="question[]" value="<?php echo $sheetData[$a]['1']; ?>"></td>
-                                        <td><input name="pila[]" value="<?php echo $sheetData[$a]['2']; ?>"></td>
-                                        <td><input name="pilb[]" value="<?php echo $sheetData[$a]['3']; ?>"></td>
-                                        <td><input name="pilc[]" value="<?php echo $sheetData[$a]['4']; ?>"></td>
-                                        <td><input name="pild[]" value="<?php echo $sheetData[$a]['5']; ?>"></td>
-                                        <td><input name="pile[]" value="<?php echo $sheetData[$a]['6']; ?>"></td>
-                                        <td><input name="key[]" value="<?php echo $sheetData[$a]['7']; ?>"></td>
+                                        <td><input name='question[]' value='<?php echo $sheetData[$a]['1']; ?>'></td>
+                                        <td><input name='pila[]' value='<?php echo $sheetData[$a]['2']; ?>'></td>
+                                        <td><input name='pilb[]' value='<?php echo $sheetData[$a]['3']; ?>'></td>
+                                        <td><input name='pilc[]' value='<?php echo $sheetData[$a]['4']; ?>'></td>
+                                        <td><input name='pild[]' value='<?php echo $sheetData[$a]['5']; ?>'></td>
+                                        <td><input name='pile[]' value='<?php echo $sheetData[$a]['6']; ?>'></td>
+                                        <td><input name='key[]' value='<?php echo $sheetData[$a]['7']; ?>'></td>
                                     </tr>
                                     <?php } ?>
                             <?php }

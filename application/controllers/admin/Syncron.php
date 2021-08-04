@@ -101,21 +101,28 @@ class Syncron extends CI_Controller
         $this->load->view('view_syncJibas',$data);
     }    
 
+    //-----------------------------
+
+
     function getApi(){
         
         $conn = $this->urlExists('10.50.171.111');
         if ($conn == true) {
-            //$url="http://10.10.10.252/api/getsiswa.php";
-            $url="http://localhost/sibening/api/getUser.php";
-            $get_url = file_get_contents($url);
-            $data['server'] = json_decode($get_url,true);
-            $data['lokal'] = $this->peserta_model->getAllUser();
-            // echo "<pre/>";
-            // print_r($data);
-            $this->load->view('admin/syncron',$data);
+            $this->syncronPeserta();
         }else{
-            echo "Tidak Terkoneksi dengan Server PHC Matraman, Harap Koneksikan dahulu dengan server";
+            return false;
+            // echo "Tidak Terkoneksi dengan Server PHC Matraman, Harap Koneksikan dahulu dengan server";
         }
+    }
+
+    function syncronPeserta(){
+        $url="http://localhost/sibening/api/getUser.php";
+        $get_url = file_get_contents($url);
+        $data['server'] = json_decode($get_url,true);
+        $data['lokal'] = $this->peserta_model->getAllUser();
+        // echo "<pre/>";
+        // print_r($data);
+        $this->load->view('admin/syncron',$data);
     }
 
     public function saveSyncronUser()
@@ -133,6 +140,10 @@ class Syncron extends CI_Controller
             );
             $this->peserta_model->updateUser($this->input->post('id')[$i],$dataUser, 'aauth_users');
         }
+
+        $url="http://localhost/sibening/api/getUser.php";
+        $get_url = file_get_contents($url);
+        $data['server'] = json_decode($get_url,true);
         echo "Berhasil Disimpan";
 
         // if(empty($q)){ //tambahkan question kosong

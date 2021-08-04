@@ -13,6 +13,48 @@
         });
     }
 
+    function syncronData() {
+        Swal.fire({
+            text: 'Please Wait...',
+            timer: 5000,
+            showConfirmButton: false,
+            timerProgressBar: true,
+            didOpen: () => {
+                Swal.showLoading()
+                timerInterval = setInterval(() => {
+                const content = Swal.getHtmlContainer()
+                if (content) {
+                    const b = content.querySelector('b')
+                    if (b) {
+                    b.textContent = Swal.getTimerLeft()
+                    }
+                }
+                }, 100)
+            },
+            willClose: () => {
+                clearInterval(timerInterval)
+            }
+        })
+        // return;
+        $.ajax({
+            type: "POST",
+            url: "<?php echo base_url(); ?>admin/syncron/getApi" ,
+            success: function(html) {
+                console.log(html);
+                if(html!=""){
+                    var url = "<?php echo base_url(); ?>admin/syncron/syncronPeserta";
+                    window.location.href = url;
+                }else{
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Tidak Terkoneksi dengan Server PHC Matraman, Harap Koneksikan dahulu dengan server'
+                    })
+                }
+            }
+        })
+    }    
+
     function deleteData(id) {
         let idData = $("#" + id + " td")[1].innerHTML;
         Swal.fire({
@@ -65,7 +107,7 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <a href="<?php echo base_url(); ?>admin/syncron/getApi" class="btn btn-app">
+                            <a href="javascript:syncronData()" class="btn btn-app"> <!--  <?php echo base_url(); ?>admin/syncron/getApi -->
                                 <i class="fa fa-download"></i> Syncron Data Dari Server PHC
                             </a>
                             <div class="card-tools">
