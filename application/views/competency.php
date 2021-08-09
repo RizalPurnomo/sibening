@@ -20,7 +20,7 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Course</li>
+              <li class="breadcrumb-item active">Competency</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -36,47 +36,14 @@
             <div class="col-lg-12">
               <div class="card card-primary card-outline">
                   <div class="card-header">
-                      <h3 class="card-title">Enrolled Course</h3>
-                  </div>
-                  <!-- /.card-header -->
-                  <div class="card-body table-responsive">
-                      <table id="example1" class="table table-bordered table-striped">
-                          <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>Date</th>
-                                <th>title</th>
-                                <th>JPL</th>
-                                <th style="width:21%">Hasil</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-
-                            <?php for ($a = 0; $a < count($jpl); $a++) { ?>
-                                  <tr>
-                                      <td><?php echo $a + 1 ?></td>
-                                      <td><?php echo $jpl[$a]['datecourse']; ?></td>
-                                      <td><?php echo $jpl[$a]['title']; ?></td>
-                                      <td><?php echo $jpl[$a]['jpl']; ?></td>
-                                      <td>   
-                                          <a class="btn btn-success btn-sm" href="#" title="Pre Test" >
-                                            <b>Pre : <?php echo $jpl[$a]['pretest']; ?></b>
-                                          </a>                                          
-                                          <a class="btn btn-success btn-sm <?php echo $jpl[$a]['posttest']; ?>" href="#" title="Post Test" >
-                                            <b>Post : <?php echo $jpl[$a]['posttest']; ?></b>
-                                          </a> 
-                                      </td>
-                                  </tr>
-                            <?php } ?>
-                          </tbody>
-                      </table>
-                  </div>
-                  <!-- /.card-body -->
-              </div>
-
-              <div class="card card-primary card-outline">
-                  <div class="card-header">
-                      <h3 class="card-title">Competency Course</h3>
+                    <a href="<?php echo base_url(); ?>competency/add" class="btn btn-app"> <!-- javascript:syncronData()  -->
+                        <i class="fa fa-plus-square" aria-hidden="true"></i> Ajukan Competency
+                    </a>
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                    </div>
                   </div>
                   <!-- /.card-header -->
                   <div class="card-body table-responsive">
@@ -88,8 +55,7 @@
                                 <th>title</th>
                                 <th>Instance</th>
                                 <th>Files</th>
-                                <th>JPL Req</th>
-                                <th>JPL ACC</th>
+                                <th>JPL Request</th>
                                 <th>Status</th>
                             </tr>
                           </thead>
@@ -103,7 +69,6 @@
                                         <td><?php echo $competency[$a]['instance'] ?></td>
                                         <td><?php echo $competency[$a]['files'] ?></td>
                                         <td><?php echo $competency[$a]['jplrequest'] ?></td>
-                                        <td><?php echo $competency[$a]['jplapproved'] ?></td>
                                         <td>
                                             <?php 
                                                 $pending = '
@@ -142,6 +107,7 @@
                   </div>
                   <!-- /.card-body -->
               </div>
+
             </div>
           </div>
           
@@ -151,7 +117,6 @@
         <!-- /.row -->
         
       </div><!-- /.container-fluid -->
-
 
 
     </div>

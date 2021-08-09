@@ -16,6 +16,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
   <title><?php echo $appName; ?> | Dashboard</title>
 
+
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="<?php echo base_url() ?>assets/plugins/fontawesome-free/css/all.min.css">
   <!-- Ionicons -->
@@ -24,6 +25,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="<?php echo base_url() ?>assets/plugins/datatables-bs4/css/dataTables.bootstrap4.css">
   <!-- daterange picker -->
   <link rel="stylesheet" href="<?php echo base_url() ?>assets/plugins/daterangepicker/daterangepicker.css">
+  <!-- bootstrap datepicker -->
+  <link rel="stylesheet" href="<?php echo base_url() ?>assets/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">  
   <!-- iCheck for checkboxes and radio inputs -->
   <link rel="stylesheet" href="<?php echo base_url() ?>assets/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
   <!-- Bootstrap Color Picker -->
@@ -69,6 +72,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <li class="nav-item">
             <a href="<?php echo base_url(); ?>course" class="nav-link">Home</a>
           </li>          
+          <li class="nav-item">
+            <a href="<?php echo base_url(); ?>jpl" class="nav-link">JPL</a>
+          </li>          
+          <!-- <li class="nav-item">
+            <a href="<?php echo base_url(); ?>reporting" class="nav-link">Reporting</a>
+          </li>                               -->
+          <li class="nav-item">
+            <a href="<?php echo base_url(); ?>competency" class="nav-link">Competency</a>
+          </li>                                        
           <li class="nav-item">
             <a href="<?php echo base_url(); ?>login/logout" class="nav-link">Logout</a>
           </li>

@@ -36,6 +36,8 @@
 <!-- InputMask -->
 <script src="<?php echo base_url() ?>assets/plugins/moment/moment.min.js"></script>
 <script src="<?php echo base_url() ?>assets/plugins/inputmask/min/jquery.inputmask.bundle.min.js"></script>
+<!-- bootstrap datepicker -->
+<script src="<?php echo base_url() ?>assets/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 <!-- date-range-picker -->
 <script src="<?php echo base_url() ?>assets/plugins/daterangepicker/daterangepicker.js"></script>
 <!-- bootstrap color picker -->
@@ -107,6 +109,11 @@
         $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
       }
     )
+
+    //Date picker
+    $('#datepicker').datepicker({
+      autoclose: true
+    })
 
     //Timepicker
     $('#timepicker').datetimepicker({

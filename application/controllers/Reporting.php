@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Jpl extends CI_Controller
+class Reporting extends CI_Controller
 {
 
     public function __construct()
@@ -25,7 +25,6 @@ class Jpl extends CI_Controller
         $getcourse = $this->course_model->getCourse($idpeserta);
         $data['getcourse'] = $getcourse;
         $data['course'] = $this->course_model->availableCourse($idpeserta);
-        $data['competency'] = $this->course_model->getCompetencyByNip($idpeserta);
         $data['jpl'] = $this->course_model->getJpl($idpeserta);
         // echo "<pre/>";
         // print_r($data);
@@ -54,6 +53,6 @@ class Jpl extends CI_Controller
         $data['percentageJplTarget'] = ($data['getJPL']/$data['targetJPL'])*100;
         $data['percentage'] = ($data['finishJPL']/$data['targetJPL'])*100;
 
-        $this->load->view('jpl',$data);
+        $this->load->view('reporting',$data);
     }
 }

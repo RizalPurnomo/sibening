@@ -192,7 +192,27 @@ class Course_model extends CI_Model
         return $qry->result_array();
     }
 
+    public function getJpl($nip){
+        $sql = "SELECT c.idquestion AS idsoal, SUM(IF(benar='y',1,0)) AS pretest, SUM(IF(benarpost='y',1,0)) AS posttest, a.*,b.*,c.*,d.*,e.* FROM dbsibening.rzl_getcourse a
+            INNER JOIN dbsibening.rzl_m_course b ON a.idcourse=b.idcourse
+            LEFT JOIN dbsibening.rzl_m_question c ON c.idcourse=a.idcourse 
+            LEFT JOIN dbsibening.rzl_answer d ON d.idquestion=c.idquestion AND d.idgetcourse=a.idgetcourse  
+            LEFT JOIN dbsibening.rzl_answerpost e ON e.idquestion=c.idquestion
+            WHERE a.nip = '$nip'
+            group by a.idgetcourse";
+        $qry = $this->db->query($sql);
+        return $qry->result_array();
+    }    
 
+
+    //Competency
+    public function getCompetencyByNip($nip)
+    {
+        $sql = "SELECT * FROM rzl_m_competency
+                WHERE nip='$nip'";
+        $qry = $this->db->query($sql);
+        return $qry->result_array();
+    }
 
     //Kategory
     public function getAllKategori()
