@@ -4,7 +4,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js" integrity="sha512-nOQuvD9nKirvxDdvQ9OMqe2dgapbPB7vYAMrzJihw5m+aNcf0dX53m6YxM4LgA9u8e9eg9QX+/+mPu8kCNpV2A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <script type="text/javascript">
-    function savecourse() {
+
+    async function savecourse() {
         if ($("#kategori").val() == "" || $("#title").val() == "" ) {
             Swal.fire({
                 icon: 'warning',
@@ -12,14 +13,26 @@
             })
             return;
         }
-
+        if($("#fileupload").val()==""){
+            upload ="";
+        }else{
+            upload =fileupload.files[0].name;
+            let formData = new FormData(); 
+            formData.append("file", fileupload.files[0]);
+            await fetch('upload', {
+                method: "POST", 
+                body: formData
+            });         
+        }
+        // return;
         var dataArray = {
             "course": {
                 // "kategori": $("#kategori").val(),
                 "title": $("#title").val(),
                 "jpl": $("#jpl").val(),
                 "materi": $("#materi").val(),
-                "idkategori" : $("#kategori").val()
+                "idkategori" : $("#kategori").val(),
+                "filemateri" : upload
             }
         }
 
@@ -109,6 +122,7 @@
                                     <input type="text" class="form-control" id="jpl" placeholder="JPL">
                                 </div>
                             </div>
+
                             <div class="form-group row">
                                 <div class="col-md-12">
                                     <div class="card card-outline card-info">
@@ -131,6 +145,30 @@
                                                         style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
                                             </div>
                                         </div>
+                                        <div class="card-footer">
+                                            <div class="container-fluid">
+                                                <label class="col-sm-2 col-form-label">File</label>
+                                                <div class="col-sm-10">
+                                                    <input id="fileupload" type="file" name="fileupload" /> 
+                                                </div>
+
+                                                
+
+                                                <!-- <?php echo form_open_multipart('admin/course/upload', array('name' => 'spreadsheet')); ?>
+                                                <table cellpadding="5">
+                                                    <tr>
+                                                        <td>File :</td>
+                                                        <td><input type="file" size="40px" name="file" /></td>
+                                                        <td class="error"><?php echo form_error('name'); ?></td>
+                                                        <td colspan="5" align="center">
+                                                            <input type="submit" value="Upload Materi" />
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                                <?php echo form_close(); ?>      -->
+                                                
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>                                
                             </div>
@@ -138,7 +176,6 @@
                         <!-- /.card-body -->
                         <div class="card-footer">
                             <button onclick="savecourse()" class="btn btn-info">Simpan</button>
-                            <!-- <button class="btn btn-default float-right">Cancel</button> -->
                         </div>
                         <!-- /.card-footer -->
                     </div>

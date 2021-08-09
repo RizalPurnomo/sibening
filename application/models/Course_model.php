@@ -90,6 +90,17 @@ class Course_model extends CI_Model
         return $qry->result_array();
     }
 
+    public function getResultPrePostTest(){
+        $sql = "SELECT c.idquestion AS idsoal,a.*,b.*,c.*,d.*,e.* FROM dbsibening.rzl_getcourse a
+            INNER JOIN dbsibening.rzl_m_course b ON a.idcourse=b.idcourse
+            LEFT JOIN dbsibening.rzl_m_question c ON c.idcourse=a.idcourse 
+            LEFT JOIN dbsibening.rzl_answer d ON d.idquestion=c.idquestion AND d.idgetcourse=a.idgetcourse  
+            LEFT JOIN dbsibening.rzl_answerpost e ON e.idquestion=c.idquestion
+            WHERE a.idgetcourse='$idgetcourse'";
+        $qry = $this->db->query($sql);
+        return $qry->result_array();        
+    }
+
     public function getSudahDijawab($idgetcourse,$idquestion){
         $sql = "SELECT * FROM rzl_answer
             WHERE idgetcourse='$idgetcourse' AND idquestion='$idquestion'";

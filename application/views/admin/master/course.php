@@ -4,7 +4,7 @@
 <script type="text/javascript">
     function selectData(id) {
         let idData = $("#" + id + " td")[1].innerHTML;
-        console.log(idData);
+        // console.log(idData);
         $.ajax({
             success: function(html) {
                 var url = "<?php echo base_url(); ?>admin/course/edit/" + idData;
@@ -15,6 +15,8 @@
 
     function deleteData(id) {
         let idData = $("#" + id + " td")[1].innerHTML;
+        // let lokasiFile = $("#" + id + " td")[2].innerHTML
+
         Swal.fire({
             title: 'Apakah yakin data akan di hapus?',
             showCancelButton: true,
@@ -26,9 +28,10 @@
                     url: "<?php echo base_url(); ?>admin/course/delete/" + idData,
                     success: function(html) {
                         if(html=="true"){
+                            // fs.unlink(lokasiFile); 
                             Swal.fire({
                                 icon: 'success',
-                                title: 'Data Berhasil Disimpan',
+                                title: 'Data Berhasil Dihapus',
                                 showConfirmButton: false,
                                 timer: 1500
                             })
@@ -99,6 +102,7 @@
                                             <th>Kategory</th>
                                             <th>Title</th>
                                             <th>JPL</th>
+                                            <th>File Materi</th>
                                             <th style="width:15%">Aksi</th>
                                         </tr>
                                     </thead>
@@ -112,6 +116,7 @@
                                                     <td><?php echo $course[$a]['kategori'] ?></td>
                                                     <td><?php echo $course[$a]['title'] ?></td>
                                                     <td><?php echo $course[$a]['jpl'] ?></td>
+                                                    <td><a href="<?php echo base_url('uploads/') . $course[$a]['filemateri'] ; ?>" target="_blank" ><?php echo $course[$a]['filemateri']; ?></a></td>
                                                     <td>
                                                         <a class="btn btn-primary btn-sm" href="<?php echo base_url('admin/course/question/') . $course[$a]['idcourse']; ?>">
                                                             <i class="fas fa-folder">
@@ -139,6 +144,7 @@
                                         <th>Kategory</th>
                                         <th>Title</th>
                                         <th>JPL</th>
+                                        <th>File Materi</th>
                                         <th>Aksi</th>
                                     </tfoot>
                                 </table>

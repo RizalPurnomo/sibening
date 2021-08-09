@@ -24,6 +24,22 @@ class Course extends CI_Controller
     {
         $data['course'] = $this->course_model->allCourse();
         $this->load->view('admin/master/course',$data);
+    }   
+
+    public function upload(){
+        /* Get the name of the uploaded file */
+        $filename = $_FILES['file']['name'];
+
+        /* Choose where to save the uploaded file */
+        $location = "uploads/".$filename;
+
+        /* Save the uploaded file to the local filesystem */
+        if ( move_uploaded_file($_FILES['file']['tmp_name'], $location) ) { 
+            echo 'Success'; 
+        } else { 
+            echo 'Failure'; 
+        }  
+        echo "lklkl";      
     }
 
     public function add()
@@ -63,14 +79,19 @@ class Course extends CI_Controller
         print_r($this->input->post());
     }
 
-
     function delete($idData)
     {
         if (isset($idData)) {
             $cekquestion = $this->course_model->getQuestionById($idData);
             if(count($cekquestion)<1){
+                //delete file
+                $cekCourse = $this->course_model->getCourseById($idData);
+                $link = './uploads/' . $cekCourse[0]['filemateri']; 
+                unlink($link); 
+                //delete db
                 $this->course_model->deleteCourse($idData, "rzl_m_course");
                 echo "true";
+                
             }else{
                 echo "false";
             }

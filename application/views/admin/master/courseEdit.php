@@ -4,7 +4,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js" integrity="sha512-nOQuvD9nKirvxDdvQ9OMqe2dgapbPB7vYAMrzJihw5m+aNcf0dX53m6YxM4LgA9u8e9eg9QX+/+mPu8kCNpV2A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <script type="text/javascript">
-    function updateCourse() {
+
+        async function updateCourse() {
         if ($("#kategori").val() == "" || $("#title").val() == "" ) {
             Swal.fire({
                 icon: 'warning',
@@ -13,13 +14,26 @@
             return;
         }
 
+        if($("#fileupload").val()==""){
+            upload ="";
+        }else{
+            upload =fileupload.files[0].name;
+            let formData = new FormData(); 
+            formData.append("file", fileupload.files[0]);
+            await fetch('../upload', {
+                method: "POST", 
+                body: formData
+            });   
+        }
+        // return;
         var dataArray = {
             "course": {
                 // "kategori": $("#kategori").val(),
                 "title": $("#title").val(),
                 "jpl": $("#jpl").val(),
                 "materi": $("#materi").val(),
-                "idkategori":$("#kategori").val()
+                "idkategori":$("#kategori").val(),
+                "filemateri" : upload
             }
         }
 
@@ -137,6 +151,21 @@
                                                         style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"><?php echo $course[0]['materi']; ?></textarea>
                                             </div>
                                         </div>
+                                        <div class="card-footer">
+                                            <div class="container-fluid">
+                                                <div class="form-group row">
+                                                    <div class="col-md-6">
+                                                        <label class="col-sm-2 col-form-label">File</label>
+                                                        <div class="col-sm-10">
+                                                            <input id="fileupload" type="file" name="fileupload" /> 
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <a href="<?php echo base_url('uploads/') . $course[0]['filemateri'] ; ?>" target="_blank" ><?php echo $course[0]['filemateri']; ?></a>
+                                                    </div>                                                    
+                                                </div>
+                                            </div>
+                                        </div>                                      
                                     </div>
                                 </div>                                
                             </div>                            

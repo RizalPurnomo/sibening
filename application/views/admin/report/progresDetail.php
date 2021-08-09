@@ -9,10 +9,12 @@
       type: "POST",
       url: "<?php echo base_url(); ?>course/hasil/" + idgetcourse,
       success: function(result) {
+        nilaiPre = 0;
+        nilaiPost = 0;
         arr = JSON.parse(result);
-        console.log(arr);
+        // console.log(arr);
         txt = "";
-        txt = `                  
+        txt += `                  
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                     <tr>
@@ -27,8 +29,8 @@
                   for (x in arr) {
                     salahPre = "";
                     salahPost = "";
-                    if(arr[x]['benar']=="n"){salahPre='bgcolor="red"';}
-                    if(arr[x]['benarpost']=="n"){salahPost='bgcolor="red"';}
+                    if(arr[x]['benar']=="n"){salahPre='bgcolor="red"';}else{nilaiPre++;}
+                    if(arr[x]['benarpost']=="n"){salahPost='bgcolor="red"';}else{nilaiPost++;}
                     txt +=`<tr>
                               <td>${(parseInt(x) + parseInt(1))} </td> 
                               <td>${arr[x]['question']}</td>
@@ -40,6 +42,10 @@
                 `</tbody>
               </table>
                 `;
+        txt += `
+          <b>Pre Test : ${nilaiPre}</b> <br/>
+          <b>Post Test : ${nilaiPost}</b>
+        `;
         document.getElementById("divModal").innerHTML = txt;
       }
     })
@@ -169,8 +175,9 @@
 
               
             </div>
+            <?php $this->load->view('admin/report/courseInformationAdmin'); ?>
             <!-- /.col-md-6 -->
-              <div class="col-lg-4">
+              <!-- <div class="col-lg-4">
                   <div class="card card-primary card-outline">
                       <div class="card-header">
                         <center><h5>Course Information</h5></center>
@@ -234,7 +241,6 @@
                                 <center>
                                   JPL Finish <br/>
                                   <span class="badge badge-success"><?php echo $JPLFinished; ?></span>
-                                  <!-- <h1><?php echo $JPLFinished; ?></h1> -->
                                 </center>                                
                               </td>
                             </tr>
@@ -243,7 +249,7 @@
                       
                       </div>
                   </div>
-              </div>
+              </div> -->
             <!-- /.col-md-6 -->
           </div>
 
