@@ -116,7 +116,7 @@
                                                     <td><?php echo $course[$a]['kategori'] ?></td>
                                                     <td><?php echo $course[$a]['title'] ?></td>
                                                     <td><?php echo $course[$a]['jpl'] ?></td>
-                                                    <td><a href="<?php echo base_url('uploads/') . $course[$a]['filemateri'] ; ?>" target="_blank" ><?php echo $course[$a]['filemateri']; ?></a></td>
+                                                    <td><a href="<?php echo base_url('uploads/materi/') . $course[$a]['filemateri'] ; ?>" target="_blank" ><?php echo $course[$a]['filemateri']; ?></a></td>
                                                     <td>
                                                         <a class="btn btn-primary btn-sm" href="<?php echo base_url('admin/course/question/') . $course[$a]['idcourse']; ?>">
                                                             <i class="fas fa-folder">

@@ -77,7 +77,14 @@
                       </div>
 
                         <footer>
-                            <h3><?php echo $course[0]['title']; ?></h3>
+                          <?php 
+                            $download = '<i class="fa fa-download" aria-hidden="true"></i>';
+                            if(!empty($course[0]['filemateri'])){
+                              echo $download;
+                            }
+                          ?>
+                          
+                          <a href="<?php echo base_url('uploads/materi/') . $course[0]['filemateri'] ; ?>" target="_blank" ><?php echo $course[0]['filemateri']; ?></a>
                         </footer>
                     </div>
 

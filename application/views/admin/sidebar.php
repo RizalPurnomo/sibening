@@ -14,6 +14,7 @@
         $syncron = ($this->uri->segment(2) == 'syncron' ? 'active' : '');        
         $report = ($this->uri->segment(2) == 'report' ? 'menu-open' : '');
         $aksescourse = ($this->uri->segment(2) == 'aksescourse' ? 'active' : '');
+        $validasiCompetency = ($this->uri->segment(2) == 'validasiCompetency' ? 'active' : '');
         $progres = ($this->uri->segment(3) == 'progresPeserta' || $this->uri->segment(3)== 'progresDetail' ? 'active' : '');  
         $logCourse = ($this->uri->segment(3) == 'logCourse' ? 'active' : '');     
     ?>
@@ -87,6 +88,12 @@
                             <p>Akses Course</p>
                         </a>
                 </li>
+                <li class="nav-item has-treeview ">
+                    <a href="<?php echo base_url(); ?>admin/validasiCompetency" class="nav-link <?php echo $validasiCompetency; ?>">
+                            <i class="nav-icon fas fa-circle"></i>
+                            <p>Validasi Competency</p>
+                        </a>
+                </li>                
                 <li class="nav-item has-treeview <?php echo $report; ?>">
                     <a href="#" class="nav-link ">
                         <i class="nav-icon fas fa-circle"></i>

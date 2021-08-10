@@ -3,6 +3,41 @@
 
 <script type="text/javascript">
 
+function editData(id) {
+        $.ajax({
+            success: function(html) {
+                var url = "<?php echo base_url(); ?>competency/edit/" + id;
+                window.location.href = url;
+            }
+        });
+    }
+
+function deleteData(id) {
+
+  Swal.fire({
+      title: 'Apakah yakin data akan di hapus?',
+      showCancelButton: true,
+      confirmButtonText: `Delete`,
+  }).then((result) => {
+      if (result.isConfirmed) {
+          $.ajax({
+              type: "POST",
+              url: "<?php echo base_url(); ?>competency/delete/" + id,
+              success: function(html) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Data Berhasil Dihapus',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+                window.location.href = "<?php echo base_url(); ?>competency/";
+              }
+          })
+      } else {
+          return;
+      }
+  })
+}
 
 </script>
 
@@ -56,6 +91,7 @@
                                 <th>Instance</th>
                                 <th>Files</th>
                                 <th>JPL Request</th>
+                                <th>JPL Approved</th>
                                 <th>Status</th>
                             </tr>
                           </thead>
@@ -67,22 +103,26 @@
                                         <td><?php echo $competency[$a]['date'] ?></td>
                                         <td><?php echo $competency[$a]['title'] ?></td>
                                         <td><?php echo $competency[$a]['instance'] ?></td>
-                                        <td><?php echo $competency[$a]['files'] ?></td>
+                                        <td><a href="<?php echo base_url('uploads/competency/') . $competency[$a]['files'] ; ?>" target="_blank" ><?php echo $competency[$a]['files']; ?></a></td>
                                         <td><?php echo $competency[$a]['jplrequest'] ?></td>
+                                        <td><?php echo $competency[$a]['jplapproved'] ?></td>
                                         <td>
                                             <?php 
-                                                $pending = '
-                                                    <a class="btn btn-info btn-sm" href="#">
-                                                        <i class="fas fa-pencil-alt">
+                                                $id = $competency[$a]['idcompetency'];
+                                                $linkDelete ="javascript:deleteData($id)";
+                                                $linkEdit ="javascript:editData($id)";
+                                                $pending = "
+                                                    <a class='btn btn-info btn-sm' href='$linkEdit'>
+                                                        <i class='fas fa-pencil-alt'>
                                                         </i>
                                                         Edit
                                                     </a>   
-                                                    <a class="btn btn-danger btn-sm" href="#">
-                                                        <i class="fas fa-trash">
+                                                    <a class='btn btn-danger btn-sm' href='$linkDelete'>
+                                                        <i class='fas fa-trash'>
                                                         </i>
                                                         Delete
                                                     </a>        
-                                                ';    
+                                                ";    
 
                                                 $approved = ' 
                                                     <button class="btn btn-success btn-sm disabled">
@@ -90,12 +130,23 @@
                                                         </i>
                                                         Approved
                                                     </button>        
+                                                '; 
+                                                
+                                                
+                                                $reject = ' 
+                                                    <button class="btn btn-danger btn-sm disabled">
+                                                        <i class="fa fa-times" aria-hidden="true"></i>
+                                                        </i>
+                                                        Rejected
+                                                    </button>        
                                                 ';                                                  
                                                 
-                                                if($competency[$a]['status']=='pending'){
+                                                if($competency[$a]['statuscompetency']=='pending'){
                                                     echo $pending;
-                                                }else{
+                                                }else if($competency[$a]['statuscompetency']=='approved'){
                                                     echo $approved;
+                                                }else{
+                                                    echo $reject;
                                                 }
                                             
                                             ?>

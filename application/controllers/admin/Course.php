@@ -31,7 +31,7 @@ class Course extends CI_Controller
         $filename = $_FILES['file']['name'];
 
         /* Choose where to save the uploaded file */
-        $location = "uploads/".$filename;
+        $location = "uploads/materi/".$filename;
 
         /* Save the uploaded file to the local filesystem */
         if ( move_uploaded_file($_FILES['file']['tmp_name'], $location) ) { 
@@ -39,7 +39,6 @@ class Course extends CI_Controller
         } else { 
             echo 'Failure'; 
         }  
-        echo "lklkl";      
     }
 
     public function add()

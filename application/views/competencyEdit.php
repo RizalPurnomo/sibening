@@ -34,7 +34,7 @@
         return dateTime;
     }
 
-    async function saveCompetency() {
+    async function editCompetency() {
         let today = new Date(),
             curr_hour = today.getHours(),
             curr_min = today.getMinutes(),
@@ -65,10 +65,11 @@
             upload = $("#nama").val() + " - " + fileupload.files[0].name;
             let formData = new FormData(); 
             formData.append("file", fileupload.files[0]);
-            await fetch('upload', {
+            await fetch('../upload', {
                 method: "POST", 
                 body: formData
-            });       
+            });      
+
             var dataArray = {
                 "competency": {
                     "nip": $("#nip").val(),
@@ -79,8 +80,9 @@
                     "files" : upload,
                     "statuscompetency" : 'pending'
                 }
-            }              
+            }               
         }
+        // console.log(upload);
         // return;
 
 
@@ -89,7 +91,7 @@
         $.ajax({
             type: "POST",
             data: dataArray,
-            url: '<?php echo base_url('competency/saveData'); ?>',
+            url: '<?php echo base_url('competency/updateData/'); ?>' + $("#id").val(),
             success: function(result) {
                 Swal.fire({
                     icon: 'success',
@@ -121,7 +123,7 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Competency Add</li>
+              <li class="breadcrumb-item active">Competency Edit</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -137,7 +139,7 @@
             <div class="col-lg-12">
               <div class="card card-primary card-outline">
                   <div class="card-header">
-                    <h3>Competency Add</h3>
+                    <h3>Competency Edit</h3>
                     <div class="card-tools">
                         <button type="button" class="btn btn-tool" data-card-widget="collapse">
                             <i class="fas fa-minus"></i>
@@ -150,21 +152,22 @@
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">Title</label>
                         <div class="col-sm-10">
-                            <input type="hidden" class="form-control" id="nama" placeholder="Nama" value="<?php echo $this->session->userdata('nama_lengkap'); ?>">
-                            <input type="hidden" class="form-control" id="nip" placeholder="NIP" value="<?php echo $this->session->userdata('nip'); ?>">
-                            <input type="text" class="form-control" id="title" placeholder="Title">
+                        <input type="hidden" class="form-control" id="id" placeholder="ID" value="<?php echo $competency[0]['idcompetency']; ?>">
+                        <input type="hidden" class="form-control" id="nama" placeholder="Nama" value="<?php echo $this->session->userdata('nama_lengkap'); ?>">
+                            <input type="hidden" class="form-control" id="nip" placeholder="NIP" value="<?php echo $this->session->userdata('nip'); ?>">                            
+                            <input type="text" class="form-control" id="title" placeholder="Title" value="<?php echo $competency[0]['title'];  ?>">
                         </div>
                     </div>  
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">Instance</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="instance" placeholder="Instance">
+                            <input type="text" class="form-control" id="instance" placeholder="Instance" value="<?php echo $competency[0]['instance'];  ?>">
                         </div>
                     </div>                                        
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">JPL Request</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="jplReq" placeholder="jplReq">
+                            <input type="text" class="form-control" id="jplReq" placeholder="jplReq" value="<?php echo $competency[0]['jplrequest'];  ?>">
                         </div>
                     </div>   
                     <div class="form-group row">
@@ -176,7 +179,8 @@
                                         <i class="far fa-calendar-alt"></i>
                                     </span>
                                 </div>
-                                <input type="text" class="form-control pull-right" id="datepicker">
+                                <?php $tgl = date("m/d/Y", strtotime($competency[0]['date'])); ?>
+                                <input type="text" class="form-control pull-right" id="datepicker" value="<?php echo $tgl ?>" >
                             </div>
                         </div>
                     </div>                    
@@ -184,13 +188,14 @@
                     <label class="col-sm-2 col-form-label">Upload</label>
                         <div class="col-sm-10">
                             <input  id="fileupload" type="file" size="40px" name="fileupload" />
+                            <?php echo $competency[0]['files'];  ?>
                         </div>
                     </div>  
                                      
                   </div>
                   <!-- /.card-body -->
                   <div class="card-footer">
-                    <button onclick="saveCompetency()" class="btn btn-info">Simpan</button>
+                    <button onclick="editCompetency()" class="btn btn-info">Edit</button>
                 </div>                  
               </div>
 

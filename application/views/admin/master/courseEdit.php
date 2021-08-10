@@ -15,7 +15,14 @@
         }
 
         if($("#fileupload").val()==""){
-            upload ="";
+            var dataArray = {
+                "course": {
+                    "title": $("#title").val(),
+                    "jpl": $("#jpl").val(),
+                    "materi": $("#materi").val(),
+                    "idkategori":$("#kategori").val()
+                }
+            }            
         }else{
             upload =fileupload.files[0].name;
             let formData = new FormData(); 
@@ -23,19 +30,20 @@
             await fetch('../upload', {
                 method: "POST", 
                 body: formData
-            });   
+            });  
+
+            var dataArray = {
+                "course": {
+                    "title": $("#title").val(),
+                    "jpl": $("#jpl").val(),
+                    "materi": $("#materi").val(),
+                    "idkategori":$("#kategori").val(),
+                    "filemateri" : upload
+                }
+            }             
         }
         // return;
-        var dataArray = {
-            "course": {
-                // "kategori": $("#kategori").val(),
-                "title": $("#title").val(),
-                "jpl": $("#jpl").val(),
-                "materi": $("#materi").val(),
-                "idkategori":$("#kategori").val(),
-                "filemateri" : upload
-            }
-        }
+
 
         console.log(dataArray);
         // return;
