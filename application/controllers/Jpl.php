@@ -23,10 +23,11 @@ class Jpl extends CI_Controller
     {
         $idpeserta = $this->session->userdata('nip');
         $getcourse = $this->course_model->getCourse($idpeserta);
+        $competency = $this->course_model->getCompetencyByNipApprove($idpeserta);
         $data['getcourse'] = $getcourse;
+        $data['competency'] = $competency;
         $data['course'] = $this->course_model->availableCourse($idpeserta);
-        $data['competency'] = $this->course_model->getCompetencyByNip($idpeserta);
-        $data['jpl'] = $this->course_model->getJpl($idpeserta);
+        $data['jpl'] = $this->course_model->getJplFinish($idpeserta);
         // echo "<pre/>";
         // print_r($data);
         // exit;
@@ -45,6 +46,13 @@ class Jpl extends CI_Controller
             
             $data['getJPL'] = $data['getJPL'] + $getcourse[$i]['jpl']; 
         }
+
+        for ($i=0; $i < count($competency) ; $i++) { 
+            if ($competency[$i]['statuscompetency'] == 'approved') {
+                $data['finishJPL'] = $data['finishJPL'] + $competency[$i]['jplapproved'];
+            }
+            
+        }        
 
         if($data['enrolledCourse']<1){
             $data['percentageFinishEnroll'] =0;  

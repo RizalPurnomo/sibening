@@ -184,13 +184,28 @@ class Course_model extends CI_Model
         $this->db->delete($tabel);
     }
 
-    public function getJplFinish(){
+    public function getSumJplFinish(){
         $sql = "SELECT SUM(jpl) AS jplFinish FROM rzl_getcourse a
             INNER JOIN rzl_m_course b ON a.idcourse=b.idcourse
             WHERE flag='finish'";
         $qry = $this->db->query($sql);
         return $qry->result_array();
     }
+
+    public function getJplFinish($nip){
+        $sql = "SELECT c.idquestion AS idsoal, SUM(IF(benar='y',1,0)) AS pretest, SUM(IF(benarpost='y',1,0)) AS posttest, a.*,b.*,c.*,d.*,e.* FROM dbsibening.rzl_getcourse a
+            INNER JOIN dbsibening.rzl_m_course b ON a.idcourse=b.idcourse
+            LEFT JOIN dbsibening.rzl_m_question c ON c.idcourse=a.idcourse 
+            LEFT JOIN dbsibening.rzl_answer d ON d.idquestion=c.idquestion AND d.idgetcourse=a.idgetcourse  
+            LEFT JOIN dbsibening.rzl_answerpost e ON e.idquestion=c.idquestion
+            WHERE a.nip = '$nip' and flag='finish'
+            group by a.idgetcourse";        
+        // $sql = "SELECT * FROM rzl_getcourse a
+        //     INNER JOIN rzl_m_course b ON a.idcourse=b.idcourse
+        //     WHERE a.nip='$nip' and flag='finish'";
+        $qry = $this->db->query($sql);
+        return $qry->result_array();
+    }    
 
     public function getJpl($nip){
         $sql = "SELECT c.idquestion AS idsoal, SUM(IF(benar='y',1,0)) AS pretest, SUM(IF(benarpost='y',1,0)) AS posttest, a.*,b.*,c.*,d.*,e.* FROM dbsibening.rzl_getcourse a
@@ -213,6 +228,14 @@ class Course_model extends CI_Model
         $qry = $this->db->query($sql);
         return $qry->result_array();
     }
+
+    public function getCompetencyByNipApprove($nip)
+    {
+        $sql = "SELECT * FROM rzl_m_competency
+                WHERE nip='$nip' and statuscompetency='approved'";
+        $qry = $this->db->query($sql);
+        return $qry->result_array();
+    }    
 
     //Kategory
     public function getAllKategori()
@@ -245,6 +268,7 @@ class Course_model extends CI_Model
             SUM(IF(flag!='finish',1,0)) AS progres, 
             SUM(IF(flag='finish',1,0)) AS finish, 
             SUM(IF(flag='finish',c.jpl,0)) AS jplfinish, 
+            (select sum(jplapproved) from dbsibening.rzl_m_competency where nip=a.nip and statuscompetency='approved' ) as jplapproved,
             a.* 
             FROM m_pegawai a
             LEFT JOIN rzl_getcourse b ON a.nip=b.nip

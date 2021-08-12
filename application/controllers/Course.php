@@ -23,8 +23,10 @@ class Course extends CI_Controller
     {
         $idpeserta = $this->session->userdata('nip');
         $getcourse = $this->course_model->getCourse($idpeserta);
+        $competency = $this->course_model->getCompetencyByNip($idpeserta);
         $data['getcourse'] = $getcourse;
         $data['course'] = $this->course_model->availableCourse($idpeserta);
+        $data['competency'] = $competency;
         
         $data['enrolledCourse'] = count($getcourse);
         $data['finishCourse'] = 0;
@@ -39,6 +41,13 @@ class Course extends CI_Controller
             
             $data['getJPL'] = $data['getJPL'] + $getcourse[$i]['jpl']; 
         }
+
+        for ($i=0; $i < count($competency) ; $i++) { 
+            if ($competency[$i]['statuscompetency'] == 'approved') {
+                $data['finishJPL'] = $data['finishJPL'] + $competency[$i]['jplapproved'];
+            }
+            
+        }        
 
         if($data['enrolledCourse']<1){
             $data['percentageFinishEnroll'] =0;  

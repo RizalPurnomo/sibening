@@ -46,7 +46,22 @@
                       </div>
                       <!-- /.info-box -->
                     </div>   
-                    
+                 
+                    <div>
+                      <div class="info-box">
+                        <span class="info-box-icon bg-info elevation-1"><i class="fa fa-info-circle" aria-hidden="true"></i></span>
+
+                        <div class="info-box-content">
+                          <span class="info-box-text">JPL Finish</span>
+                          <span class="info-box-number">
+                            <span class="badge badge-success"><?php echo $finishJPL; ?></span>
+                          </span>
+                        </div>
+                        <!-- /.info-box-content -->
+                      </div>
+                      <!-- /.info-box -->
+                    </div>  
+                                        
                     <div>
                       <div class="info-box">
                         <span class="info-box-icon bg-info elevation-1"><i class="fa fa-info-circle" aria-hidden="true"></i></span>
@@ -68,20 +83,7 @@
                       <!-- /.info-box -->
                     </div>   
                     
-                    <div>
-                      <div class="info-box">
-                        <span class="info-box-icon bg-info elevation-1"><i class="fa fa-info-circle" aria-hidden="true"></i></span>
-
-                        <div class="info-box-content">
-                          <span class="info-box-text">JPL Finish</span>
-                          <span class="info-box-number">
-                            <span class="badge badge-success"><?php echo $finishJPL; ?></span>
-                          </span>
-                        </div>
-                        <!-- /.info-box-content -->
-                      </div>
-                      <!-- /.info-box -->
-                    </div>                       
+                     
 
                     <!-- <div class="row">
                       <table border="0">

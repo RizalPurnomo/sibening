@@ -164,7 +164,7 @@
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">JPL Request</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="jplReq" placeholder="jplReq">
+                            <input type="text" class="form-control" id="jplReq" placeholder="JPL Request">
                         </div>
                     </div>   
                     <div class="form-group row">

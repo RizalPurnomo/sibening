@@ -151,6 +151,7 @@
                                             <th>Course Progress</th>
                                             <th>Course Finish</th>
                                             <th>JPL Finish</th>
+                                            <th>JPL Approved</th>
                                             <th>Precentage</th>
                                             <th>Aksi</th>
                                         </tr>
@@ -165,8 +166,9 @@
                                                     <td><?php echo $progress[$a]['progres'] ?></td>
                                                     <td><?php echo $progress[$a]['finish'] ?></td>
                                                     <td><?php echo $progress[$a]['jplfinish'] ?></td>
+                                                    <td><?php echo $progress[$a]['jplapproved'] ?></td>
                                                     <?php 
-                                                      $jplFinish = $progress[$a]['jplfinish'];
+                                                      $jplFinish = $progress[$a]['jplfinish'] + $progress[$a]['jplapproved'] ;
                                                       $targetJPL = 20;
                                                       $percentage = ($jplFinish/$targetJPL)*100;
                                                     ?>
@@ -196,6 +198,7 @@
                                       <th>Course Progress</th>
                                       <th>Course Finish</th>
                                       <th>JPL Finish</th>
+                                      <th>JPL Approved</th>
                                       <th>Precentage</th>
                                       <th>Aksi</th>
                                     </tfoot>

@@ -73,14 +73,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <a href="<?php echo base_url(); ?>course" class="nav-link">Home</a>
           </li>          
           <li class="nav-item">
+            <a href="<?php echo base_url(); ?>competency" class="nav-link">Competency</a>
+          </li>                                        
+          <li class="nav-item">
             <a href="<?php echo base_url(); ?>jpl" class="nav-link">JPL</a>
           </li>          
           <!-- <li class="nav-item">
             <a href="<?php echo base_url(); ?>reporting" class="nav-link">Reporting</a>
           </li>                               -->
-          <li class="nav-item">
-            <a href="<?php echo base_url(); ?>competency" class="nav-link">Competency</a>
-          </li>                                        
           <li class="nav-item">
             <a href="<?php echo base_url(); ?>login/logout" class="nav-link">Logout</a>
           </li>

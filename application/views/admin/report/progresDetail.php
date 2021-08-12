@@ -173,6 +173,88 @@
                   <!-- /.card-body -->
               </div>
 
+              <br/>
+              <div class="card card-primary card-outline">
+                  <div class="card-header">
+                      <h3 class="card-title">Competency</h3>
+                  </div>
+                  <!-- /.card-header -->
+                  <div class="card-body table-responsive">
+                      <table id="example1" class="table table-bordered table-striped">
+                          <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Date</th>
+                                <th>title</th>
+                                <th>Instance</th>
+                                <th>Files</th>
+                                <th>JPL Approved</th>
+                                <th>Status</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+
+                            <?php for ($a = 0; $a < count($competency); $a++) { ?>
+                                  <tr>
+                                        <td><?php echo $a + 1 ?></td>
+                                        <td><?php echo $competency[$a]['date'] ?></td>
+                                        <td><?php echo $competency[$a]['title'] ?></td>
+                                        <td><?php echo $competency[$a]['instance'] ?></td>
+                                        <td><a href="<?php echo base_url('uploads/competency/') . $competency[$a]['files'] ; ?>" target="_blank" ><?php echo $competency[$a]['files']; ?></a></td>
+                                        <td><?php echo $competency[$a]['jplapproved'] ?></td>
+                                        <td>
+                                            <?php 
+                                                $id = $competency[$a]['idcompetency'];
+                                                $linkDelete ="javascript:deleteData($id)";
+                                                $linkEdit ="javascript:editData($id)";
+                                                $pending = "
+                                                    <a class='btn btn-info btn-sm disabled' href='$linkEdit'>
+                                                        <i class='fas fa-pencil-alt'>
+                                                        </i>
+                                                        Edit
+                                                    </a>   
+                                                    <a class='btn btn-danger btn-sm disabled' href='$linkDelete'>
+                                                        <i class='fas fa-trash'>
+                                                        </i>
+                                                        Delete
+                                                    </a>        
+                                                ";    
+
+                                                $approved = ' 
+                                                    <button class="btn btn-success btn-sm disabled">
+                                                        <i class="fa fa-check">
+                                                        </i>
+                                                        Approved
+                                                    </button>        
+                                                '; 
+                                                
+                                                
+                                                $reject = ' 
+                                                    <button class="btn btn-danger btn-sm disabled">
+                                                        <i class="fa fa-times" aria-hidden="true"></i>
+                                                        </i>
+                                                        Rejected
+                                                    </button>        
+                                                ';                                                  
+                                                
+                                                if($competency[$a]['statuscompetency']=='pending'){
+                                                    echo $pending;
+                                                }else if($competency[$a]['statuscompetency']=='approved'){
+                                                    echo $approved;
+                                                }else{
+                                                    echo $reject;
+                                                }
+                                            
+                                            ?>
+                                        </td>
+                                  </tr>
+                            <?php } ?>
+                          </tbody>
+                      </table>
+                  </div>
+                  <!-- /.card-body -->
+              </div>                
+          
               
             </div>
             <?php $this->load->view('admin/report/courseInformationAdmin'); ?>

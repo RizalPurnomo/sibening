@@ -28,7 +28,8 @@ class Report extends CI_Controller
     public function progresPeserta(){
         $data['peserta'] = $this->peserta_model->getAllPeserta();
         $data['progress'] = $this->course_model->progressPeserta();
-        $data['getJplFinish'] = $this->course_model->getJplFinish();
+        $data['getJplFinish'] = $this->course_model->getSumJplFinish();
+        // $data['competency'] = $this->course_model->getCompetencyByNip($idpeserta);
         $this->load->view('admin/report/progresPeserta',$data);
     }
 
@@ -40,7 +41,9 @@ class Report extends CI_Controller
 
     public function progresDetail($idpeserta){
         $getcourse = $this->course_model->getCourse($idpeserta);
+        $competency = $this->course_model->getCompetencyByNip($idpeserta);
         $data['getcourse'] = $getcourse;
+        $data['competency'] = $competency;
         $data['course'] = $this->course_model->availableCourse($idpeserta);
         $data['peserta'] = $this->peserta_model->getPesertaById($idpeserta);
 
@@ -58,6 +61,13 @@ class Report extends CI_Controller
             $data['getJPL'] = $data['getJPL'] + $getcourse[$i]['jpl']; 
         }
 
+        for ($i=0; $i < count($competency) ; $i++) { 
+            if ($competency[$i]['statuscompetency'] == 'approved') {
+                $data['finishJPL'] = $data['finishJPL'] + $competency[$i]['jplapproved'];
+            }
+            
+        }        
+
         if($data['enrolledCourse']<1){
             $data['percentageFinishEnroll'] =0;  
         }else{
@@ -65,6 +75,7 @@ class Report extends CI_Controller
         }
         $data['percentageJplTarget'] = ($data['getJPL']/$data['targetJPL'])*100;
         $data['percentage'] = ($data['finishJPL']/$data['targetJPL'])*100;
+
 
 
         $this->load->view('admin/report/progresDetail',$data);
