@@ -39,7 +39,7 @@
               }else{
                 $jplFinish = $getJplFinish[0]['jplFinish'];
               }
-              $percentageGlobal = ($jplFinish / $targetJPL )*100; 
+              $percentageGlobal = ($totalJpl / $targetJPL )*100; 
             ?>
             <div class="row">
               <div class="col-12 col-sm-6 col-md-3">
@@ -80,7 +80,7 @@
 
                   <div class="info-box-content">
                     <span class="info-box-text">JPL Finish</span>
-                    <span class="info-box-number"><?php echo $jplFinish; ?> JPL</span>
+                    <span class="info-box-number"><?php echo $totalJpl; ?> JPL</span>
                   </div>
                   <!-- /.info-box-content -->
                 </div>

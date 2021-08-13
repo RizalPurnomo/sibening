@@ -46,4 +46,11 @@ class Competency_model extends CI_Model
         $qry = $this->db->query($sql);
         return $qry->result_array();
     }
+
+    public function getSumJplApproved(){
+        $sql = "SELECT sum(jplapproved) as jplApproved FROM rzl_m_competency 
+            where statuscompetency='approved';";
+        $qry = $this->db->query($sql);
+        return $qry->result_array();
+    }    
 }

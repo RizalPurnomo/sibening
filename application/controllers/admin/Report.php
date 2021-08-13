@@ -7,7 +7,7 @@ class Report extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->model(array('peserta_model','course_model'));
+        $this->load->model(array('peserta_model','course_model','competency_model'));
         // if (empty($this->session->userdata('nip'))) {
         //     redirect('login');
         // }
@@ -29,7 +29,11 @@ class Report extends CI_Controller
         $data['peserta'] = $this->peserta_model->getAllPeserta();
         $data['progress'] = $this->course_model->progressPeserta();
         $data['getJplFinish'] = $this->course_model->getSumJplFinish();
+        $data['getJplApproved'] = $this->competency_model->getSumJplApproved();
+        $data['totalJpl'] = $data['getJplFinish'][0]['jplFinish'] + $data['getJplApproved'][0]['jplApproved'];
         // $data['competency'] = $this->course_model->getCompetencyByNip($idpeserta);
+        // echo "<pre/>";
+        // print_r($data);
         $this->load->view('admin/report/progresPeserta',$data);
     }
 
