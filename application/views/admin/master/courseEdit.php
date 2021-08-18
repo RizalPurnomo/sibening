@@ -5,64 +5,68 @@
 
 <script type="text/javascript">
 
-        async function updateCourse() {
-        if ($("#kategori").val() == "" || $("#title").val() == "" ) {
-            Swal.fire({
-                icon: 'warning',
-                text: 'Harap Melengkapi Data!',
-            })
-            return;
-        }
+    // var coll = document.getElementById('chkPraktek');
+    // console.log(coll);
+    // praktek.style.display = "none";
 
-        if($("#fileupload").val()==""){
-            var dataArray = {
-                "course": {
-                    "title": $("#title").val(),
-                    "jpl": $("#jpl").val(),
-                    "materi": $("#materi").val(),
-                    "idkategori":$("#kategori").val()
-                }
-            }            
-        }else{
-            upload =fileupload.files[0].name;
-            let formData = new FormData(); 
-            formData.append("file", fileupload.files[0]);
-            await fetch('../upload', {
-                method: "POST", 
-                body: formData
-            });  
-
-            var dataArray = {
-                "course": {
-                    "title": $("#title").val(),
-                    "jpl": $("#jpl").val(),
-                    "materi": $("#materi").val(),
-                    "idkategori":$("#kategori").val(),
-                    "filemateri" : upload
-                }
-            }             
-        }
-        // return;
-
-
-        console.log(dataArray);
-        // return;
-        $.ajax({
-            type: "POST",
-            data: dataArray,
-            url: '<?php echo base_url('admin/course/updateCourse/'); ?>' + $("#idcourse").val(),
-            success: function(result) {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Data Berhasil Disimpan',
-                    showConfirmButton: false,
-                    timer: 1500
-                })
-
-                console.log(result);
-                window.location = "<?php echo base_url(); ?>admin/course";
-            }
+    async function updateCourse() {
+    if ($("#kategori").val() == "" || $("#title").val() == "" ) {
+        Swal.fire({
+            icon: 'warning',
+            text: 'Harap Melengkapi Data!',
         })
+        return;
+    }
+
+    if($("#fileupload").val()==""){
+        var dataArray = {
+            "course": {
+                "title": $("#title").val(),
+                "jpl": $("#jpl").val(),
+                "materi": $("#materi").val(),
+                "idkategori":$("#kategori").val()
+            }
+        }            
+    }else{
+        upload =fileupload.files[0].name;
+        let formData = new FormData(); 
+        formData.append("file", fileupload.files[0]);
+        await fetch('../upload', {
+            method: "POST", 
+            body: formData
+        });  
+
+        var dataArray = {
+            "course": {
+                "title": $("#title").val(),
+                "jpl": $("#jpl").val(),
+                "materi": $("#materi").val(),
+                "idkategori":$("#kategori").val(),
+                "filemateri" : upload
+            }
+        }             
+    }
+    // return;
+
+
+    console.log(dataArray);
+    // return;
+    $.ajax({
+        type: "POST",
+        data: dataArray,
+        url: '<?php echo base_url('admin/course/updateCourse/'); ?>' + $("#idcourse").val(),
+        success: function(result) {
+            Swal.fire({
+                icon: 'success',
+                title: 'Data Berhasil Disimpan',
+                showConfirmButton: false,
+                timer: 1500
+            })
+
+            console.log(result);
+            window.location = "<?php echo base_url(); ?>admin/course";
+        }
+    })
 
     }
 </script>
@@ -75,7 +79,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark">Course Add</h1>
+            <h1 class="m-0 text-dark">Course Edit</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -190,6 +194,59 @@
             </div>
             <!-- /.card -->
         </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <!-- <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                            <i class="fas fa-minus"></i>
+                        </button> -->
+                        <div class="form-group">
+                            <div class="custom-control custom-checkbox">
+                                <input class="custom-control-input" type="checkbox" id="customCheckbox1" data-toggle='collapse' data-target='#praktek'>
+                                <label for="customCheckbox1" class="custom-control-label">Custom Checkbox</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="praktek" >
+                        <div class="card-body">
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Trainer</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="trainer" placeholder="Nama Trainer" >
+                                </div>
+                            </div>                          
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Tanggal</label>
+                                <div class="col-sm-9">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="far fa-calendar-alt"></i>
+                                            </span>
+                                        </div>
+                                        <input type="text" class="form-control pull-right" id="datepicker">
+                                    </div>
+                                </div>
+                                <div class="col-sm-1">
+                                    <button class="btn btn-info">+</button>
+                                </div>
+                            </div>   
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label"></label>
+                                <div class="col-sm-10">
+                                    <textarea class="form-control" rows="3" placeholder="List Tanggal Available"></textarea>
+                                </div>
+                            </div>                                                                                 
+                        </div>        
+                            
+                    </div>    
+                </div>  
+            </div>
+        </div>
+
+
         <!-- /.row -->
         <!-- Main row -->
 
