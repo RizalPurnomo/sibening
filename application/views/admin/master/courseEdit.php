@@ -180,7 +180,68 @@
                                         </div>                                      
                                     </div>
                                 </div>                                
-                            </div>                            
+                            </div>       
+                            
+                            <div class="card">
+                                <div class="card-header">
+                                    <!-- <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button> -->
+                                    <div class="form-group">
+                                        <div class="custom-control custom-checkbox">
+                                            <input class="custom-control-input" type="checkbox" id="customCheckbox1" data-toggle='collapse' data-target='#praktek'>
+                                            <label for="customCheckbox1" class="custom-control-label">Custom Checkbox</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="praktek" >
+                                    <div class="card-body">
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label">Trainer</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" id="trainer" placeholder="Nama Trainer" value="<?php echo $course[0]['trainer']; ?>" >
+                                            </div>
+                                        </div>                          
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label">Tanggal</label>
+                                            <div class="col-sm-9">
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">
+                                                            <i class="far fa-calendar-alt"></i>
+                                                        </span>
+                                                    </div>
+                                                    <input type="text" class="form-control pull-right" id="datepicker">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-1">
+                                                <button class="btn btn-info" onclick="addJadwal()">+</button>
+                                            </div>
+                                        </div>   
+
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label"></label>
+                                            <div class="col-sm-10">
+                                                <div id="divTglAvailable">
+                                                    <ul>
+                                                        <?php 
+                                                            if($course[0]['tglavailablepraktek']!=""){
+                                                                $arr = explode(",",$course[0]['tglavailablepraktek']);
+                                                                for ($i=0; $i < count($arr) ; $i++) { 
+                                                                    # code...
+                                                                }
+                                                                echo "<li>dfdf </li>"
+                                                            }
+                                                        ?>
+                                                    </ul>
+                                                </div>
+                                                <!-- <textarea id="tglAvailable" class="form-control" rows="3" placeholder="List Tanggal Available"></textarea> -->
+                                            </div>
+                                        </div>                                                                                 
+                                    </div>         
+                                </div>    
+                            </div> 
+
                         </div>
                         <!-- /.card-body -->
                         <div class="card-footer">
@@ -193,57 +254,6 @@
                 <!-- ./card-body -->
             </div>
             <!-- /.card -->
-        </div>
-
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header">
-                        <!-- <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                            <i class="fas fa-minus"></i>
-                        </button> -->
-                        <div class="form-group">
-                            <div class="custom-control custom-checkbox">
-                                <input class="custom-control-input" type="checkbox" id="customCheckbox1" data-toggle='collapse' data-target='#praktek'>
-                                <label for="customCheckbox1" class="custom-control-label">Custom Checkbox</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="praktek" >
-                        <div class="card-body">
-                            <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">Trainer</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="trainer" placeholder="Nama Trainer" >
-                                </div>
-                            </div>                          
-                            <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">Tanggal</label>
-                                <div class="col-sm-9">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text">
-                                                <i class="far fa-calendar-alt"></i>
-                                            </span>
-                                        </div>
-                                        <input type="text" class="form-control pull-right" id="datepicker">
-                                    </div>
-                                </div>
-                                <div class="col-sm-1">
-                                    <button class="btn btn-info">+</button>
-                                </div>
-                            </div>   
-                            <div class="form-group row">
-                                <label class="col-sm-2 col-form-label"></label>
-                                <div class="col-sm-10">
-                                    <textarea class="form-control" rows="3" placeholder="List Tanggal Available"></textarea>
-                                </div>
-                            </div>                                                                                 
-                        </div>        
-                            
-                    </div>    
-                </div>  
-            </div>
         </div>
 
 

@@ -4,6 +4,64 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js" integrity="sha512-nOQuvD9nKirvxDdvQ9OMqe2dgapbPB7vYAMrzJihw5m+aNcf0dX53m6YxM4LgA9u8e9eg9QX+/+mPu8kCNpV2A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <script type="text/javascript">
+    tanggals = "";
+    const jadwalAvailable = [];
+
+
+    function getDateTime($tgl) {
+        if ($tgl == "now") {
+            var now = new Date();
+        } else {
+            var now = $tgl;
+        }
+        var year = now.getFullYear();
+        var month = now.getMonth() + 1;
+        var day = now.getDate();
+        var hour = now.getHours();
+        var minute = now.getMinutes();
+        var second = now.getSeconds();
+        if (month.toString().length == 1) {
+            var month = '0' + month;
+        }
+        if (day.toString().length == 1) {
+            var day = '0' + day;
+        }
+        if (hour.toString().length == 1) {
+            var hour = '0' + hour;
+        }
+        if (minute.toString().length == 1) {
+            var minute = '0' + minute;
+        }
+        if (second.toString().length == 1) {
+            var second = '0' + second;
+        }
+        var dateTime = year + '/' + month + '/' + day ;
+        return dateTime;
+    }
+
+    function addJadwal(){
+        
+        var list = "";
+        tanggal = getDateTime(new Date($("#datepicker").val()));
+        // tanggals = tanggals + ' | ' + tanggal;
+        // $("#tglAvailable").val(tanggals);
+        // alert(tanggals);
+        if(jadwalAvailable.includes(tanggal)){
+            alert("Tanggal ini sudah di daftarkan");
+            return;
+        }else{
+            jadwalAvailable.push(tanggal);
+        }
+        console.log(jadwalAvailable);
+        list += '<ul>';
+                    for (let i = 0; i < jadwalAvailable.length; i++) {
+                        list += `<li>${jadwalAvailable[i]}</li>`;
+                        
+                    }
+        list += '</ul>';
+        document.getElementById("divTglAvailable").innerHTML = list;
+
+    }
 
     async function savecourse() {
         if ($("#kategori").val() == "" || $("#title").val() == "" ) {
@@ -19,7 +77,9 @@
                     "title": $("#title").val(),
                     "jpl": $("#jpl").val(),
                     "materi": $("#materi").val(),
-                    "idkategori" : $("#kategori").val()
+                    "idkategori" : $("#kategori").val(),
+                    "tglavailablepraktek" : jadwalAvailable.toString(),
+                    "trainer" : $("#trainer").val()
                 }
             }
         }else{
@@ -37,6 +97,8 @@
                     "jpl": $("#jpl").val(),
                     "materi": $("#materi").val(),
                     "idkategori" : $("#kategori").val(),
+                    "tglavailablepraktek" : jadwalAvailable.toString(),
+                    "trainer" : $("#trainer").val(),                    
                     "filemateri" : upload
                 }
             }                   
@@ -130,7 +192,6 @@
                                     <input type="text" class="form-control" id="jpl" placeholder="JPL">
                                 </div>
                             </div>
-
                             <div class="form-group row">
                                 <div class="col-md-12">
                                     <div class="card card-outline card-info">
@@ -180,7 +241,62 @@
                                     </div>
                                 </div>                                
                             </div>
+
+                            <div class="card">
+                                <div class="card-header">
+                                    <!-- <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button> -->
+                                    <div class="form-group">
+                                        <div class="custom-control custom-checkbox">
+                                            <input class="custom-control-input" type="checkbox" id="customCheckbox1" data-toggle='collapse' data-target='#praktek'>
+                                            <label for="customCheckbox1" class="custom-control-label">Custom Checkbox</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="praktek" >
+                                    <div class="card-body">
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label">Trainer</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" id="trainer" placeholder="Nama Trainer" >
+                                            </div>
+                                        </div>                          
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label">Tanggal</label>
+                                            <div class="col-sm-9">
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">
+                                                            <i class="far fa-calendar-alt"></i>
+                                                        </span>
+                                                    </div>
+                                                    <input type="text" class="form-control pull-right" id="datepicker">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-1">
+                                                <button class="btn btn-info" onclick="addJadwal()">+</button>
+                                            </div>
+                                        </div>   
+
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label"></label>
+                                            <div class="col-sm-10">
+                                                <div id="divTglAvailable">
+
+                                                </div>
+                                                <!-- <textarea id="tglAvailable" class="form-control" rows="3" placeholder="List Tanggal Available"></textarea> -->
+                                            </div>
+                                        </div>                                                                                 
+                                    </div>         
+                                </div>    
+                            </div> 
+
                         </div>
+                        
+ 
+
+                        
                         <!-- /.card-body -->
                         <div class="card-footer">
                             <button onclick="savecourse()" class="btn btn-info">Simpan</button>
