@@ -189,17 +189,17 @@
                                     </button> -->
                                     <div class="form-group">
                                         <div class="custom-control custom-checkbox">
-                                            <input class="custom-control-input" type="checkbox" id="customCheckbox1" data-toggle='collapse' data-target='#praktek'>
-                                            <label for="customCheckbox1" class="custom-control-label">Custom Checkbox</label>
+                                            <input class="custom-control-input" type="checkbox" id="chkTraining" data-toggle='collapse' data-target='#praktek' <?php if($course[0]['tglavailablepraktek']==""){ echo '';}else{echo 'checked'; } ?> >
+                                            <label for="chkTraining" class="custom-control-label">Training</label>
                                         </div>
                                     </div>
                                 </div>
-                                <div id="praktek" >
+                                <div id="praktek" class="<?php if($course[0]['tglavailablepraktek']==""){ echo 'collapse';}else{echo 'collapse show'; } ?>" >
                                     <div class="card-body">
                                         <div class="form-group row">
                                             <label class="col-sm-2 col-form-label">Trainer</label>
                                             <div class="col-sm-10">
-                                                <input type="text" class="form-control" id="trainer" placeholder="Nama Trainer" value="<?php echo $course[0]['trainer']; ?>" >
+                                                <input type="text" class="form-control" id="trainer" placeholder="Nama Trainer" value="<?php echo $course[0]['trainer']; ?>" checked > 
                                             </div>
                                         </div>                          
                                         <div class="form-group row">
@@ -228,14 +228,12 @@
                                                             if($course[0]['tglavailablepraktek']!=""){
                                                                 $arr = explode(",",$course[0]['tglavailablepraktek']);
                                                                 for ($i=0; $i < count($arr) ; $i++) { 
-                                                                    # code...
+                                                                    echo "<li>$arr[$i]</li>";
                                                                 }
-                                                                echo "<li>dfdf </li>"
                                                             }
                                                         ?>
                                                     </ul>
                                                 </div>
-                                                <!-- <textarea id="tglAvailable" class="form-control" rows="3" placeholder="List Tanggal Available"></textarea> -->
                                             </div>
                                         </div>                                                                                 
                                     </div>         

@@ -95,7 +95,7 @@ CREATE TABLE `aauth_login_attempts` (
   `timestamp` datetime DEFAULT NULL,
   `login_attempts` tinyint(2) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=58901 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=58904 DEFAULT CHARSET=latin1;
 
 /*Data for the table `aauth_login_attempts` */
 
@@ -1351,7 +1351,7 @@ insert  into `aauth_users`(`id`,`email`,`pass`,`username`,`banned`,`last_login`,
 (298,'mail@mail.com','63bdfffa4da8d79e1b340d929e4b31828b47a28b613938146a04eba79093c456','Ali',0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'Ali Munsip','1020184119901109201602188',NULL),
 (299,'mail@gmail.com','995edbacbbf22e9930813f519cffedde662dad8a6fda5a70a4dd02928d7cb5e8','12345',0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'Dummy','12345',NULL),
 (300,'nahdya@gmail.com','82d622c57592ca4de294faa3c12f3bc46617db0d86b002aa7995cecdadcfdce4','1020184119950609202107209',0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'Nahdya Putri Octavina','1020184119950609202107209',NULL),
-(301,'rizalpurnomo222@gmail.com','97edb01973bd73e65187263cd7798293a8951bcc78d7d4bc432f25a43593217e','rizal',0,'2021-08-16 03:05:10','2021-08-16 03:05:10',NULL,NULL,NULL,NULL,NULL,NULL,'192.168.101.202','Rizal Purnomo','1020184119860919202107210',NULL),
+(301,'rizalpurnomo222@gmail.com','97edb01973bd73e65187263cd7798293a8951bcc78d7d4bc432f25a43593217e','rizal',0,'2021-08-19 10:45:06','2021-08-19 10:45:06',NULL,NULL,NULL,NULL,NULL,NULL,'192.168.101.121','Rizal Purnomo','1020184119860919202107210',NULL),
 (302,'sidikpurnomo1996@gmail.com','2133b6f7d97b233c12e97c20199634e0193428abd801feecc5d85baf3f3b7adc','Sidik purnomo',0,'2021-08-16 04:22:27','2021-08-16 04:22:27',NULL,NULL,NULL,NULL,NULL,NULL,'192.168.101.54','Sidik Purnomo','1020184119961130202107211',NULL),
 (303,'singgihariefk19@gmail.com','9a876af845fcf82b11d37dbff9c3976ef0ad33c0a2698d168f10a7d1faca0efe','singgiharief',0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'Singgih Arief Kurniawan','1020184119980619202107212',NULL),
 (304,'rekhadewi90@gmail.com','cb73940706d01905ee00d2d73102d5cced3ad57301f6c3924ecd2ea7060eb30f','drrekha',0,'2021-08-16 04:23:11','2021-08-16 04:23:11',NULL,NULL,NULL,NULL,NULL,NULL,'192.168.101.54','Rekha Dewi Amiati','1020184119900502202107213',NULL);
@@ -1369,7 +1369,7 @@ CREATE TABLE `aauth_userslog` (
   `comments` text,
   `ipaddr` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`log_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=79 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=85 DEFAULT CHARSET=latin1;
 
 /*Data for the table `aauth_userslog` */
 
@@ -1451,7 +1451,13 @@ insert  into `aauth_userslog`(`log_id`,`user_id`,`perms`,`dateactivity`,`page`,`
 (75,NULL,'member_login','2021-08-16 04:22:41','http://192.168.101.54/sibening/login/login','Login attempt failed with username : nahdya','192.168.101.54'),
 (76,304,'member_login','2021-08-16 04:23:11','http://192.168.101.54/sibening/login/login','Login Success with username : drrekha','192.168.101.54'),
 (77,301,'member_login','2021-08-15 21:58:22','http://192.168.101.54/sibening/login/login','Login Success with username : rizal','192.168.101.202'),
-(78,301,'Admin_login','2021-08-16 03:05:10','http://192.168.101.54/sibening/admin/login/login','Admin Login Success with username : rizal','192.168.101.202');
+(78,301,'Admin_login','2021-08-16 03:05:10','http://192.168.101.54/sibening/admin/login/login','Admin Login Success with username : rizal','192.168.101.202'),
+(79,301,'Admin_login','2021-08-18 08:30:47','http://192.168.101.121/sibening/admin/login/login','Admin Login Success with username : rizal','192.168.101.121'),
+(80,301,'Admin_login','2021-08-18 11:31:42','http://192.168.101.121/sibening/admin/login/login','Admin Login Success with username : rizal','192.168.101.121'),
+(81,301,'member_login','2021-08-18 06:34:23','http://192.168.101.121/sibening/login/login','Login Success with username : rizal','192.168.101.121'),
+(82,301,'Admin_login','2021-08-19 08:30:12','http://192.168.101.121/sibening/admin/login/login','Admin Login Success with username : rizal','192.168.101.121'),
+(83,301,'member_login','2021-08-19 05:44:06','http://192.168.101.121/sibening/login/login','Login Success with username : rizal','192.168.101.121'),
+(84,301,'Admin_login','2021-08-19 10:45:06','http://192.168.101.121/sibening/admin/login/login','Admin Login Success with username : rizal','192.168.101.121');
 
 /*Table structure for table `m_bagian` */
 
@@ -1969,7 +1975,7 @@ CREATE TABLE `rzl_answer` (
   `benar` varchar(2) DEFAULT NULL,
   PRIMARY KEY (`idanswer`),
   KEY `idgetcourse` (`idgetcourse`)
-) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `rzl_answer` */
 
@@ -2023,7 +2029,17 @@ insert  into `rzl_answer`(`idanswer`,`idgetcourse`,`idquestion`,`answer`,`key`,`
 (47,6,27,'D','C','n'),
 (48,6,28,'D','A','n'),
 (49,6,29,'E','B','n'),
-(50,6,30,'C','A','n');
+(50,6,30,'C','A','n'),
+(51,7,71,'A','C','n'),
+(52,7,72,'A','A','y'),
+(53,7,73,'A','D','n'),
+(54,7,74,'A','A','y'),
+(55,7,75,'A','E','n'),
+(56,7,76,'A','C','n'),
+(57,7,77,'A','A','y'),
+(58,7,78,'A','D','n'),
+(59,7,79,'A','B','n'),
+(60,7,80,'A','A','y');
 
 /*Table structure for table `rzl_answerpost` */
 
@@ -2037,7 +2053,7 @@ CREATE TABLE `rzl_answerpost` (
   `key` varchar(10) DEFAULT NULL,
   `benarpost` varchar(2) DEFAULT NULL,
   PRIMARY KEY (`idanswerpost`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `rzl_answerpost` */
 
@@ -2061,7 +2077,17 @@ insert  into `rzl_answerpost`(`idanswerpost`,`idgetcourse`,`idquestion`,`answerp
 (17,6,27,'C','C','y'),
 (18,6,28,'C','A','n'),
 (19,6,29,'D','B','n'),
-(20,6,30,'C','A','n');
+(20,6,30,'C','A','n'),
+(21,7,71,'B','C','n'),
+(22,7,72,'B','A','n'),
+(23,7,73,'B','D','n'),
+(24,7,74,'B','A','n'),
+(25,7,75,'B','E','n'),
+(26,7,76,'B','C','n'),
+(27,7,77,'B','A','n'),
+(28,7,78,'B','D','n'),
+(29,7,79,'B','B','y'),
+(30,7,80,'D','A','n');
 
 /*Table structure for table `rzl_getcourse` */
 
@@ -2076,7 +2102,7 @@ CREATE TABLE `rzl_getcourse` (
   PRIMARY KEY (`idgetcourse`),
   KEY `idpeserta` (`nip`),
   KEY `idcourse` (`idcourse`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `rzl_getcourse` */
 
@@ -2085,7 +2111,8 @@ insert  into `rzl_getcourse`(`idgetcourse`,`datecourse`,`nip`,`idcourse`,`flag`)
 (2,'2021-08-02 05:49:37','1020184119860919202107210',3,'finish'),
 (4,'2021-08-10 10:06:06','1020184119961130202107211',3,'materi'),
 (5,'2021-08-10 10:25:05','1020184119961130202107211',4,'materi'),
-(6,'2021-08-15 09:59:09','1020184119860919202107210',2,'finish');
+(6,'2021-08-15 09:59:09','1020184119860919202107210',2,'post'),
+(7,'2021-08-19 05:47:11','1020184119860919202107210',7,'praktek');
 
 /*Table structure for table `rzl_m_competency` */
 
@@ -2121,18 +2148,22 @@ CREATE TABLE `rzl_m_course` (
   `jpl` int(11) DEFAULT NULL,
   `materi` text,
   `idkategori` int(11) DEFAULT NULL,
-  `filemateri` varchar(45) DEFAULT NULL,
+  `filemateri` varchar(100) DEFAULT NULL,
   `tglavailablepraktek` varchar(100) DEFAULT NULL,
+  `trainer` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`idcourse`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `rzl_m_course` */
 
-insert  into `rzl_m_course`(`idcourse`,`title`,`jpl`,`materi`,`idkategori`,`filemateri`,`tglavailablepraktek`) values 
-(1,'Ujian Rekrutmen Pranata Komputer',2,'<p>Materi Ujian Rekrutmen Pranata Komputer</p>',9,'sdsd.pdf',NULL),
-(2,'Ujian Rekrutmen Pranata Komputer Part 2',2,'<p>Materi&nbsp;Ujian Rekrutmen Pranata Komputer Part 2</p>',9,NULL,NULL),
-(3,'Ujian Rekrutmen Soal Umum',1,'Materi&nbsp;Ujian Rekrutmen Soal Umum',1,NULL,NULL),
-(4,'Ujian Rekrutmen Soal Umum Part 2',1,'<p>Materi Ujian Rekrutmen Soal Umum Part 2</p>',1,'123.pdf',NULL);
+insert  into `rzl_m_course`(`idcourse`,`title`,`jpl`,`materi`,`idkategori`,`filemateri`,`tglavailablepraktek`,`trainer`) values 
+(1,'Ujian Rekrutmen Pranata Komputer',2,'<p>Materi Ujian Rekrutmen Pranata Komputer</p>',9,'sdsd.pdf',NULL,NULL),
+(2,'Ujian Rekrutmen Pranata Komputer Part 2',2,'<p>Materi&nbsp;Ujian Rekrutmen Pranata Komputer Part 2</p>',9,NULL,NULL,NULL),
+(3,'Ujian Rekrutmen Soal Umum',1,'Materi Ujian Rekrutmen Soal Umum',1,NULL,NULL,NULL),
+(4,'Ujian Rekrutmen Soal Umum Part 2',1,'<p>Materi Ujian Rekrutmen Soal Umum Part 2</p>',1,'123.pdf',NULL,NULL),
+(5,'Contoh Course Perawat',2,'<p>Contoh Course Perawat<br></p>',3,'REKAPITULASI SKRINING BERKALA PERKELAS SD Kec',NULL,NULL),
+(6,'Course Tata Usaha',2,'<p>Course Tata Usaha<br></p>',4,'SKB 3 Menteri tentang Perubahan kedua Libur Nasional dan Cuti Bersama 2021.pdf','2021/08/23,2021/08/24,2021/08/25','Rizal Purnomo'),
+(7,'Course Kategori Umum',2,'<p>Course Kategori Umum<br></p>',1,'REKAPITULASI SKRINING BERKALA PERKELAS.SMP-1(2019).xls','2021/08/30,2021/08/31','Rizal Purnomo');
 
 /*Table structure for table `rzl_m_kategori` */
 
@@ -2194,7 +2225,7 @@ CREATE TABLE `rzl_m_question` (
   `key` varchar(1) DEFAULT NULL,
   PRIMARY KEY (`idquestion`),
   KEY `idcourse` (`idcourse`)
-) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=81 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `rzl_m_question` */
 
@@ -2238,7 +2269,27 @@ insert  into `rzl_m_question`(`idquestion`,`idcourse`,`nomor`,`question`,`pila`,
 (57,4,NULL,'Makna imbuhan men-kan pada kalimat “ Ayah membelikan saya sepatu baru”. Sama dengan makna imbuhan men-kan yang terdapat pada kalimat ... ','Dia mengambilkan ayah kaca mata','Tono memasukkan sepeda motornya ke garasi','Saya menyerahkan surat-surat kepada kepala sekolah','Nita meletakkan tasnya di meja','Dia menjahitkan baju kepada Bu Rini','A'),
 (58,4,NULL,'Tujuh orang membuat jembatan di atas sungai dan bisa selesai dalam waktu 12 hari. Jika jembatan ingin diselesaikan dalam waktu 6 hari, berapa orang yang diperlukan :','12 orang','14 orang','15 orang','18 orang','20 orang','B'),
 (59,4,NULL,'94,88,82,76,70,64, .... , ...... ','52, 60','58, 52','56, 50','70, 68','60, 54','B'),
-(60,4,NULL,'Pada tanggal 25 Desember 1912 di kota Bandung, Jawa Barat didirikan organisasi bernama Indische Partij . Organisasi ini didirikan oleh ','Douwes Dekker, H. Samanhudi dan RM Suwardi Suryaningrat','dr. Cipto Mangunkusomo, dr. Sutomo dan RM Suwardi Suryaningrat','KH Achmad Dahlan, Ki Hajar Dewantoro, dr. Cipto Mangunkusomo','Ki Hajar Dewantoro, dr. Cipto Mangunkusumo, dr. Danudirja Setiabudi','Semua jawaban diatas salah','A');
+(60,4,NULL,'Pada tanggal 25 Desember 1912 di kota Bandung, Jawa Barat didirikan organisasi bernama Indische Partij . Organisasi ini didirikan oleh ','Douwes Dekker, H. Samanhudi dan RM Suwardi Suryaningrat','dr. Cipto Mangunkusomo, dr. Sutomo dan RM Suwardi Suryaningrat','KH Achmad Dahlan, Ki Hajar Dewantoro, dr. Cipto Mangunkusomo','Ki Hajar Dewantoro, dr. Cipto Mangunkusumo, dr. Danudirja Setiabudi','Semua jawaban diatas salah','A'),
+(61,6,NULL,'','','','','','',''),
+(62,6,NULL,'','','','','','',''),
+(63,6,NULL,'','','','','','',''),
+(64,6,NULL,'','','','','','',''),
+(65,6,NULL,'','','','','','',''),
+(66,6,NULL,'','','','','','',''),
+(67,6,NULL,'','','','','','',''),
+(68,6,NULL,'','','','','','',''),
+(69,6,NULL,'','','','','','',''),
+(70,6,NULL,'','','','','','',''),
+(71,7,NULL,'Seorang pedagang menjual baju dengan harga Rp 60.000 dan memperoleh laba 20% dari harga beli. Berapa harga beli baju tersebut?','72000','56000','50000','48000','30000','C'),
+(72,7,NULL,'Ciri-ciri Negara Hukum adalah …','Pengakuan atas HAM termasuk pemisahan kekuasaan untuk menjamin HAM','Pemerintah berdasarkan hukum','Pengadilan untuk menyelesaikan masalah akibat pelanggaran HAM','Semua jawaban salah','Semua jawaban benar','A'),
+(73,7,NULL,'Kalimat berikut yang termasuk kalimat pasif adalah ..','Pembalap itu merajai lomba pada etape pertama','Pembicara itu berceramah tentang refleksi diri','Guru yang sedang berbicara itu seorang penulis cerita pendek','Telah kukirimkan kembali buku itu kemarin kepada pemiliknya','Diskusi yang sedang berlangsung membicarakan peningkatan etos kerja','D'),
+(74,7,NULL,'Batang tubuh UUD 1945, dalam hubungannya dengan pembukaan, seperti ditegaskan dalam penjelasan pada hakekatnya merupakan …','Penjabaran lebih rinci dari pokok-pokok pikiran yang terkandung dalam pembukaan','Norma norma dasar dalam kehidupan bernegara bagi bangsa Indonesia','Dua dokumen historis dalam kehidupan berbangsa dan bernegara bagi bangsa Indonesia','Penjabaran seluruh konsepsi tentang Negara yang terkandung dalam pembukaan','Semua jawaban benar','A'),
+(75,7,NULL,'1,2,4,5,25,26, ...., .......','27, 54','21, 52','27, 28','254, 255','676, 677','E'),
+(76,7,NULL,'Untuk membentuk panitia sebuah acara ada 2 calon ketua, 3 orang calon sekretaris dan 2 orang calon bendahara serta tidak ada seorangpun yang dicalonkan pada dua atau jabatan yang berbeda. Jika susunan panitia terdiri dari seorang ketua, seorang sekretaris dan seorang bendahara, ada berapa cara susunan panitia tersebut dapat dibentuk ?','18 cara','16 cara','12 cara','8 cara','10 cara','C'),
+(77,7,NULL,'Ardi mengendarai mobil dari kota A ke kota B. Rute perjalanannya adalah sebagai berikut. Ia berangkat dari kota A menuju timur sejauh 20 km, kemudian belok ke utara 20 km, kemudian belok lagi ke timur sejauh 10 km, kemudian belok ke utara lagi sejauh 10 km. Terakhir ia belok ke timur sejauh 10 km sampai ke kota B. Sebenarnya berapa jarak kota A ke kota B ?','80 km','70 km','60 km','50 km','40 km','A'),
+(78,7,NULL,'Penulisan tanggal surat yang benar adalah …','Jakarta, 24-12-2011','Jakarta, 24 Desember 2011.','Jakarta, 24-Desember 2011','Jakarta, 24 Desember 2011','Semua jawaban salah','D'),
+(79,7,NULL,'Sistem pemerintahan kabinet presidensiil ditandai oleh …','Kepala negaranya seorang Presiden','Presiden merupakan kepala pemerintahan','Kedudukan kabinet sederajat dengan parlemen','Presiden memegang kekuasaan tertinggi dalam Negara','Semua jawaban salah','B'),
+(80,7,NULL,'HUJAN : BASAH = BAKAR : … ','Hangus','Mati','Habis','Kering','Dingin','A');
 
 /*Table structure for table `rzl_praktek` */
 
@@ -2248,13 +2299,16 @@ CREATE TABLE `rzl_praktek` (
   `idpraktek` int(11) NOT NULL AUTO_INCREMENT,
   `idcourse` int(11) DEFAULT NULL,
   `nip` varchar(100) DEFAULT NULL,
-  `tglpraktek` datetime DEFAULT NULL,
+  `tglpraktek` date DEFAULT NULL,
   `nilai` varchar(50) DEFAULT NULL,
   `statuspraktek` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`idpraktek`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 /*Data for the table `rzl_praktek` */
+
+insert  into `rzl_praktek`(`idpraktek`,`idcourse`,`nip`,`tglpraktek`,`nilai`,`statuspraktek`) values 
+(4,7,'1020184119860919202107210','2021-08-31',NULL,NULL);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

@@ -4,7 +4,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js" integrity="sha512-nOQuvD9nKirvxDdvQ9OMqe2dgapbPB7vYAMrzJihw5m+aNcf0dX53m6YxM4LgA9u8e9eg9QX+/+mPu8kCNpV2A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <script type="text/javascript">
-    tanggals = "";
     const jadwalAvailable = [];
 
 
@@ -103,7 +102,6 @@
                 }
             }                   
         }
-        // return;
 
 
         console.log(dataArray);
@@ -249,12 +247,12 @@
                                     </button> -->
                                     <div class="form-group">
                                         <div class="custom-control custom-checkbox">
-                                            <input class="custom-control-input" type="checkbox" id="customCheckbox1" data-toggle='collapse' data-target='#praktek'>
-                                            <label for="customCheckbox1" class="custom-control-label">Custom Checkbox</label>
+                                            <input class="custom-control-input" type="checkbox" id="chkTraining" data-toggle='collapse' data-target='#praktek'>
+                                            <label for="chkTraining" class="custom-control-label">Training</label>
                                         </div>
                                     </div>
                                 </div>
-                                <div id="praktek" >
+                                <div id="praktek" class="collapse" >
                                     <div class="card-body">
                                         <div class="form-group row">
                                             <label class="col-sm-2 col-form-label">Trainer</label>
@@ -317,5 +315,13 @@
   </div>
   <!-- /.content-wrapper -->
 
+<!-- <script type="text/javascript">
+    var chkTraining = document.getElementById("chkTraining");
+    console.log(chkTraining);
+    if (chkTraining.checked) {
+        
+        document.getElementById("chkTraining").checked = false;
+    }
+</script> -->
 
   <?php $this->load->view('admin/footer'); ?>

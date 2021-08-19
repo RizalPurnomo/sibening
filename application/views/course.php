@@ -178,6 +178,7 @@
                                             $materi = "";
                                             $post = "";
                                             $delete = "";
+                                            $praktek = "";
                                             $getJPL = $getJPL + $getcourse[$a]['jpl'];
                                             if($getcourse[$a]['flag']=="pre"){
                                               $pre = "";
@@ -185,31 +186,41 @@
                                               $post = "disabled";
                                               $finish = "d-none";
                                               $delete = "";
+                                              $praktek = "disabled";
                                             }else if($getcourse[$a]['flag']=="materi"){ 
                                               $pre = "";
                                               $materi = "";
                                               $post = "disabled";
                                               $finish = "d-none";
                                               $delete = "disabled";
+                                              $praktek = "disabled";
                                             }else if($getcourse[$a]['flag']=="post"){
                                               $pre = "";
                                               $materi = "";
                                               $post = "";
                                               $finish = "d-none";
                                               $delete = "disabled";
+                                              $praktek = "disabled";
+                                            }else if($getcourse[$a]['flag']=="praktek"){
+                                              $pre = "";
+                                              $materi = "";
+                                              $post = "";
+                                              $finish = "d-none";
+                                              $delete = "disabled";
+                                              $praktek = "";                                              
                                             }else if($getcourse[$a]['flag']=="finish"){
                                               $pre = "d-none";
                                               $materi = "d-none";
                                               $post = "d-none";
                                               $finish = "";
                                               $delete = "d-none";
+                                              $praktek = "d-none";
                                               $enrollFinished++;
                                               $JPLFinished = $JPLFinished + $getcourse[$a]['jpl'] ;
                                             }
 
 
                                         ?>
-                                        <!-- <?php print_r($getcourse[$a]); ?> -->
                                         <a class="btn btn-info btn-sm <?php echo $pre; ?>" href="<?php echo base_url('course/preTest/') . $getcourse[$a]['idgetcourse']; ?>" title="Pre" >
                                           <i class="fas fa-pencil-alt">
                                           </i>
@@ -224,7 +235,19 @@
                                           <i class="fas fa-pencil-alt">
                                           </i>
                                           <!-- Post -->
-                                        </a>    
+                                        </a>   
+
+                                        <?php 
+                                          if ($getcourse[$a]['tglavailablepraktek']!="") {
+                                        ?>
+                                            <a class="btn btn-primary btn-sm <?php echo $praktek; ?>" href="<?php echo base_url('course/praktek/') . $getcourse[$a]['idgetcourse']; ?>" title="Praktek" >
+                                              <i class="fa fa-space-shuttle" aria-hidden="true"></i>
+                                              <!-- Praktek -->
+                                            </a>                                            
+                                        <?php
+                                          }
+                                        ?>
+
                                         <a class="btn btn-danger btn-sm <?php echo $delete; ?>" href="javascript:deleteData('<?php echo $getcourse[$a]['idgetcourse']; ?>')" title="Delete" >
                                           <i class="fas fa-trash">
                                           </i>

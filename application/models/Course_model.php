@@ -95,8 +95,8 @@ class Course_model extends CI_Model
             INNER JOIN dbsibening.rzl_m_course b ON a.idcourse=b.idcourse
             LEFT JOIN dbsibening.rzl_m_question c ON c.idcourse=a.idcourse 
             LEFT JOIN dbsibening.rzl_answer d ON d.idquestion=c.idquestion AND d.idgetcourse=a.idgetcourse  
-            LEFT JOIN dbsibening.rzl_answerpost e ON e.idquestion=c.idquestion
-            WHERE a.idgetcourse='$idgetcourse'";
+            LEFT JOIN dbsibening.rzl_answerpost e ON e.idquestion=c.idquestion";
+            // WHERE a.idgetcourse='$idgetcourse'";
         $qry = $this->db->query($sql);
         return $qry->result_array();        
     }
@@ -219,6 +219,16 @@ class Course_model extends CI_Model
         return $qry->result_array();
     }    
 
+
+    //Praktek
+    public function getPraktek($nip,$idCourse)
+    {
+        $sql = "SELECT * FROM rzl_praktek a
+                INNER JOIN rzl_m_course b ON a.idcourse=b.idcourse
+                WHERE a.idcourse='$idCourse' AND a.nip='$nip'";
+        $qry = $this->db->query($sql);
+        return $qry->result_array();
+    }
 
     //Competency
     public function getCompetencyByNip($nip)

@@ -61,6 +61,14 @@ class Course extends CI_Controller
         $this->load->view('course',$data);
     }
 
+
+    public function saveData()
+    {
+        $data = $this->input->post('praktek');
+        $this->course_model->saveData($data, 'rzl_praktek');
+        print_r($this->input->post());
+    }
+
     public function preTest($idGetCourse)
     {
         $preTest = $this->course_model->getPreTest($idGetCourse);
@@ -84,6 +92,21 @@ class Course extends CI_Controller
             $this->load->view('postTest',$data);
         }
     }    
+
+    public function praktek($idCourse)
+    {
+        $praktek = $this->course_model->getCourseDetailById($idCourse)[0]['tglavailablepraktek'];
+        $data['praktek'] = explode(',',$praktek);
+        $data['jadwalPraktek'] = $this->course_model->getPraktek($this->session->userdata('nip'),$idCourse);
+        $data['idCourse'] = $idCourse;
+        $this->load->view('praktek',$data);
+    }      
+
+    public function printBuktiDaftar($idCourse)
+    {
+        $data['praktek'] = $this->course_model->getPraktek($this->session->userdata('nip'),$idCourse);
+        $this->load->view('printBuktiDaftar',$data);
+    }      
 
     public function materi($idGetCourse)
     {
@@ -150,6 +173,7 @@ class Course extends CI_Controller
 
     public function saveUpdateDataPost($idGetCourse){
         // echo $idGetCourse;
+        $course = $this->course_model->getCourseById($idGetCourse);
         $question = $this->input->post('question');
         $answerpost = $this->input->post('answer');
         for ($i=0; $i < count($question) ; $i++) { 
@@ -175,12 +199,21 @@ class Course extends CI_Controller
                 $this->course_model->updateDataPost($sdhJawabPost, $data, 'rzl_answerpost');
             }
 
-            $dataTest = array(
-                'flag' => 'finish'
-            ); //update flag
-            $this->course_model->updateFlag($idGetCourse, $dataTest, 'rzl_getcourse');
+            //update flag
+            if($course[0]['tglavailablepraktek']==""){
+                $dataTest = array(
+                    'flag' => 'finish'
+                );
 
+            }else{
+                $dataTest = array(
+                    'flag' => 'praktek'
+                );                
+            }
+
+            $this->course_model->updateFlag($idGetCourse, $dataTest, 'rzl_getcourse');
         }
+
     }    
 
     public function enrollCourse($idCourse){
@@ -207,12 +240,7 @@ class Course extends CI_Controller
     }
 
 
-    public function saveData()
-    {
-        $data = $this->input->post('aset');
-        $this->aset_model->saveData($data, 'tblaset');
-        print_r($this->input->post());
-    }
+
 
     function edit($idData)
     {
