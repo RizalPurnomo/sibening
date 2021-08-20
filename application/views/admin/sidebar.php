@@ -14,7 +14,10 @@
         $syncron = ($this->uri->segment(2) == 'syncron' ? 'active' : '');        
         $report = ($this->uri->segment(2) == 'report' ? 'menu-open' : '');
         $aksescourse = ($this->uri->segment(2) == 'aksescourse' ? 'active' : '');
+
+        $validasi = ($this->uri->segment(2) == 'validasiCompetency' || $this->uri->segment(2) == 'validasiPraktek'  ? 'menu-open' : '');
         $validasiCompetency = ($this->uri->segment(2) == 'validasiCompetency' ? 'active' : '');
+        $validasiPraktek = ($this->uri->segment(2) == 'validasiPraktek' ? 'active' : '');
         $progres = ($this->uri->segment(3) == 'progresPeserta' || $this->uri->segment(3)== 'progresDetail' ? 'active' : '');  
         $logCourse = ($this->uri->segment(3) == 'logCourse' ? 'active' : '');     
     ?>
@@ -88,12 +91,35 @@
                             <p>Akses Course</p>
                         </a>
                 </li>
-                <li class="nav-item has-treeview ">
+                <!-- <li class="nav-item has-treeview ">
                     <a href="<?php echo base_url(); ?>admin/validasiCompetency" class="nav-link <?php echo $validasiCompetency; ?>">
                             <i class="nav-icon fas fa-circle"></i>
                             <p>Validasi Competency</p>
                         </a>
-                </li>                
+                </li>    -->
+                <li class="nav-item has-treeview <?php echo $validasi; ?>">
+                    <a href="#" class="nav-link ">
+                        <i class="nav-icon fas fa-circle"></i>
+                        <p>
+                            Validasi
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="<?php echo base_url(); ?>admin/validasiCompetency" class="nav-link <?php echo $validasiCompetency; ?>">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Validasi Competency</p>
+                            </a>
+                        </li> 
+                        <li class="nav-item">
+                            <a href="<?php echo base_url(); ?>admin/validasiPraktek" class="nav-link <?php echo $validasiPraktek; ?>">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Validasi Praktek</p>
+                            </a>
+                        </li>                                                
+                    </ul>
+                </li>                               
                 <li class="nav-item has-treeview <?php echo $report; ?>">
                     <a href="#" class="nav-link ">
                         <i class="nav-icon fas fa-circle"></i>

@@ -35,6 +35,15 @@
           Email: puskesmas.matraman@jakarta.go.id
         </address>
       </div>
+      <div class="col-sm-4 invoice-col">
+      </div>
+      <div class="col-sm-4 invoice-col">
+        <address>
+          <h1 class="float-right">
+            .: <?php echo $praktek[0]['idpraktek'] ?> :.
+          </h1>      
+        </address>
+      </div>      
       <!-- /.col -->
     </div>
     <!-- /.row -->
@@ -59,6 +68,7 @@
             <th>JPL</th>
             <th>Tgl Praktek</th>
             <th>Trainer</th>
+            <th>Nilai</th>
           </tr>
           </thead>
           <tbody>
@@ -69,6 +79,7 @@
                     <td><?php echo $praktek[$a]['jpl'] ?></td>
                     <td><?php echo $praktek[$a]['tglpraktek'] ?></td>
                     <td><?php echo $praktek[$a]['trainer'] ?></td>
+                    <td></td>
                 </tr>
             <?php } ?>
 

@@ -1,7 +1,35 @@
+<!-- https://www.youtube.com/watch?v=wD-kW0CXf50&list=PLFIM0718LjIWB3YRoQbQh82ZewAGtE2-3&index=6&ab_channel=WebProgrammingUNPAS -->
 <?php $this->load->view('admin/header'); ?>
 <?php $this->load->view('admin/sidebar'); ?>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js" integrity="sha512-nOQuvD9nKirvxDdvQ9OMqe2dgapbPB7vYAMrzJihw5m+aNcf0dX53m6YxM4LgA9u8e9eg9QX+/+mPu8kCNpV2A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<style type="text/css">
+    #divTglAvailable ul{
+        list-style: none;
+        width: 500px; 
+    }
+
+    #divTglAvailable ul li{ 
+        width: 100%;
+        height: 40px;
+        line-height: 40px;
+        padding: 0 5px;
+        position: relative;
+        cursor: pointer;
+        display: block;
+        margin: 5px 0;
+        box-shadow: -3px 6px 4px #222;
+    }
+    #divTglAvailable ul li span{
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 50px;
+        text-align: center;
+        background: #e00;
+    }
+</style>
 
 <script type="text/javascript">
     const jadwalAvailable = [];
@@ -38,13 +66,20 @@
         return dateTime;
     }
 
-    function addJadwal(){
-        
-        var list = "";
+    function hapus(){
+        const hapusLi = document.getElementById('ulDiv');
+        hapusLi.removeChild(hapusLi.lastElementChild);
+        console.log(hapusLi);
+
+        // var lis = document.querySelectorAll('#ulDiv li');
+        // for(var i=0; li=lis[i]; i++) {
+        //     li.parentNode.removeChild(li);
+        // }        
+
+    }
+
+    function addJadwal(){    
         tanggal = getDateTime(new Date($("#datepicker").val()));
-        // tanggals = tanggals + ' | ' + tanggal;
-        // $("#tglAvailable").val(tanggals);
-        // alert(tanggals);
         if(jadwalAvailable.includes(tanggal)){
             alert("Tanggal ini sudah di daftarkan");
             return;
@@ -52,14 +87,54 @@
             jadwalAvailable.push(tanggal);
         }
         console.log(jadwalAvailable);
-        list += '<ul>';
-                    for (let i = 0; i < jadwalAvailable.length; i++) {
-                        list += `<li>${jadwalAvailable[i]}</li>`;
-                        
-                    }
-        list += '</ul>';
-        document.getElementById("divTglAvailable").innerHTML = list;
+        getJadwal(tanggal);
 
+
+
+
+
+        // const pBaru = document.createElement('p');
+        // const textBaru = document.createTextNode($("#datepicker").val());
+        // pBaru.appendChild(textBaru);
+
+        // const sectionA = document.getElementById('divTglAvailable');
+        // sectionA.appendChild(pBaru);
+
+    }
+
+    function getJadwal(tanggal){
+        const ul = document.getElementById('ulDiv');
+        
+        const li = document.createElement('li');
+        li.setAttribute('onclick','hapus()');
+        // li.setAttribute('id',tanggal);
+        const text = document.createTextNode(tanggal);
+        const span = document.createElement('span');
+        
+        const textClose = document.createTextNode('x');
+        
+
+        ul.appendChild(li);
+            li.appendChild(text);
+                li.appendChild(span);
+                    span.appendChild(textClose);
+
+        // var list = "";
+        // list += '<ul>';
+        //             for (let i = 0; i < jadwalAvailable.length; i++) {
+        //                 list += `<li>${jadwalAvailable[i]}<span class''>X</span></li>`;
+                        
+        //             }
+        // list += '</ul>';
+
+
+        // list += '<span><div class="container"><ul>';
+        //             for (let i = 0; i < jadwalAvailable.length; i++) {
+        //                 list += `<li>${jadwalAvailable[i]}<span>X</span></li>`;
+                        
+        //             }
+        // list += '</ul></div></span>';
+        // document.getElementById("divTglAvailable").innerHTML = list;        
     }
 
     async function savecourse() {
@@ -281,7 +356,9 @@
                                             <label class="col-sm-2 col-form-label"></label>
                                             <div class="col-sm-10">
                                                 <div id="divTglAvailable">
-
+                                                        <ul id="ulDiv">
+                                                            <!-- <li>sdsd</li> -->
+                                                        </ul>
                                                 </div>
                                                 <!-- <textarea id="tglAvailable" class="form-control" rows="3" placeholder="List Tanggal Available"></textarea> -->
                                             </div>
@@ -315,13 +392,18 @@
   </div>
   <!-- /.content-wrapper -->
 
-<!-- <script type="text/javascript">
-    var chkTraining = document.getElementById("chkTraining");
-    console.log(chkTraining);
-    if (chkTraining.checked) {
-        
-        document.getElementById("chkTraining").checked = false;
+<script type="text/javascript">
+    // const list = document.querySelector('.container ul');
+    const close = document.querySelectorAll('span');
+    console.log(close);
+    for(let i=0; i<close.length; i++){
+        console.log(i);
+        close[i].addEventListener('click',()=>{
+            close[i].parentElement.style.display = "none";
+            console.log('sdsdsd');
+        })
     }
-</script> -->
+    
+</script>
 
   <?php $this->load->view('admin/footer'); ?>

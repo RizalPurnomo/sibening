@@ -86,15 +86,15 @@
                                 <div class="form-group">
                                     <input type="hidden" class="form-control" id="idcourse" value="<?php echo $idCourse; ?>">
                                     <input type="hidden" class="form-control" id="nip" placeholder="NIP" value="<?php echo $this->session->userdata('nip'); ?>">
-                                    <select name='tglPraktek' id='tglPraktek' class="form-control select2" style="width: 100%;">
+                                    <?php 
+                                        if(empty($jadwalPraktek)){
+                                            $tglPraktek ="";    
+                                        }else{
+                                            $tglPraktek = date("Y/m/d", strtotime($jadwalPraktek[0]['tglpraktek'])); 
+                                        }
+                                    ?>
+                                    <select name='tglPraktek' id='tglPraktek' class="form-control select2" style="width: 100%;" <?php if($tglPraktek!=""){ echo 'disabled';} ?>>
                                         <option value=''>--Pilih Tanggal Praktek--</option>
-                                        <?php 
-                                            if(empty($jadwalPraktek)){
-                                                $tglPraktek ="";    
-                                            }else{
-                                                $tglPraktek = date("Y/m/d", strtotime($jadwalPraktek[0]['tglpraktek'])); 
-                                            }
-                                        ?>
                                         <?php for ($i=0; $i < count($praktek) ; $i++) { ?>
                                             <option value='<?php echo $praktek[$i] ?>' <?php if($praktek[$i]==$tglPraktek){echo "selected";} ?> ><?php echo $praktek[$i] ?></option>
                                         <?php } ?>
