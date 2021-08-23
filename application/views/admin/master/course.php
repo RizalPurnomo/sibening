@@ -103,6 +103,9 @@
                                             <th>Title</th>
                                             <th>JPL</th>
                                             <th>File Materi</th>
+                                            <th>Trainer</th>
+                                            <th>Tgl Available</th>
+                                            <th>Max Peserta</th>
                                             <th style="width:15%">Aksi</th>
                                         </tr>
                                     </thead>
@@ -117,6 +120,9 @@
                                                     <td><?php echo $course[$a]['title'] ?></td>
                                                     <td><?php echo $course[$a]['jpl'] ?></td>
                                                     <td><a href="<?php echo base_url('uploads/materi/') . $course[$a]['filemateri'] ; ?>" target="_blank" ><?php echo $course[$a]['filemateri']; ?></a></td>
+                                                    <td><?php echo $course[$a]['trainer'] ?></td>
+                                                    <td><?php echo $course[$a]['tglavailablepraktek'] ?></td>
+                                                    <td><?php echo $course[$a]['maxpeserta'] ?></td>
                                                     <td>
                                                         <a class="btn btn-primary btn-sm" href="<?php echo base_url('admin/course/question/') . $course[$a]['idcourse']; ?>">
                                                             <i class="fas fa-folder">
@@ -145,6 +151,9 @@
                                         <th>Title</th>
                                         <th>JPL</th>
                                         <th>File Materi</th>
+                                        <th>Trainer</th>
+                                        <th>Tgl Available</th>
+                                        <th>Max Peserta</th>                                        
                                         <th>Aksi</th>
                                     </tfoot>
                                 </table>

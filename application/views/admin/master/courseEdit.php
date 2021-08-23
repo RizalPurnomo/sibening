@@ -3,54 +3,206 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js" integrity="sha512-nOQuvD9nKirvxDdvQ9OMqe2dgapbPB7vYAMrzJihw5m+aNcf0dX53m6YxM4LgA9u8e9eg9QX+/+mPu8kCNpV2A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+<style type="text/css">
+    #divTglAvailable ul{
+        list-style: none;
+        width: 500px; 
+    }
+
+    #divTglAvailable ul li{ 
+        width: 100%;
+        height: 40px;
+        line-height: 40px;
+        padding: 0 5px;
+        position: relative;
+        display: block;
+        margin: 5px 0;
+        border: 1px solid #000000;
+        /* box-shadow: -3px 6px 4px #222; */
+    }
+    #divTglAvailable ul li span{
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 50px;
+        text-align: center;
+        background: #e00;
+        cursor: pointer;
+    }
+</style>
+
 <script type="text/javascript">
+    const jadwalAvailable = [];
+    window.onload = function test(){
+        a = document.getElementById('ulDiv');
+        console.log(a);
+        
+    }
 
-    // var coll = document.getElementById('chkPraktek');
-    // console.log(coll);
-    // praktek.style.display = "none";
+    function getDateTime($tgl) {
+        if ($tgl == "now") {
+            var now = new Date();
+        } else {
+            var now = $tgl;
+        }
+        var year = now.getFullYear();
+        var month = now.getMonth() + 1;
+        var day = now.getDate();
+        var hour = now.getHours();
+        var minute = now.getMinutes();
+        var second = now.getSeconds();
+        if (month.toString().length == 1) {
+            var month = '0' + month;
+        }
+        if (day.toString().length == 1) {
+            var day = '0' + day;
+        }
+        if (hour.toString().length == 1) {
+            var hour = '0' + hour;
+        }
+        if (minute.toString().length == 1) {
+            var minute = '0' + minute;
+        }
+        if (second.toString().length == 1) {
+            var second = '0' + second;
+        }
+        var dateTime = year + '/' + month + '/' + day ;
+        return dateTime;
+    }    
 
-    async function updateCourse() {
-    if ($("#kategori").val() == "" || $("#title").val() == "" ) {
+    function lengkapiData(){
         Swal.fire({
             icon: 'warning',
             text: 'Harap Melengkapi Data!',
         })
-        return;
+        return;        
+    }
+
+    function addJadwal(){    
+        tanggal = getDateTime(new Date($("#datepicker").val()));
+        if(jadwalAvailable.includes(tanggal)){
+            alert("Tanggal ini sudah di daftarkan");
+            return;
+        }else{
+            jadwalAvailable.push(tanggal);
+        }
+        console.log(jadwalAvailable);
+        getJadwal(tanggal);
+
+    }
+
+
+    function getJadwal(tanggal){
+        const ul = document.getElementById('ulDiv');
+        
+        const li = document.createElement('li');
+        const text = document.createTextNode(tanggal);
+        const span = document.createElement('span');
+        span.setAttribute('onclick','hapus()');
+        
+        const textClose = document.createTextNode('x');
+
+        ul.appendChild(li);
+            li.appendChild(text);
+                li.appendChild(span);
+                    span.appendChild(textClose);       
+    }    
+
+    function hapus() {
+        $('#divTglAvailable ul li').click(function () {
+            $('#divTglAvailable ul li').removeClass('selected');
+            $(this).addClass('selected');
+            $('#divTglAvailable ul li.selected').remove();
+            tanggal = $(this).text().substr(0,10); 
+            
+            //remove array jadwalAvailable
+            const index = jadwalAvailable.indexOf(tanggal);
+            if (index > -1) {
+                jadwalAvailable.splice(index, 1);
+            }
+        });
+
+    }      
+
+    async function updateCourse() {
+    if ($("#kategori").val() == "" || $("#title").val() == "" ) {
+        lengkapiData();
     }
 
     if($("#fileupload").val()==""){
-        var dataArray = {
-            "course": {
-                "title": $("#title").val(),
-                "jpl": $("#jpl").val(),
-                "materi": $("#materi").val(),
-                "idkategori":$("#kategori").val()
+            if($("#chkTraining").is(':checked')){
+                if ($("#trainer").val() == "" || $("#maxpeserta").val() == "" || jadwalAvailable.toString() == "" ) {
+                    lengkapiData();
+                    alert('sdsd');
+                }
+                var dataArray = {
+                    "course": {
+                        "title": $("#title").val(),
+                        "jpl": $("#jpl").val(),
+                        "materi": $("#materi").val(),
+                        "idkategori" : $("#kategori").val(),
+                        "tglavailablepraktek" : jadwalAvailable.toString(),
+                        "trainer" : $("#trainer").val(),
+                        "maxpeserta" : $("#maxPeserta").val()
+                    }
+                }                
+
+            }else{
+                var dataArray = {
+                    "course": {
+                        "title": $("#title").val(),
+                        "jpl": $("#jpl").val(),
+                        "materi": $("#materi").val(),
+                        "idkategori" : $("#kategori").val(),
+                        "tglavailablepraktek" : "",
+                        "trainer" : "",
+                        "maxpeserta" : ""
+                    }
+                }                
             }
-        }            
     }else{
         upload =fileupload.files[0].name;
         let formData = new FormData(); 
         formData.append("file", fileupload.files[0]);
-        await fetch('../upload', {
+        await fetch('upload', {
             method: "POST", 
             body: formData
         });  
-
-        var dataArray = {
-            "course": {
-                "title": $("#title").val(),
-                "jpl": $("#jpl").val(),
-                "materi": $("#materi").val(),
-                "idkategori":$("#kategori").val(),
-                "filemateri" : upload
-            }
-        }             
+        if($("#chkTraining").is(':checked')){
+            if ($("#trainer").val() == "" || $("#maxpeserta").val() == "" || jadwalAvailable.toString() == "" ) {
+                lengkapiData();
+            }                
+            var dataArray = {
+                "course": {
+                    "title": $("#title").val(),
+                    "jpl": $("#jpl").val(),
+                    "materi": $("#materi").val(),
+                    "idkategori" : $("#kategori").val(),
+                    "tglavailablepraktek" : jadwalAvailable.toString(),
+                    "trainer" : $("#trainer").val(),
+                    "maxpeserta" : $("#maxPeserta").val(),                    
+                    "filemateri" : upload
+                }
+            }                
+        }else{
+            var dataArray = {
+                "course": {
+                    "title": $("#title").val(),
+                    "jpl": $("#jpl").val(),
+                    "materi": $("#materi").val(),
+                    "idkategori" : $("#kategori").val(),  
+                    "tglavailablepraktek" : "",
+                    "trainer" : "",
+                    "maxpeserta" : "",              
+                    "filemateri" : upload
+                }
+            }                   
+             
+        }
     }
-    // return;
-
 
     console.log(dataArray);
-    // return;
+    return;
     $.ajax({
         type: "POST",
         data: dataArray,
@@ -223,19 +375,31 @@
                                             <label class="col-sm-2 col-form-label"></label>
                                             <div class="col-sm-10">
                                                 <div id="divTglAvailable">
-                                                    <ul>
+                                                    <ul id="ulDiv">
                                                         <?php 
                                                             if($course[0]['tglavailablepraktek']!=""){
                                                                 $arr = explode(",",$course[0]['tglavailablepraktek']);
                                                                 for ($i=0; $i < count($arr) ; $i++) { 
-                                                                    echo "<li>$arr[$i]</li>";
+                                                                    echo "<li class='$i'>$arr[$i]<span onclick='hapus()'>X</span></li>";
                                                                 }
                                                             }
                                                         ?>
                                                     </ul>
-                                                </div>
+                                                </div>                                                
+                                                <!-- <div id="divTglAvailable">
+                                                    <ul>
+
+                                                    </ul>
+                                                </div> -->
                                             </div>
-                                        </div>                                                                                 
+                                        </div>   
+
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label">Jumlah Peserta</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" id="maxPeserta" placeholder="Max Peserta Per Hari" value="<?php echo $course[0]['maxpeserta']; ?>" >
+                                            </div>
+                                        </div> 
                                     </div>         
                                 </div>    
                             </div> 

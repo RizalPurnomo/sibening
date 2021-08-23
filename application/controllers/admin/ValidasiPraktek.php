@@ -24,18 +24,11 @@ class ValidasiPraktek extends CI_Controller
         $this->load->view('admin/validasi_praktek',$data);
     }
 
-    // public function approved($idData)
-    // {
-    //     $competency = $this->input->post('competency');
-    //     $this->competency_model->updateCompetency($idData, $competency, 'rzl_m_competency');
-    //     print_r($this->input->post());
-    // }
+    public function beriNilai($idPraktek){
+        $praktek = $this->input->post('praktek');
+        $this->praktek_model->updateNilai($idPraktek, $praktek, 'rzl_praktek');
+        print_r($this->input->post());        
+    }
 
-    // public function reject($idData)
-    // {
-    //     $competency = $this->input->post('competency');
-    //     $this->competency_model->updateCompetency($idData, $competency, 'rzl_m_competency');
-    //     print_r($this->input->post());
-    // }    
-    
+
 }

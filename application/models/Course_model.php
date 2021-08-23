@@ -219,17 +219,6 @@ class Course_model extends CI_Model
         return $qry->result_array();
     }    
 
-
-    //Praktek
-    public function getPraktek($nip,$idCourse)
-    {
-        $sql = "SELECT * FROM rzl_praktek a
-                INNER JOIN rzl_m_course b ON a.idcourse=b.idcourse
-                WHERE a.idcourse='$idCourse' AND a.nip='$nip'";
-        $qry = $this->db->query($sql);
-        return $qry->result_array();
-    }
-
     //Competency
     public function getCompetencyByNip($nip)
     {
@@ -288,6 +277,9 @@ class Course_model extends CI_Model
         $qry = $this->db->query($sql);
         return $qry->result_array();
     }    
+
+    //Prektek
+
 
 
 }

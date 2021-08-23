@@ -8,29 +8,48 @@
                 confirmButtonText: `Pilih`,
             }).then((result) => {
                 if (result.isConfirmed) {
-
-                    var dataArray = {
-                        "praktek": {
-                            "idcourse": $("#idcourse").val(),
-                            "nip": $("#nip").val(),
-                            "tglpraktek": $("#tglPraktek").val()
-                        }
-                    }  
-
+                    var arrPraktek = {
+                      "idcourse": $("#idcourse").val(),
+                      "tglpraktek": $("#tglPraktek").val()
+                    }
                     $.ajax({
                         type: "POST",
-                        data: dataArray,
-                        url: '<?php echo base_url('course/saveData'); ?>',
+                        data: arrPraktek,
+                        url: '<?php echo base_url('praktek/cekQuota'); ?>',
                         success: function(result) {
+                          if(result >= $("#maxPeserta").val()){
                             Swal.fire({
-                                icon: 'success',
-                                title: 'Data Berhasil Disimpan',
-                                showConfirmButton: false,
-                                timer: 1500
+                                icon: 'warning',
+                                text: 'Tanggal Ini Sudah Melebihi Quota !',
                             })
+                            return;                             
+                          }else{
+                            var dataArray = {
+                                "praktek": {
+                                    "idcourse": $("#idcourse").val(),
+                                    "nip": $("#nip").val(),
+                                    "tglpraktek": $("#tglPraktek").val()
+                                }
+                            }  
 
-                            console.log(result);
-                            window.location = "<?php echo base_url(); ?>course/praktek/" + $("#idcourse").val();
+                            $.ajax({
+                                type: "POST",
+                                data: dataArray,
+                                url: '<?php echo base_url('praktek/saveData'); ?>',
+                                success: function(result) {
+                                    Swal.fire({
+                                        icon: 'success',
+                                        title: 'Data Berhasil Disimpan',
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    })
+
+                                    console.log(result);
+                                    window.location = "<?php echo base_url(); ?>course/praktek/" + $("#idcourse").val();
+                                }
+                            })                            
+                          }
+
                         }
                     })
 
@@ -86,6 +105,7 @@
                                 <div class="form-group">
                                     <input type="hidden" class="form-control" id="idcourse" value="<?php echo $idCourse; ?>">
                                     <input type="hidden" class="form-control" id="nip" placeholder="NIP" value="<?php echo $this->session->userdata('nip'); ?>">
+                                    <input type="text" class="form-control" id="maxPeserta" value="<?php echo $maxPeserta; ?>">
                                     <?php 
                                         if(empty($jadwalPraktek)){
                                             $tglPraktek ="";    
@@ -102,7 +122,7 @@
                                     
                                 </div>
                                 <a href="#" class="btn btn-primary <?php if($tglPraktek!=""){ echo 'collapse';} ?>" onclick="pilihTanggal()">Pilih Tanggal</a>
-                                <a href="<?php echo base_url('course/printBuktiDaftar/') . $idCourse; ?>" class="btn btn-success <?php if($tglPraktek==""){ echo 'collapse';} ?>">Cetak Bukti Pendaftaran</a>
+                                <a href="<?php echo base_url('praktek/printBuktiDaftar/') . $idCourse; ?>" class="btn btn-success <?php if($tglPraktek==""){ echo 'collapse';} ?>">Cetak Bukti Pendaftaran</a>
                             </div>                          
                         </div>                     
 

@@ -7,7 +7,7 @@ class Course extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->model(array('course_model'));
+        $this->load->model(array('course_model','praktek_model'));
         // if (empty($this->session->userdata('nip'))) {
         //     redirect('login');
         // }
@@ -62,13 +62,6 @@ class Course extends CI_Controller
     }
 
 
-    public function saveData()
-    {
-        $data = $this->input->post('praktek');
-        $this->course_model->saveData($data, 'rzl_praktek');
-        print_r($this->input->post());
-    }
-
     public function preTest($idGetCourse)
     {
         $preTest = $this->course_model->getPreTest($idGetCourse);
@@ -93,20 +86,7 @@ class Course extends CI_Controller
         }
     }    
 
-    public function praktek($idCourse)
-    {
-        $praktek = $this->course_model->getCourseDetailById($idCourse)[0]['tglavailablepraktek'];
-        $data['praktek'] = explode(',',$praktek);
-        $data['jadwalPraktek'] = $this->course_model->getPraktek($this->session->userdata('nip'),$idCourse);
-        $data['idCourse'] = $idCourse;
-        $this->load->view('praktek',$data);
-    }      
-
-    public function printBuktiDaftar($idCourse)
-    {
-        $data['praktek'] = $this->course_model->getPraktek($this->session->userdata('nip'),$idCourse);
-        $this->load->view('printBuktiDaftar',$data);
-    }      
+  
 
     public function materi($idGetCourse)
     {
@@ -173,7 +153,8 @@ class Course extends CI_Controller
 
     public function saveUpdateDataPost($idGetCourse){
         // echo $idGetCourse;
-        $course = $this->course_model->getCourseById($idGetCourse);
+        $course = $this->course_model->getCourseDetailById($idGetCourse);
+
         $question = $this->input->post('question');
         $answerpost = $this->input->post('answer');
         for ($i=0; $i < count($question) ; $i++) { 
@@ -225,6 +206,20 @@ class Course extends CI_Controller
         ); 
         $this->course_model->saveData($data, 'rzl_getcourse');
     }
+
+    public function praktek($idGetCourse)
+    {
+        $courseDetail = $this->course_model->getCourseDetailById($idGetCourse); 
+        $idCourse = $courseDetail[0]['idcourse'];
+        $praktek = $this->course_model->getCourseDetailById($idGetCourse)[0]['tglavailablepraktek'];
+        $data['praktek'] = explode(',',$praktek);
+        $data['jadwalPraktek'] = $this->praktek_model->getPraktek($this->session->userdata('nip'),$idCourse);
+        $data['maxPeserta'] = $this->course_model->getCourseDetailById($idGetCourse)[0]['maxpeserta'];
+        $data['idCourse'] = $idCourse;
+        // echo "<pre/>";
+        // print_r($idCourse);
+        $this->load->view('praktek',$data);
+    } 
 
 
 

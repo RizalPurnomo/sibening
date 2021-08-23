@@ -3,40 +3,39 @@
 
 <script type="text/javascript">
 
-function approved(id) {
+function beriNilai(id) {
     Swal.fire({
-        title: 'Masukan Jumlah JPL Yang Disetujui',
+        title: 'Beri Nilai Untuk Praktek Ini',
         input: 'text',
         inputAttributes: {
             autocapitalize: 'off'
         },
         showCancelButton: true,
-        confirmButtonText: 'Approved',
+        confirmButtonText: 'Finish',
         showLoaderOnConfirm: true
     }).then((result) => {
         console.log(result);
         if (result.isConfirmed) {
             var dataArray = {
-                "competency": {
-                    "jplapproved": result.value,
-                    "statuscompetency" : "approved"
+                "praktek": {
+                    "nilai": result.value
                 }
             } 
 
             $.ajax({
-              type: "POST",
-              data: dataArray,
-              url: "<?php echo base_url(); ?>admin/validasiCompetency/approved/" + id,
-              success: function(html) {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Data Berhasil Di Approved',
-                    showConfirmButton: false,
-                    timer: 1500
-                })
-                window.location.href = "<?php echo base_url(); ?>admin/validasiCompetency/";
-              }
-          })
+                type: "POST",
+                data: dataArray,
+                url: "<?php echo base_url(); ?>admin/validasipraktek/beriNilai/" + id,
+                success: function(html) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Data Berhasil Di Approved',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                    window.location.href = "<?php echo base_url(); ?>admin/validasiPraktek/";
+                }
+            })
         }
     })
 
@@ -144,7 +143,13 @@ function reject(id){
                                                     <td><?php echo $praktek[$a]['tglpraktek'] ?></td>
                                                     <td><?php echo $praktek[$a]['trainer'] ?></td>
                                                     <td><?php echo $praktek[$a]['flag'] ?></td>
-                                                    <td></td>
+                                                    <td>
+                                                        <a class='btn btn-success btn-sm' href='javascript:beriNilai(<?php echo $idpraktek; ?>)'>
+                                                            <i class='fa fa-check'>
+                                                            </i>
+                                                            Beri Nilai
+                                                        </a>
+                                                    </td>
                                                 </tr>
                                         <?php }
                                         } ?>

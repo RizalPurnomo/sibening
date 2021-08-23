@@ -16,10 +16,10 @@
         line-height: 40px;
         padding: 0 5px;
         position: relative;
-        cursor: pointer;
         display: block;
         margin: 5px 0;
-        box-shadow: -3px 6px 4px #222;
+        border: 1px solid #000000;
+        /* box-shadow: -3px 6px 4px #222; */
     }
     #divTglAvailable ul li span{
         position: absolute;
@@ -28,6 +28,7 @@
         width: 50px;
         text-align: center;
         background: #e00;
+        cursor: pointer;
     }
 </style>
 
@@ -66,16 +67,12 @@
         return dateTime;
     }
 
-    function hapus(){
-        const hapusLi = document.getElementById('ulDiv');
-        hapusLi.removeChild(hapusLi.lastElementChild);
-        console.log(hapusLi);
-
-        // var lis = document.querySelectorAll('#ulDiv li');
-        // for(var i=0; li=lis[i]; i++) {
-        //     li.parentNode.removeChild(li);
-        // }        
-
+    function lengkapiData(){
+        Swal.fire({
+                icon: 'warning',
+                text: 'Harap Melengkapi Data!',
+            })
+            return;        
     }
 
     function addJadwal(){    
@@ -89,72 +86,72 @@
         console.log(jadwalAvailable);
         getJadwal(tanggal);
 
-
-
-
-
-        // const pBaru = document.createElement('p');
-        // const textBaru = document.createTextNode($("#datepicker").val());
-        // pBaru.appendChild(textBaru);
-
-        // const sectionA = document.getElementById('divTglAvailable');
-        // sectionA.appendChild(pBaru);
-
     }
+
 
     function getJadwal(tanggal){
         const ul = document.getElementById('ulDiv');
         
         const li = document.createElement('li');
-        li.setAttribute('onclick','hapus()');
-        // li.setAttribute('id',tanggal);
         const text = document.createTextNode(tanggal);
         const span = document.createElement('span');
+        span.setAttribute('onclick','hapus()');
         
         const textClose = document.createTextNode('x');
-        
 
         ul.appendChild(li);
             li.appendChild(text);
                 li.appendChild(span);
-                    span.appendChild(textClose);
-
-        // var list = "";
-        // list += '<ul>';
-        //             for (let i = 0; i < jadwalAvailable.length; i++) {
-        //                 list += `<li>${jadwalAvailable[i]}<span class''>X</span></li>`;
-                        
-        //             }
-        // list += '</ul>';
-
-
-        // list += '<span><div class="container"><ul>';
-        //             for (let i = 0; i < jadwalAvailable.length; i++) {
-        //                 list += `<li>${jadwalAvailable[i]}<span>X</span></li>`;
-                        
-        //             }
-        // list += '</ul></div></span>';
-        // document.getElementById("divTglAvailable").innerHTML = list;        
+                    span.appendChild(textClose);       
     }
+
+    function hapus() {
+
+        $('#divTglAvailable ul li').click(function () {
+            $('#divTglAvailable ul li').removeClass('selected');
+            $(this).addClass('selected');
+            $('#divTglAvailable ul li.selected').remove();
+            tanggal = $(this).text().substr(0,10); 
+            
+            //remove array jadwalAvailable
+            const index = jadwalAvailable.indexOf(tanggal);
+            if (index > -1) {
+                jadwalAvailable.splice(index, 1);
+            }
+        });
+
+    }    
 
     async function savecourse() {
         if ($("#kategori").val() == "" || $("#title").val() == "" ) {
-            Swal.fire({
-                icon: 'warning',
-                text: 'Harap Melengkapi Data!',
-            })
-            return;
+            lengkapiData();
         }
         if($("#fileupload").val()==""){
-            var dataArray = {
-                "course": {
-                    "title": $("#title").val(),
-                    "jpl": $("#jpl").val(),
-                    "materi": $("#materi").val(),
-                    "idkategori" : $("#kategori").val(),
-                    "tglavailablepraktek" : jadwalAvailable.toString(),
-                    "trainer" : $("#trainer").val()
+            if($("#chkTraining").is(':checked')){
+                if ($("#trainer").val() == "" || $("#maxpeserta").val() == "" || jadwalAvailable.toString() == "" ) {
+                    lengkapiData();
                 }
+                var dataArray = {
+                    "course": {
+                        "title": $("#title").val(),
+                        "jpl": $("#jpl").val(),
+                        "materi": $("#materi").val(),
+                        "idkategori" : $("#kategori").val(),
+                        "tglavailablepraktek" : jadwalAvailable.toString(),
+                        "trainer" : $("#trainer").val(),
+                        "maxpeserta" : $("#maxPeserta").val()
+                    }
+                }                  
+            }else{
+                var dataArray = {
+                    "course": {
+                        "title": $("#title").val(),
+                        "jpl": $("#jpl").val(),
+                        "materi": $("#materi").val(),
+                        "idkategori" : $("#kategori").val(),
+                    }
+                }
+              
             }
         }else{
             upload =fileupload.files[0].name;
@@ -164,18 +161,34 @@
                 method: "POST", 
                 body: formData
             });  
-
-            var dataArray = {
-                "course": {
-                    "title": $("#title").val(),
-                    "jpl": $("#jpl").val(),
-                    "materi": $("#materi").val(),
-                    "idkategori" : $("#kategori").val(),
-                    "tglavailablepraktek" : jadwalAvailable.toString(),
-                    "trainer" : $("#trainer").val(),                    
-                    "filemateri" : upload
-                }
-            }                   
+            if($("#chkTraining").is(':checked')){
+                if ($("#trainer").val() == "" || $("#maxpeserta").val() == "" || jadwalAvailable.toString() == "" ) {
+                    lengkapiData();
+                }                
+                var dataArray = {
+                    "course": {
+                        "title": $("#title").val(),
+                        "jpl": $("#jpl").val(),
+                        "materi": $("#materi").val(),
+                        "idkategori" : $("#kategori").val(),
+                        "tglavailablepraktek" : jadwalAvailable.toString(),
+                        "trainer" : $("#trainer").val(),
+                        "maxpeserta" : $("#maxPeserta").val(),                    
+                        "filemateri" : upload
+                    }
+                }                 
+            }else{
+                var dataArray = {
+                    "course": {
+                        "title": $("#title").val(),
+                        "jpl": $("#jpl").val(),
+                        "materi": $("#materi").val(),
+                        "idkategori" : $("#kategori").val(),                    
+                        "filemateri" : upload
+                    }
+                }                   
+                
+            }
         }
 
 
@@ -293,21 +306,6 @@
                                                 <div class="col-sm-10">
                                                     <input id="fileupload" type="file" name="fileupload" /> 
                                                 </div>
-
-                                                
-
-                                                <!-- <?php echo form_open_multipart('admin/course/upload', array('name' => 'spreadsheet')); ?>
-                                                <table cellpadding="5">
-                                                    <tr>
-                                                        <td>File :</td>
-                                                        <td><input type="file" size="40px" name="file" /></td>
-                                                        <td class="error"><?php echo form_error('name'); ?></td>
-                                                        <td colspan="5" align="center">
-                                                            <input type="submit" value="Upload Materi" />
-                                                        </td>
-                                                    </tr>
-                                                </table>
-                                                <?php echo form_close(); ?>      -->
                                                 
                                             </div>
                                         </div>
@@ -317,9 +315,6 @@
 
                             <div class="card">
                                 <div class="card-header">
-                                    <!-- <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                                        <i class="fas fa-minus"></i>
-                                    </button> -->
                                     <div class="form-group">
                                         <div class="custom-control custom-checkbox">
                                             <input class="custom-control-input" type="checkbox" id="chkTraining" data-toggle='collapse' data-target='#praktek'>
@@ -351,18 +346,24 @@
                                                 <button class="btn btn-info" onclick="addJadwal()">+</button>
                                             </div>
                                         </div>   
-
                                         <div class="form-group row">
                                             <label class="col-sm-2 col-form-label"></label>
                                             <div class="col-sm-10">
                                                 <div id="divTglAvailable">
-                                                        <ul id="ulDiv">
-                                                            <!-- <li>sdsd</li> -->
-                                                        </ul>
+                                                    <ul id="ulDiv">
+
+                                                    </ul>
                                                 </div>
-                                                <!-- <textarea id="tglAvailable" class="form-control" rows="3" placeholder="List Tanggal Available"></textarea> -->
                                             </div>
-                                        </div>                                                                                 
+                                        </div>                                          
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label">Jumlah Peserta</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" id="maxPeserta" placeholder="Max Peserta Per Hari" >
+                                            </div>
+                                        </div>                                           
+
+                                                                               
                                     </div>         
                                 </div>    
                             </div> 
@@ -392,18 +393,5 @@
   </div>
   <!-- /.content-wrapper -->
 
-<script type="text/javascript">
-    // const list = document.querySelector('.container ul');
-    const close = document.querySelectorAll('span');
-    console.log(close);
-    for(let i=0; i<close.length; i++){
-        console.log(i);
-        close[i].addEventListener('click',()=>{
-            close[i].parentElement.style.display = "none";
-            console.log('sdsdsd');
-        })
-    }
-    
-</script>
 
   <?php $this->load->view('admin/footer'); ?>
