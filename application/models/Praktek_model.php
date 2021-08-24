@@ -13,10 +13,10 @@ class Praktek_model extends CI_Model
     public function getAllPraktek()
     {
         $sql = "SELECT * FROM rzl_praktek a
-            INNER JOIN rzl_m_course b ON a.idcourse=b.idcourse
-            INNER JOIN rzl_getcourse c ON c.idcourse=a.idcourse
+            INNER JOIN rzl_getcourse b ON a.idcourse=b.idcourse AND a.nip=b.nip            
+            INNER JOIN rzl_m_course c ON c.idcourse=a.idcourse
             INNER JOIN m_pegawai d ON d.nip=a.nip
-            GROUP BY a.nip";
+            ORDER BY a.idpraktek DESC";
         $qry = $this->db->query($sql);
         return $qry->result_array();
     }

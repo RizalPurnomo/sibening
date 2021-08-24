@@ -172,6 +172,14 @@ class Course_model extends CI_Model
         return  "Data " . $id . " Berhasil Diupdate";
     }
 
+    public function updateFlagByNipIdCourse($idCourse,$nip, $data, $tabel)
+    {
+        $this->db->where('idcourse', $idCourse);
+        $this->db->where('nip', $nip);
+        $this->db->update($tabel, $data);
+        return  "Data Berhasil Diupdate";
+    }
+
     public function deleteData($id, $tabel)
     {
         $this->db->where('idgetcourse', $id);

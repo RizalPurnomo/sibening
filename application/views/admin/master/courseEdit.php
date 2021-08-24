@@ -34,8 +34,12 @@
 <script type="text/javascript">
     const jadwalAvailable = [];
     window.onload = function test(){
-        a = document.getElementById('ulDiv');
-        console.log(a);
+        //set JadwalAvailable saat di load
+        a = document.getElementById('tglArray').value;
+        tglArray = a.split(",");
+        for (let i = 0; i < tglArray.length; i++) {
+            jadwalAvailable.push(tglArray[i]);
+        }
         
     }
 
@@ -86,7 +90,7 @@
         }else{
             jadwalAvailable.push(tanggal);
         }
-        console.log(jadwalAvailable);
+        // console.log(jadwalAvailable);
         getJadwal(tanggal);
 
     }
@@ -133,7 +137,6 @@
             if($("#chkTraining").is(':checked')){
                 if ($("#trainer").val() == "" || $("#maxpeserta").val() == "" || jadwalAvailable.toString() == "" ) {
                     lengkapiData();
-                    alert('sdsd');
                 }
                 var dataArray = {
                     "course": {
@@ -202,7 +205,7 @@
     }
 
     console.log(dataArray);
-    return;
+    // return;
     $.ajax({
         type: "POST",
         data: dataArray,
@@ -215,7 +218,7 @@
                 timer: 1500
             })
 
-            console.log(result);
+            // console.log(result);
             window.location = "<?php echo base_url(); ?>admin/course";
         }
     })
@@ -374,6 +377,7 @@
                                         <div class="form-group row">
                                             <label class="col-sm-2 col-form-label"></label>
                                             <div class="col-sm-10">
+                                                <input type="hidden" class="form-control" id="tglArray" placeholder="Tanggal Praktek Array" value="<?php echo $course[0]['tglavailablepraktek']; ?>" > 
                                                 <div id="divTglAvailable">
                                                     <ul id="ulDiv">
                                                         <?php 

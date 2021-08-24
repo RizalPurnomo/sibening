@@ -105,7 +105,7 @@
                                 <div class="form-group">
                                     <input type="hidden" class="form-control" id="idcourse" value="<?php echo $idCourse; ?>">
                                     <input type="hidden" class="form-control" id="nip" placeholder="NIP" value="<?php echo $this->session->userdata('nip'); ?>">
-                                    <input type="text" class="form-control" id="maxPeserta" value="<?php echo $maxPeserta; ?>">
+                                    <input type="hidden" class="form-control" id="maxPeserta" value="<?php echo $maxPeserta; ?>">
                                     <?php 
                                         if(empty($jadwalPraktek)){
                                             $tglPraktek ="";    
