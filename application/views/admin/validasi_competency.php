@@ -105,9 +105,9 @@ function reject(id){
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <!-- <a href="<?php echo base_url(); ?>admin/peserta/add" class="btn btn-app">
-                                <i class="fas fa-user"></i> Tambah User
-                            </a> -->
+                            <a href="<?php echo base_url(); ?>admin/validasiCompetency/add" class="btn btn-app">
+                                <i class="fa fa-book" aria-hidden="true"></i> Tambah Competency
+                            </a>
                             <div class="card-tools">
                                 <button type="button" class="btn btn-tool" data-card-widget="collapse">
                                     <i class="fas fa-minus"></i>

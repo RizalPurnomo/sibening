@@ -21,9 +21,10 @@ class Competency extends CI_Controller
 
     public function index()
     {
+        $thnIni = date("Y");
         $idpeserta = $this->session->userdata('nip');
-        $getcourse = $this->course_model->getCourse($idpeserta);
-        $competency = $this->course_model->getCompetencyByNip($idpeserta);
+        $getcourse = $this->course_model->getCourse($idpeserta,$thnIni);
+        $competency = $this->competency_model->getCompetencyByNip($idpeserta,$thnIni);
         $data['getcourse'] = $getcourse;
         $data['competency'] = $competency;
         // echo "<pre/>";

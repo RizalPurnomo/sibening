@@ -11,11 +11,11 @@ class Course_model extends CI_Model
 
 
 
-    public function getCourse($idpeserta)
+    public function getCourse($idpeserta,$thn)
     {
         $sql = "SELECT * FROM rzl_getcourse a
                 INNER JOIN rzl_m_course b ON a.idcourse=b.idcourse
-                WHERE a.nip = '$idpeserta'";
+                WHERE a.nip = '$idpeserta'  AND YEAR(datecourse)='$thn'";
         $qry = $this->db->query($sql);
         return $qry->result_array();
     }
@@ -223,23 +223,6 @@ class Course_model extends CI_Model
             LEFT JOIN dbsibening.rzl_answerpost e ON e.idquestion=c.idquestion
             WHERE a.nip = '$nip'
             group by a.idgetcourse";
-        $qry = $this->db->query($sql);
-        return $qry->result_array();
-    }    
-
-    //Competency
-    public function getCompetencyByNip($nip)
-    {
-        $sql = "SELECT * FROM rzl_m_competency
-                WHERE nip='$nip'";
-        $qry = $this->db->query($sql);
-        return $qry->result_array();
-    }
-
-    public function getCompetencyByNipApprove($nip)
-    {
-        $sql = "SELECT * FROM rzl_m_competency
-                WHERE nip='$nip' and statuscompetency='approved'";
         $qry = $this->db->query($sql);
         return $qry->result_array();
     }    

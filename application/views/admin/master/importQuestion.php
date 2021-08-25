@@ -92,12 +92,6 @@
                                         </div>
                                         <div class="col-sm-2">
                                             <button type="submit" class="btn btn-primary">Download</button>
-                                            <!-- <a class="btn btn-primary btn-sm" href="<?php echo base_url('admin/import/export/'); ?>">
-                                                <i class="fa fa-download">
-                                                </i>
-                                                Download
-                                            </a>   -->
-                                            <!-- <button onclick="savePeserta()" class="btn btn-info">Download</button> -->
                                         </div>
                                     </div>
                                 </div>
@@ -126,8 +120,6 @@
                     </div>
                     <div class="card-body">
                         <div class="container-fluid">
-
-                            <!-- <h3><u>Import Data Question</u></h3> -->
                             <?php echo form_open_multipart('admin/import/importQuestion', array('name' => 'spreadsheet')); ?>
                             <table cellpadding="5">
                                 <tr>
@@ -140,19 +132,76 @@
                                 </tr>
                             </table>
                             <?php echo form_close(); ?>
-
-
-
                         </div>
-
-
                     </div>
                 </div>
-                <!-- ./card-body -->
             </div>
-            <!-- /.card -->
         </div>
         <!-- /.row -->    
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            <i class="fas fa-chart-pie mr-1"></i>
+                            Import Data Diklat
+                        </h3>
+                        <div class="card-tools">
+
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="container-fluid">
+                            <?php echo form_open_multipart('admin/import/importDataDiklat', array('name' => 'spreadsheet')); ?>
+                            <table cellpadding="5">
+                                <tr>
+                                    <td>File :</td>
+                                    <td><input type="file" size="40px" name="upload_file" /></td>
+                                    <td class="error"><?php echo form_error('name'); ?></td>
+                                    <td colspan="5" align="center">
+                                        <input type="submit" value="Import Data Diklat" />
+                                    </td>
+                                </tr>
+                            </table>
+                            <?php echo form_close(); ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>        
+
+        <!-- <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            <i class="fas fa-chart-pie mr-1"></i>
+                            Import Diklat
+                        </h3>
+                        <div class="card-tools">
+
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="container-fluid">
+                            <?php echo form_open_multipart('admin/import/importDiklat', array('name' => 'spreadsheet')); ?>
+                            <table cellpadding="5">
+                                <tr>
+                                    <td>File :</td>
+                                    <td><input type="file" size="40px" name="upload_file" /></td>
+                                    <td class="error"><?php echo form_error('name'); ?></td>
+                                    <td colspan="5" align="center">
+                                        <input type="submit" value="Import Diklat" />
+                                    </td>
+                                </tr>
+                            </table>
+                            <?php echo form_close(); ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>         -->
 
         <!-- Main row -->
 

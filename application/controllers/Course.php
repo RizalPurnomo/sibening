@@ -7,7 +7,7 @@ class Course extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->model(array('course_model','praktek_model'));
+        $this->load->model(array('course_model','praktek_model','competency_model'));
         // if (empty($this->session->userdata('nip'))) {
         //     redirect('login');
         // }
@@ -21,13 +21,14 @@ class Course extends CI_Controller
 
     public function index()
     {
+        $thnIni = date("Y");
         $idpeserta = $this->session->userdata('nip');
-        $getcourse = $this->course_model->getCourse($idpeserta);
-        $competency = $this->course_model->getCompetencyByNip($idpeserta);
-        $data['getcourse'] = $getcourse;
         $data['course'] = $this->course_model->availableCourse($idpeserta);
-        $data['competency'] = $competency;
         
+        $competency = $this->competency_model->getCompetencyByNip($idpeserta,$thnIni);
+        $getcourse = $this->course_model->getCourse($idpeserta,$thnIni);
+        $data['getcourse'] = $getcourse;
+        $data['competency'] = $competency;        
         $data['enrolledCourse'] = count($getcourse);
         $data['finishCourse'] = 0;
         $data['getJPL'] = 0;

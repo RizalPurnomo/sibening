@@ -181,7 +181,7 @@
                         </div>
                     </div>                    
                     <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">Upload</label>
+                        <label class="col-sm-2 col-form-label">Upload</label>
                         <div class="col-sm-10">
                             <input  id="fileupload" type="file" size="40px" name="fileupload" />
                         </div>

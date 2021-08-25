@@ -162,5 +162,86 @@ class Import extends CI_Controller {
         
         $writer->save('php://output');	// download file 
     }
+
+
+
+
+    //Diklat
+    public function importDiklat()
+    {
+        $file_mimes = array('text/x-comma-separated-values', 'text/comma-separated-values', 'application/octet-stream', 'application/vnd.ms-excel', 'application/x-csv', 'text/x-csv', 'text/csv', 'application/csv', 'application/excel', 'application/vnd.msexcel', 'text/plain', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        if (isset($_FILES['upload_file']['name']) && in_array($_FILES['upload_file']['type'], $file_mimes)) {
+            $arr_file = explode('.', $_FILES['upload_file']['name']);
+            $extension = end($arr_file);
+            if ('csv' == $extension) {
+                $reader = new \PhpOffice\PhpSpreadsheet\Reader\Csv();
+            } else {
+                $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
+            }
+            $spreadsheet = $reader->load($_FILES['upload_file']['tmp_name']);
+            $sheetData = $spreadsheet->getActiveSheet()->toArray();
+            $data['sheetData'] = $sheetData;
+            // echo "<pre>";
+            // print_r($data);
+            $this->load->view('admin/master/importPreviewDiklat', $data);
+        }
+    }     
+
+    function saveDiklat()
+    {
+        $jum = count($this->input->post('kodediklat'));
+        //insert Batch
+        for ($i = 0; $i < $jum; $i++) {
+            $dataDiklat = array(
+                'iddiklat' => $this->input->post('kodediklat')[$i],
+                'rumpundiklat' => $this->input->post('rumpun')[$i],
+                'jenisdiklat'  => $this->input->post('jenis')[$i],
+                'detailjenisdiklat'  => $this->input->post('detail')[$i]
+            );
+            $this->course_model->saveData($dataDiklat, 'rzl_m_diklat');
+        }
+        echo "Berhasil Disimpan";
+    }    
+
+    //DataDiklat
+    public function importDataDiklat()
+    {
+        $file_mimes = array('text/x-comma-separated-values', 'text/comma-separated-values', 'application/octet-stream', 'application/vnd.ms-excel', 'application/x-csv', 'text/x-csv', 'text/csv', 'application/csv', 'application/excel', 'application/vnd.msexcel', 'text/plain', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        if (isset($_FILES['upload_file']['name']) && in_array($_FILES['upload_file']['type'], $file_mimes)) {
+            $arr_file = explode('.', $_FILES['upload_file']['name']);
+            $extension = end($arr_file);
+            if ('csv' == $extension) {
+                $reader = new \PhpOffice\PhpSpreadsheet\Reader\Csv();
+            } else {
+                $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
+            }
+            $spreadsheet = $reader->load($_FILES['upload_file']['tmp_name']);
+            $sheetData = $spreadsheet->getActiveSheet()->toArray();
+            $data['sheetData'] = $sheetData;
+            // echo "<pre>";
+            // print_r($data);
+            $this->load->view('admin/master/importPreviewDataDiklat', $data);
+        }
+    }     
+
+    function saveDataDiklat()
+    {
+        $jum = count($this->input->post('nip'));
+        //insert Batch
+        for ($i = 0; $i < $jum; $i++) {
+            $dataDiklat = array(
+                'nip' => $this->input->post('nip')[$i],
+                'date' => $this->input->post('date')[$i],
+                'title'  => $this->input->post('title')[$i],
+                'instance'  => $this->input->post('instance')[$i],
+                'jplapproved'  => $this->input->post('jplapproved')[$i],
+                'iddiklat'  => $this->input->post('iddiklat')[$i],
+                'idjenisdiklat'  => $this->input->post('idjenisdiklat')[$i],
+                'statuscompetency' => 'approved'
+            );
+            $this->course_model->saveData($dataDiklat, 'rzl_m_competency');
+        }
+        echo "Berhasil Disimpan";
+    }        
     
 } 

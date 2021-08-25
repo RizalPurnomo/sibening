@@ -3,6 +3,7 @@
               <div class="card card-primary card-outline">
                   <div class="card-header">
                     <center><h5>Course Information</h5></center>
+                    <center><h3><?php echo date('Y'); ?></h3></center>
                   </div>
                   <div class="card-body">
                     <div>

@@ -44,8 +44,9 @@ class Report extends CI_Controller
     }
 
     public function progresDetail($idpeserta){
-        $getcourse = $this->course_model->getCourse($idpeserta);
-        $competency = $this->course_model->getCompetencyByNip($idpeserta);
+        $thnIni = date("Y");
+        $getcourse = $this->course_model->getCourse($idpeserta,$thnIni);
+        $competency = $this->competency_model->getCompetencyByNip($idpeserta,$thnIni);
         $data['getcourse'] = $getcourse;
         $data['competency'] = $competency;
         $data['course'] = $this->course_model->availableCourse($idpeserta);
@@ -80,9 +81,9 @@ class Report extends CI_Controller
         $data['percentageJplTarget'] = ($data['getJPL']/$data['targetJPL'])*100;
         $data['percentage'] = ($data['finishJPL']/$data['targetJPL'])*100;
 
-
-
-        $this->load->view('admin/report/progresDetail',$data);
+        echo "<pre/>";
+        print_r($data);
+        // $this->load->view('admin/report/progresDetail',$data);
     }    
 
     public function preTest($idGetCourse)

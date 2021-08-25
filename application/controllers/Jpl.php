@@ -7,7 +7,7 @@ class Jpl extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->model(array('course_model'));
+        $this->load->model(array('course_model','competency_model'));
         // if (empty($this->session->userdata('nip'))) {
         //     redirect('login');
         // }
@@ -21,13 +21,14 @@ class Jpl extends CI_Controller
 
     public function index()
     {
+        $thnIni = date("Y");
         $idpeserta = $this->session->userdata('nip');
-        $getcourse = $this->course_model->getCourse($idpeserta);
-        $competency = $this->course_model->getCompetencyByNipApprove($idpeserta);
+        $getcourse = $this->course_model->getCourse($idpeserta,$thnIni);
+        $competency = $this->competency_model->getCompetencyByNipApprove($idpeserta,$thnIni);
         $data['getcourse'] = $getcourse;
         $data['competency'] = $competency;
-        $data['course'] = $this->course_model->availableCourse($idpeserta);
-        $data['jpl'] = $this->course_model->getJplFinish($idpeserta);
+        $data['course'] = $this->course_model->availableCourse($idpeserta,$thnIni);
+        $data['jpl'] = $this->course_model->getJplFinish($idpeserta,$thnIni);
         // echo "<pre/>";
         // print_r($data);
         // exit;

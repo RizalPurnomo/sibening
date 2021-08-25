@@ -7,7 +7,7 @@ class ValidasiCompetency extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->model(array('competency_model'));
+        $this->load->model(array('competency_model','diklat_model','peserta_model'));
 
         $this->load->library("Aauth");
         if (!$this->aauth->is_loggedin()) {
@@ -23,6 +23,21 @@ class ValidasiCompetency extends CI_Controller
         // print_r($data);
         $this->load->view('admin/validasi_competency',$data);
     }
+
+    public function add()
+    {
+        $data['peserta'] = $this->peserta_model->getAllPeserta();
+        $data['diklat'] = $this->diklat_model->getDiklatAll();
+        $data['jenis'] = $this->diklat_model->getJenisDiklatAll();
+        $this->load->view('admin/master/competencyAdd',$data);
+    }
+
+    public function saveData()
+    {
+        $data = $this->input->post('competency');
+        $this->diklat_model->saveData($data, 'rzl_m_competency');
+        print_r($this->input->post());
+    }    
 
     public function approved($idData)
     {

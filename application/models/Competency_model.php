@@ -10,13 +10,6 @@ class Competency_model extends CI_Model
     }
 
     //Competency
-    public function getCompetencyByNip($nip)
-    {
-        $sql = "SELECT * FROM rzl_m_competency
-                WHERE nip='$nip'";
-        $qry = $this->db->query($sql);
-        return $qry->result_array();
-    }
 
     public function getCompetencyById($id)
     {
@@ -53,4 +46,21 @@ class Competency_model extends CI_Model
         $qry = $this->db->query($sql);
         return $qry->result_array();
     }    
+
+    public function getCompetencyByNip($nip,$thn)
+    {
+        $sql = "SELECT * FROM rzl_m_competency
+                WHERE nip='$nip' AND YEAR(date)='$thn'";
+        $qry = $this->db->query($sql);
+        return $qry->result_array();
+    }
+
+    public function getCompetencyByNipApprove($nip,$thn)
+    {
+        $sql = "SELECT * FROM rzl_m_competency
+                WHERE nip='$nip' and statuscompetency='approved' AND YEAR(date)='$thn'";
+        $qry = $this->db->query($sql);
+        return $qry->result_array();
+    }     
+    
 }
