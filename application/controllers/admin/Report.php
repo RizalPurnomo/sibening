@@ -81,9 +81,9 @@ class Report extends CI_Controller
         $data['percentageJplTarget'] = ($data['getJPL']/$data['targetJPL'])*100;
         $data['percentage'] = ($data['finishJPL']/$data['targetJPL'])*100;
 
-        echo "<pre/>";
-        print_r($data);
-        // $this->load->view('admin/report/progresDetail',$data);
+        // echo "<pre/>";
+        // print_r($data);
+        $this->load->view('admin/report/progresDetail',$data);
     }    
 
     public function preTest($idGetCourse)

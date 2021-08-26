@@ -229,9 +229,11 @@ class Import extends CI_Controller {
         $jum = count($this->input->post('nip'));
         //insert Batch
         for ($i = 0; $i < $jum; $i++) {
+            $tgl = date('Y-m-d', strtotime($this->input->post('date')[$i]));
+
             $dataDiklat = array(
                 'nip' => $this->input->post('nip')[$i],
-                'date' => $this->input->post('date')[$i],
+                'date' => $tgl,
                 'title'  => $this->input->post('title')[$i],
                 'instance'  => $this->input->post('instance')[$i],
                 'jplapproved'  => $this->input->post('jplapproved')[$i],
