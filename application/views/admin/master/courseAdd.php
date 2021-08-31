@@ -367,13 +367,7 @@
                                     </div>         
                                 </div>    
                             </div> 
-
-                        </div>
-                        
- 
-
-                        
-                        <!-- /.card-body -->
+                        </div>                        
                         <div class="card-footer">
                             <button onclick="savecourse()" class="btn btn-info">Simpan</button>
                         </div>

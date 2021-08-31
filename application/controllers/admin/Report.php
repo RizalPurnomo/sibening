@@ -26,11 +26,25 @@ class Report extends CI_Controller
     }
 
     public function progresPeserta(){
-        $data['peserta'] = $this->peserta_model->getAllPeserta();
+        $data['peserta'] = $this->peserta_model->getAllPesertaAktif();
         $data['progress'] = $this->course_model->progressPeserta();
+        $progress = $data['progress'];
         $data['getJplFinish'] = $this->course_model->getSumJplFinish();
         $data['getJplApproved'] = $this->competency_model->getSumJplApproved();
         $data['totalJpl'] = $data['getJplFinish'][0]['jplFinish'] + $data['getJplApproved'][0]['jplApproved'];
+        
+        $totalJplPeserta=0;
+        for ($i=0; $i < count($progress) ; $i++) { 
+            if($progress[$i]['totaljpl']>20){
+                $a = 20;
+            }else{
+                $a = $progress[$i]['totaljpl'];
+            }
+            $totalJplPeserta = $totalJplPeserta + $a;
+        }
+        $data['totalJplPeserta'] = $totalJplPeserta;
+
+
         // $data['competency'] = $this->course_model->getCompetencyByNip($idpeserta);
         // echo "<pre/>";
         // print_r($data);

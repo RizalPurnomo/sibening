@@ -39,69 +39,13 @@
               }else{
                 $jplFinish = $getJplFinish[0]['jplFinish'];
               }
-              $percentageGlobal = ($totalJpl / $targetJPL )*100; 
+              $percentageGlobalRata = ($totalJpl / $targetJPL )*100; 
+              $percentageGlobalPeserta = ($totalJplPeserta / $targetJPL )*100; 
+              
+
+
             ?>
-            <div class="row">
-              <div class="col-12 col-sm-6 col-md-3">
-                <div class="info-box">
-                  <span class="info-box-icon bg-info elevation-1"><i class="fas fa-users"></i></span>
 
-                  <div class="info-box-content">
-                    <span class="info-box-text">Total Peserta</span>
-                    <span class="info-box-number">
-                      <?php echo $totalPeserta; ?> Peserta
-                    </span>
-                  </div>
-                  <!-- /.info-box-content -->
-                </div>
-                <!-- /.info-box -->
-              </div>
-              <!-- /.col -->
-              <div class="col-12 col-sm-6 col-md-3">
-                <div class="info-box mb-3">
-                  <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-shopping-cart"></i></span>
-
-                  <div class="info-box-content">
-                    <span class="info-box-text">Target JPL Selesai</span>
-                    <span class="info-box-number"><?php echo $targetJPL; ?> JPL</span>
-                  </div>
-                  <!-- /.info-box-content -->
-                </div>
-                <!-- /.info-box -->
-              </div>
-              <!-- /.col -->
-
-              <!-- fix for small devices only -->
-              <div class="clearfix hidden-md-up"></div>
-
-              <div class="col-12 col-sm-6 col-md-3">
-                <div class="info-box mb-3">
-                  <span class="info-box-icon bg-success elevation-1"><i class="fas fa-thumbs-up"></i></span>
-
-                  <div class="info-box-content">
-                    <span class="info-box-text">JPL Finish</span>
-                    <span class="info-box-number"><?php echo $totalJpl; ?> JPL</span>
-                  </div>
-                  <!-- /.info-box-content -->
-                </div>
-                <!-- /.info-box -->
-              </div>
-              <!-- /.col -->
-              <div class="col-12 col-sm-6 col-md-3">
-                <div class="info-box mb-3">
-                  <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-cog"></i></span>
-
-                  <div class="info-box-content">
-                    <span class="info-box-text">Progress</span>
-                    <span class="info-box-number"><?php echo $percentageGlobal; ?> %</span>
-                  </div>
-                  <!-- /.info-box-content -->
-                </div>
-                <!-- /.info-box -->
-              </div>
-              <!-- /.col -->
-            
-            </div> 
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
@@ -115,14 +59,143 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
+                            Progress Rata Rata
+                            <div class="row">
+                              <div class="col-12 col-sm-6 col-md-3">
+                                <div class="info-box">
+                                  <span class="info-box-icon bg-info elevation-1"><i class="fas fa-users"></i></span>
 
+                                  <div class="info-box-content">
+                                    <span class="info-box-text">Total Peserta</span>
+                                    <span class="info-box-number">
+                                      <?php echo $totalPeserta; ?> Peserta
+                                    </span>
+                                  </div>
+                                  <!-- /.info-box-content -->
+                                </div>
+                                <!-- /.info-box -->
+                              </div>
+                              <!-- /.col -->
+                              <div class="col-12 col-sm-6 col-md-3">
+                                <div class="info-box mb-3">
+                                  <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-shopping-cart"></i></span>
+
+                                  <div class="info-box-content">
+                                    <span class="info-box-text">Target JPL Selesai</span>
+                                    <span class="info-box-number"><?php echo $targetJPL; ?> JPL</span>
+                                  </div>
+                                  <!-- /.info-box-content -->
+                                </div>
+                                <!-- /.info-box -->
+                              </div>
+                              <!-- /.col -->
+
+                              <!-- fix for small devices only -->
+                              <div class="clearfix hidden-md-up"></div>
+
+                              <div class="col-12 col-sm-6 col-md-3">
+                                <div class="info-box mb-3">
+                                  <span class="info-box-icon bg-success elevation-1"><i class="fas fa-thumbs-up"></i></span>
+
+                                  <div class="info-box-content">
+                                    <span class="info-box-text">JPL Finish</span>
+                                    <span class="info-box-number"><?php echo $totalJpl; ?> JPL</span>
+                                  </div>
+                                  <!-- /.info-box-content -->
+                                </div>
+                                <!-- /.info-box -->
+                              </div>
+                              <!-- /.col -->
+                              <div class="col-12 col-sm-6 col-md-3">
+                                <div class="info-box mb-3">
+                                  <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-cog"></i></span>
+
+                                  <div class="info-box-content">
+                                    <span class="info-box-text">Progress</span>
+                                    <span class="info-box-number"><?php echo $percentageGlobalRata; ?> %</span>
+                                  </div>
+                                  <!-- /.info-box-content -->
+                                </div>
+                                <!-- /.info-box -->
+                              </div>
+                              <!-- /.col -->
+                            </div>
                             <div class="progress progress-sm">
-                              <div class="progress-bar bg-green" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100" style="width: <?php echo $percentageGlobal; ?>%">
+                              <div class="progress-bar bg-green" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100" style="width: <?php echo $percentageGlobalRata; ?>%">
                               </div>
                             </div>
-                            <?php echo round($percentageGlobal); ?>% Complete
+                            <?php echo round($percentageGlobalRata); ?>% Complete
                         </div>
+                        <div class="card-body">
+                            Progress Per Peserta
 
+                            <div class="row">
+                              <div class="col-12 col-sm-6 col-md-3">
+                                <div class="info-box">
+                                  <span class="info-box-icon bg-info elevation-1"><i class="fas fa-users"></i></span>
+
+                                  <div class="info-box-content">
+                                    <span class="info-box-text">Total Peserta</span>
+                                    <span class="info-box-number">
+                                      <?php echo $totalPeserta; ?> Peserta
+                                    </span>
+                                  </div>
+                                  <!-- /.info-box-content -->
+                                </div>
+                                <!-- /.info-box -->
+                              </div>
+                              <!-- /.col -->
+                              <div class="col-12 col-sm-6 col-md-3">
+                                <div class="info-box mb-3">
+                                  <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-shopping-cart"></i></span>
+
+                                  <div class="info-box-content">
+                                    <span class="info-box-text">Target JPL Selesai</span>
+                                    <span class="info-box-number"><?php echo $targetJPL; ?> JPL</span>
+                                  </div>
+                                  <!-- /.info-box-content -->
+                                </div>
+                                <!-- /.info-box -->
+                              </div>
+                              <!-- /.col -->
+
+                              <!-- fix for small devices only -->
+                              <div class="clearfix hidden-md-up"></div>
+
+                              <div class="col-12 col-sm-6 col-md-3">
+                                <div class="info-box mb-3">
+                                  <span class="info-box-icon bg-success elevation-1"><i class="fas fa-thumbs-up"></i></span>
+
+                                  <div class="info-box-content">
+                                    <span class="info-box-text">JPL Finish</span>
+                                    <span class="info-box-number"><?php echo $totalJplPeserta; ?> JPL</span>
+                                  </div>
+                                  <!-- /.info-box-content -->
+                                </div>
+                                <!-- /.info-box -->
+                              </div>
+                              <!-- /.col -->
+                              <div class="col-12 col-sm-6 col-md-3">
+                                <div class="info-box mb-3">
+                                  <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-cog"></i></span>
+
+                                  <div class="info-box-content">
+                                    <span class="info-box-text">Progress</span>
+                                    <span class="info-box-number"><?php echo $percentageGlobalPeserta; ?> %</span>
+                                  </div>
+                                  <!-- /.info-box-content -->
+                                </div>
+                                <!-- /.info-box -->
+                              </div>
+                              <!-- /.col -->
+                            </div>
+
+                            <div class="progress progress-sm">
+                              <div class="progress-bar bg-green" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100" style="width: <?php echo $percentageGlobalPeserta; ?>%">
+                              </div>
+                            </div>
+                            <?php echo round($percentageGlobalPeserta); ?>% Complete
+                        </div>
                     </div>
                     <!-- ./card-body -->
                 </div>
@@ -168,8 +241,13 @@
                                                     <td><?php echo $progress[$a]['jplfinish'] ?></td>
                                                     <td><?php echo $progress[$a]['jplapproved'] ?></td>
                                                     <?php 
-                                                      $jplFinish = $progress[$a]['jplfinish'] + $progress[$a]['jplapproved'] ;
                                                       $targetJPL = 20;
+                                                      $jplOke = $progress[$a]['jplfinish'] + $progress[$a]['jplapproved'] ;
+                                                      if($jplOke>$targetJPL){
+                                                        $jplFinish = $targetJPL;
+                                                      }else{
+                                                        $jplFinish = $jplOke;
+                                                      }
                                                       $percentage = ($jplFinish/$targetJPL)*100;
                                                     ?>
                                                     <td>

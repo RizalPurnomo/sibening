@@ -259,6 +259,7 @@ class Course_model extends CI_Model
             SUM(IF(flag='finish',1,0)) AS finish, 
             SUM(IF(flag='finish',c.jpl,0)) AS jplfinish, 
             (select sum(jplapproved) from dbsibening.rzl_m_competency where nip=a.nip and statuscompetency='approved' ) as jplapproved,
+            (SUM(IF(flag='finish',c.jpl,0))+(SELECT SUM(jplapproved) FROM dbsibening.rzl_m_competency WHERE nip=a.nip AND statuscompetency='approved' )) AS totaljpl,
             a.* 
             FROM m_pegawai a
             LEFT JOIN rzl_getcourse b ON a.nip=b.nip
