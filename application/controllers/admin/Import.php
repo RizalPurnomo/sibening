@@ -1,10 +1,11 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
-class Import extends CI_Controller {
+class Import extends CI_Controller
+{
 
     public function __construct()
     {
@@ -18,14 +19,14 @@ class Import extends CI_Controller {
             $this->session->set_flashdata('message_type', 'error');
             $this->session->set_flashdata('messages', 'Please login first.');
             redirect('admin/login');
-        }        
+        }
+    }
 
-    }     
-
-    public function index() {
+    public function index()
+    {
         $data['course'] = $this->course_model->allCourse();
         // print_r($data);
-        $this->load->view('admin/master/importQuestion',$data);
+        $this->load->view('admin/master/importQuestion', $data);
     }
 
     public function importQuestion()
@@ -46,7 +47,7 @@ class Import extends CI_Controller {
             // print_r($data);
             $this->load->view('admin/master/importPreviewQuestion', $data);
         }
-    }    
+    }
 
     public function saveQuestion()
     {
@@ -54,16 +55,14 @@ class Import extends CI_Controller {
         $q = $this->course_model->getQuestionById($this->input->post('idCourse'));
         // print_r($q);
         // exit;
-        if(empty($q)){ //tambahkan question kosong
+        if (empty($q)) { //tambahkan question kosong
             $this->savedQuestion();
-        }else{
+        } else {
             $this->course_model->deleteCourse($this->input->post('idCourse'), 'rzl_m_question');
             $this->savedQuestion();
         }
         $data['question'] = $this->course_model->getQuestionById($this->input->post('idCourse'));
-        $this->load->view('admin/master/question' , $data);
-
-
+        $this->load->view('admin/master/question', $data);
     }
 
     function savedQuestion()
@@ -86,7 +85,8 @@ class Import extends CI_Controller {
         echo "Berhasil Disimpan";
     }
 
-	public function export() {
+    public function export()
+    {
         $id = $this->input->post();
 
         $data['course'] = $this->course_model->getCourseById($id['idcourse']);
@@ -98,7 +98,7 @@ class Import extends CI_Controller {
         $spreadsheet = new Spreadsheet(); // instantiate Spreadsheet
         $sheet = $spreadsheet->getActiveSheet();
         // manually set table data value
-        $sheet->setCellValue('A1', $data['course'][0]['idcourse']); 
+        $sheet->setCellValue('A1', $data['course'][0]['idcourse']);
         $sheet->setCellValue('B1', $data['course'][0]['title']);
         $sheet->setCellValue('A3', 'No');
         $sheet->setCellValue('B3', 'Question');
@@ -109,12 +109,12 @@ class Import extends CI_Controller {
         $sheet->setCellValue('G3', 'Pil E');
         $sheet->setCellValue('H3', 'Key');
         $barisAwal = 4;
-        for ($i=0; $i < 10 ; $i++) { 
+        for ($i = 0; $i < 10; $i++) {
             //Tambah Nomor
-            $sheet->setCellValue('A'.$barisAwal, $i+1);
-            
+            $sheet->setCellValue('A' . $barisAwal, $i + 1);
+
             //Seting Height
-            $sheet->getRowDimension($barisAwal)->setRowHeight(35,'pt');
+            $sheet->getRowDimension($barisAwal)->setRowHeight(35, 'pt');
 
             $barisAwal++;
         }
@@ -124,10 +124,10 @@ class Import extends CI_Controller {
         //Memberi Warna hijau di kolom available edit
         $sheet->getStyle('B4:H13')->getFill()
             ->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)
-            ->getStartColor()->setARGB('E6FFBA');      
+            ->getStartColor()->setARGB('E6FFBA');
         $sheet->getStyle('A2:C2')->getFill()
             ->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)
-            ->getStartColor()->setARGB('FF4739');              
+            ->getStartColor()->setARGB('FF4739');
 
         //Memberi Border
         $styleArray = [
@@ -138,8 +138,8 @@ class Import extends CI_Controller {
                 ],
             ],
         ];
-        $sheet->getStyle('A3:H13')->applyFromArray($styleArray);   
-        
+        $sheet->getStyle('A3:H13')->applyFromArray($styleArray);
+
         //Seting Width
         $sheet->getColumnDimension('A')->setWidth(4, 'pt');
         $sheet->getColumnDimension('B')->setWidth(42, 'pt');
@@ -152,15 +152,15 @@ class Import extends CI_Controller {
 
         //Set Wrap
         $sheet->getStyle('B4:H13')->getAlignment()->setWrapText(true);
-        
+
         $writer = new Xlsx($spreadsheet); // instantiate Xlsx
         $filename = 'Import Question - ' . $data['course'][0]['title']; // set filename for excel file to be exported
- 
+
         header('Content-Type: application/vnd.ms-excel'); // generate excel file
-        header('Content-Disposition: attachment;filename="'. $filename .'.xlsx"'); 
+        header('Content-Disposition: attachment;filename="' . $filename . '.xlsx"');
         header('Cache-Control: max-age=0');
-        
-        $writer->save('php://output');	// download file 
+
+        $writer->save('php://output');    // download file 
     }
 
 
@@ -185,7 +185,7 @@ class Import extends CI_Controller {
             // print_r($data);
             $this->load->view('admin/master/importPreviewDiklat', $data);
         }
-    }     
+    }
 
     function saveDiklat()
     {
@@ -201,7 +201,7 @@ class Import extends CI_Controller {
             $this->course_model->saveData($dataDiklat, 'rzl_m_diklat');
         }
         echo "Berhasil Disimpan";
-    }    
+    }
 
     //DataDiklat
     public function importDataDiklat()
@@ -222,7 +222,7 @@ class Import extends CI_Controller {
             // print_r($data);
             $this->load->view('admin/master/importPreviewDataDiklat', $data);
         }
-    }     
+    }
 
     function saveDataDiklat()
     {
@@ -244,6 +244,5 @@ class Import extends CI_Controller {
             $this->course_model->saveData($dataDiklat, 'rzl_m_competency');
         }
         echo "Berhasil Disimpan";
-    }        
-    
-} 
+    }
+}

@@ -11,12 +11,12 @@ class Login extends CI_Controller
 		// if (!empty($this->session->userdata('nip'))) {
 		// 	redirect('admin/dashboard');
 		// }
-        $this->load->library("Aauth");
-        // if (!$this->aauth->is_loggedin()) {
-        //     $this->session->set_flashdata('message_type', 'error');
-        //     $this->session->set_flashdata('messages', 'Please login first.');
-        //     redirect('admin/login');
-        // }        
+		$this->load->library("Aauth");
+		// if (!$this->aauth->is_loggedin()) {
+		//     $this->session->set_flashdata('message_type', 'error');
+		//     $this->session->set_flashdata('messages', 'Please login first.');
+		//     redirect('admin/login');
+		// }        
 
 	}
 
@@ -42,18 +42,26 @@ class Login extends CI_Controller
 		if ($login) {
 			$perms = "Admin_login";
 			$page = current_url();
-			$comments = "Admin Login Success with username : ". $username;
-			$this->aauth->logit($perms,$page, $comments);
-			redirect('admin/dashboard');
+			$comments = "Admin Login Success with username : " . $username;
+			$this->aauth->logit($perms, $page, $comments);
+			$logn =  $this->session->userdata('learning');
+			print_r($this->session->userdata());
+			// exit;
+			if ($logn == '1') {
+				redirect('admin/dashboard');
+			} else {
+				redirect('admin/login');
+			}
+			// exit;
 		} else {
 			$perms = "Admin_login";
 			$page = current_url();
-			$comments = "Admin Login attempt failed with username : ". $username;
-			$this->aauth->logit($perms,$page, $comments);
+			$comments = "Admin Login attempt failed with username : " . $username;
+			$this->aauth->logit($perms, $page, $comments);
 			$this->session->set_flashdata('message_type', 'error');
 			$this->session->set_flashdata('messages', $this->aauth->get_errors_array());
 			redirect('admin/login');
-		}		
+		}
 
 		// $userdata = $this->user_model->getValidUser($username, md5($password));
 		// if ($userdata) {
@@ -75,8 +83,8 @@ class Login extends CI_Controller
 		// // $_SESSION = [];
 		// redirect('admin/login');
 
-        $this->load->library("Aauth");
-        $this->aauth->logout();
-        redirect('admin/login');		
+		$this->load->library("Aauth");
+		$this->aauth->logout();
+		redirect('admin/login');
 	}
 }
