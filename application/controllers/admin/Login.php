@@ -45,12 +45,12 @@ class Login extends CI_Controller
 			$comments = "Admin Login Success with username : " . $username;
 			$this->aauth->logit($perms, $page, $comments);
 			$logn =  $this->session->userdata('learning');
-			print_r($this->session->userdata());
+			// print_r($this->session->userdata());
 			// exit;
 			if ($logn == '1') {
 				redirect('admin/dashboard');
 			} else {
-				redirect('admin/login');
+				$this->logout();
 			}
 			// exit;
 		} else {
