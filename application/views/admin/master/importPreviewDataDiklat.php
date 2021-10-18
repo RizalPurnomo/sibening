@@ -6,43 +6,94 @@
 
 </script>
 
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <div class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1 class="m-0 text-dark">Diklat</h1>
-          </div><!-- /.col -->
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>admin"><?php echo $this->uri->segment(1); ?></a></li>
-              <li class="breadcrumb-item active"><?php echo $this->uri->segment(2); ?></li>
-            </ol>
-          </div><!-- /.col -->
-        </div><!-- /.row -->
-      </div><!-- /.container-fluid -->
-    </div>
-    <!-- /.content-header -->
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0 text-dark">Diklat</h1>
+        </div><!-- /.col -->
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>admin"><?php echo $this->uri->segment(1); ?></a></li>
+            <li class="breadcrumb-item active"><?php echo $this->uri->segment(2); ?></li>
+          </ol>
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </div>
+  <!-- /.content-header -->
 
-    <!-- Main content -->
-    <section class="content">
-        <div class="container-fluid">
-            <!-- Small boxes (Stat box) -->
-            <div class="card-header">
-                <!-- <h3 class="card-title">
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <!-- Small boxes (Stat box) -->
+      <div class="card-header">
+        <!-- <h3 class="card-title">
                     <i class="fas fa-chart-pie mr-1"></i>
                     
                     <?php echo $sheetData[0]['1']; ?>
                 </h3> -->
 
-            </div>
-            <div class="card-body">
-                <div class="box-body table-responsive">
-                    <?php echo form_open('admin/import/saveDataDiklat'); ?>
-                    <input name="idCourse" value="<?php echo $sheetData[0]['0']; ?>">
-                    <table class="table table-bordered table-striped">
+      </div>
+      <div class="card-body">
+        <div class="box-body table-responsive">
+          <?php echo form_open('admin/import/saveDataDiklat'); ?>
+          <input name="idCourse" value="<?php echo $sheetData[0]['0']; ?>">
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th>No</th>
+                <th>Id Competency</th>
+                <th>NIP</th>
+                <th>Tgl Sertifikat</th>
+                <th>Judul</th>
+                <th>Penyelenggara</th>
+                <th>JPL Request</th>
+                <th>JPL Approve</th>
+                <th>Id Diklat</th>
+                <th>Id Jenis Diklat</th>
+                <th>Tgl Upload</th>
+                <!-- <th>Akreditasi</th> -->
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+
+              <?php
+              $jum = count($sheetData);
+              if (!empty($sheetData)) {
+                $no = 0;
+                for ($a = 0; $a < $jum; $a++) { ?>
+                  <?php
+                  if ($a == 0 || $a == 0) {
+                  } else {
+                    $no++;
+                  ?>
+                    <tr>
+                      <td><?php echo $no; ?></td>
+                      <td><input name='idcompetency[]' value='<?php echo $sheetData[$a]['0']; ?>'></td>
+                      <td><input name='nip[]' value='<?php echo $sheetData[$a]['1']; ?>'></td>
+                      <td><input name='datesertifikat[]' value='<?php echo $sheetData[$a]['2']; ?>'></td>
+                      <td><input name='title[]' value='<?php echo $sheetData[$a]['3']; ?>'></td>
+                      <td><input name='instance[]' value='<?php echo $sheetData[$a]['4']; ?>'></td>
+                      <td><input name='jplrequest[]' value='<?php echo $sheetData[$a]['5']; ?>'></td>
+                      <td><input name='jplapproved[]' value='<?php echo $sheetData[$a]['6']; ?>'></td>
+                      <td><input name='iddiklat[]' value='<?php echo $sheetData[$a]['7']; ?>'></td>
+                      <td><input name='idjenisdiklat[]' value='<?php echo $sheetData[$a]['8']; ?>'></td>
+                      <td><input name='dateupload[]' value='<?php echo $sheetData[$a]['9']; ?>'></td>
+                      <!-- <td><input name='akreditasi[]' value='<?php echo $sheetData[$a]['10']; ?>'></td> -->
+                      <td><input name='status[]' value='<?php echo $sheetData[$a]['11']; ?>'></td>
+                    </tr>
+                  <?php } ?>
+              <?php }
+              }
+              ?>
+            </tbody>
+          </table>
+          <!-- <table class="table table-bordered table-striped">
                         <thead>
                             <tr>
                                 <th>No</th>
@@ -60,13 +111,12 @@
                             <?php
                             $jum = count($sheetData);
                             if (!empty($sheetData)) {
-                                $no = 0;
-                                for ($a = 0; $a < $jum; $a++) { ?>
-                                  <?php 
-                                    if($a==0){
-
-                                    }else{
-                                      $no++;
+                              $no = 0;
+                              for ($a = 0; $a < $jum; $a++) { ?>
+                                  <?php
+                                  if ($a == 0) {
+                                  } else {
+                                    $no++;
                                   ?>
                                     <tr>
                                         <td><?php echo $no; ?></td>
@@ -96,21 +146,21 @@
                             </tr>
 
                         </tfoot>
-                    </table>
+                    </table> -->
 
-                </div>
+        </div>
 
-            </div>
+      </div>
 
-            <div class="card-footer">
-              <button type="submit" class="btn btn-primary">Submit</button>
-            </div>
+      <div class="card-footer">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
 
-        </div><!-- /.container-fluid -->
-    </section>
-    <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
+    </div><!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
 
 
-  <?php $this->load->view('admin/footer'); ?>
+<?php $this->load->view('admin/footer'); ?>

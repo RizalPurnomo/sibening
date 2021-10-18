@@ -224,22 +224,49 @@ class Import extends CI_Controller
         }
     }
 
-    function saveDataDiklat()
+    // function saveDataDiklat()
+    // {
+    //     $jum = count($this->input->post('nip'));
+    //     //insert Batch
+    //     for ($i = 0; $i < $jum; $i++) {
+    //         $tgl = date('Y-m-d', strtotime($this->input->post('date')[$i]));
+
+    //         $dataDiklat = array(
+    //             'nip' => $this->input->post('nip')[$i],
+    //             'date' => $tgl,
+    //             'title'  => $this->input->post('title')[$i],
+    //             'instance'  => $this->input->post('instance')[$i],
+    //             'jplapproved'  => $this->input->post('jplapproved')[$i],
+    //             'iddiklat'  => $this->input->post('iddiklat')[$i],
+    //             'idjenisdiklat'  => $this->input->post('idjenisdiklat')[$i],
+    //             'statuscompetency' => 'approved'
+    //         );
+    //         $this->course_model->saveData($dataDiklat, 'rzl_m_competency');
+    //     }
+    //     echo "Berhasil Disimpan";
+    // }
+
+    public function saveDataDiklat()
     {
         $jum = count($this->input->post('nip'));
         //insert Batch
         for ($i = 0; $i < $jum; $i++) {
             $tgl = date('Y-m-d', strtotime($this->input->post('date')[$i]));
+            $tglupload = date('Y-m-d', strtotime($this->input->post('dateupload')[$i]));
 
             $dataDiklat = array(
+                'idcompetency' => $this->input->post('idcompetency')[$i],
                 'nip' => $this->input->post('nip')[$i],
                 'date' => $tgl,
                 'title'  => $this->input->post('title')[$i],
                 'instance'  => $this->input->post('instance')[$i],
+                'jplrequest'  => $this->input->post('jplrequest')[$i],
                 'jplapproved'  => $this->input->post('jplapproved')[$i],
                 'iddiklat'  => $this->input->post('iddiklat')[$i],
                 'idjenisdiklat'  => $this->input->post('idjenisdiklat')[$i],
-                'statuscompetency' => 'approved'
+                'dateupload' => $tglupload,
+                // 'akreditasi'  => $this->input->post('akreditasi')[$i],
+                'statuscompetency' => $this->input->post('status')[$i]
             );
             $this->course_model->saveData($dataDiklat, 'rzl_m_competency');
         }
