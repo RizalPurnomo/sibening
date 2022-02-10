@@ -251,7 +251,7 @@ class Import extends CI_Controller
         $jum = count($this->input->post('nip'));
         //insert Batch
         for ($i = 0; $i < $jum; $i++) {
-            $tgl = date('Y-m-d', strtotime($this->input->post('date')[$i]));
+            $tgl = date('Y-m-d', strtotime($this->input->post('datesertifikat')[$i]));
             $tglupload = date('Y-m-d', strtotime($this->input->post('dateupload')[$i]));
 
             $dataDiklat = array(
@@ -266,9 +266,162 @@ class Import extends CI_Controller
                 'idjenisdiklat'  => $this->input->post('idjenisdiklat')[$i],
                 'dateupload' => $tglupload,
                 // 'akreditasi'  => $this->input->post('akreditasi')[$i],
-                'statuscompetency' => $this->input->post('status')[$i]
+                'statuscompetency' => $this->input->post('status')[$i],
+                'files' => $this->input->post('files')[$i],
             );
             $this->course_model->saveData($dataDiklat, 'rzl_m_competency');
+        }
+        echo "Berhasil Disimpan";
+    }
+
+    public function test()
+    {
+        // $jum = count($this->input->post('nip'));
+        // //insert Batch
+        // for ($i = 0; $i < $jum; $i++) {
+        $tgl = date('Y-m-d', strtotime('22-Apr-21'));
+        $tglupload = date('Y-m-d', strtotime('23-Apr-21'));
+
+        $dataDiklat = array(
+            'idcompetency' => '2126',
+            'nip' => '1020184119940704201708156',
+            'date' => $tgl,
+            'title'  => 'title',
+            'instance'  => 'Instance',
+            'jplrequest'  => '3',
+            'jplapproved'  => '0',
+            'iddiklat'  => '',
+            'idjenisdiklat'  => '101010100',
+            'dateupload' => $tglupload,
+            // 'akreditasi'  => $this->input->post('akreditasi')[$i],
+            'statuscompetency' => 'pending',
+            'files' => ''
+        );
+        $this->course_model->saveData($dataDiklat, 'rzl_m_competency');
+        // }
+        echo "Berhasil Disimpan";
+    }
+
+
+
+
+    //DataBarang
+    public function importDataBarang()
+    {
+        $file_mimes = array('text/x-comma-separated-values', 'text/comma-separated-values', 'application/octet-stream', 'application/vnd.ms-excel', 'application/x-csv', 'text/x-csv', 'text/csv', 'application/csv', 'application/excel', 'application/vnd.msexcel', 'text/plain', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        if (isset($_FILES['upload_file']['name']) && in_array($_FILES['upload_file']['type'], $file_mimes)) {
+            $arr_file = explode('.', $_FILES['upload_file']['name']);
+            $extension = end($arr_file);
+            if ('csv' == $extension) {
+                $reader = new \PhpOffice\PhpSpreadsheet\Reader\Csv();
+            } else {
+                $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
+            }
+            $spreadsheet = $reader->load($_FILES['upload_file']['tmp_name']);
+            $sheetData = $spreadsheet->getActiveSheet()->toArray();
+            $data['sheetData'] = $sheetData;
+            // echo "<pre>";
+            // print_r($data);
+            $this->load->view('admin/master/importPreviewDataBarang', $data);
+        }
+    }
+
+    public function saveDataBarang()
+    {
+        $jum = count($this->input->post('id_klasifikasi'));
+        //insert Batch
+        for ($i = 0; $i < $jum; $i++) {
+            $dataBarang = array(
+                'id_klasifikasi' => $this->input->post('id_klasifikasi')[$i],
+                'kategori' => $this->input->post('kategori')[$i],
+                'nama_barang'  => $this->input->post('nama_barang')[$i],
+                'satuan_barang'  => $this->input->post('satuan_barang')[$i],
+                'barcode'  => $this->input->post('barcode')[$i],
+                'stock'  => $this->input->post('stock')[$i],
+                'nilai'  => $this->input->post('nilai')[$i]
+            );
+            $this->course_model->saveData($dataBarang, 'rzl_m_aset_lancar_pakai_habis');
+        }
+        echo "Berhasil Disimpan";
+    }
+
+    //DataPembelianDetail
+    public function importDataPembelian()
+    {
+        $file_mimes = array('text/x-comma-separated-values', 'text/comma-separated-values', 'application/octet-stream', 'application/vnd.ms-excel', 'application/x-csv', 'text/x-csv', 'text/csv', 'application/csv', 'application/excel', 'application/vnd.msexcel', 'text/plain', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        if (isset($_FILES['upload_file']['name']) && in_array($_FILES['upload_file']['type'], $file_mimes)) {
+            $arr_file = explode('.', $_FILES['upload_file']['name']);
+            $extension = end($arr_file);
+            if ('csv' == $extension) {
+                $reader = new \PhpOffice\PhpSpreadsheet\Reader\Csv();
+            } else {
+                $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
+            }
+            $spreadsheet = $reader->load($_FILES['upload_file']['tmp_name']);
+            $sheetData = $spreadsheet->getActiveSheet()->toArray();
+            $data['sheetData'] = $sheetData;
+            // echo "<pre>";
+            // print_r($data);
+            $this->load->view('admin/master/importPreviewDataPembelian', $data);
+        }
+    }
+
+    public function saveDataPembelian()
+    {
+        $jum = count($this->input->post('id_ekspedisi_masuk'));
+        //insert Batch
+        for ($i = 0; $i < $jum; $i++) {
+            $dataPembelian = array(
+                'id_ekspedisi_masuk' => $this->input->post('id_ekspedisi_masuk')[$i],
+                'id_aset_lph' => $this->input->post('id_aset_lph')[$i],
+                'jumlah_masuk'  => $this->input->post('jumlah_masuk')[$i],
+                'jumlah_keluar'  => $this->input->post('jumlah_keluar')[$i],
+                'harga'  => $this->input->post('harga')[$i],
+                'merek'  => $this->input->post('merek')[$i],
+                'tipe'  => $this->input->post('tipe')[$i],
+                'ukuran'  => $this->input->post('ukuran')[$i],
+                'warna'  => $this->input->post('warna')[$i]
+            );
+            $this->course_model->saveData($dataPembelian, 'rzl_ekspedisi_masuk_detail');
+        }
+        echo "Berhasil Disimpan";
+    }
+
+
+    //DataObat
+    public function importDataObat()
+    {
+        $file_mimes = array('text/x-comma-separated-values', 'text/comma-separated-values', 'application/octet-stream', 'application/vnd.ms-excel', 'application/x-csv', 'text/x-csv', 'text/csv', 'application/csv', 'application/excel', 'application/vnd.msexcel', 'text/plain', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        if (isset($_FILES['upload_file']['name']) && in_array($_FILES['upload_file']['type'], $file_mimes)) {
+            $arr_file = explode('.', $_FILES['upload_file']['name']);
+            $extension = end($arr_file);
+            if ('csv' == $extension) {
+                $reader = new \PhpOffice\PhpSpreadsheet\Reader\Csv();
+            } else {
+                $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
+            }
+            $spreadsheet = $reader->load($_FILES['upload_file']['tmp_name']);
+            $sheetData = $spreadsheet->getActiveSheet()->toArray();
+            $data['sheetData'] = $sheetData;
+            // echo "<pre>";
+            // print_r($data);
+            $this->load->view('admin/master/importPreviewObat', $data);
+        }
+    }
+
+    public function saveDataObat()
+    {
+        $jum = count($this->input->post('id_obat'));
+        //insert Batch
+        for ($i = 0; $i < $jum; $i++) {
+            $dataObat = array(
+                'id_obat' => $this->input->post('id_obat')[$i],
+                'nama_obat' => $this->input->post('nama_obat')[$i],
+                'kategori'  => $this->input->post('kategori')[$i],
+                'satuan'  => $this->input->post('satuan')[$i],
+                'jenis_obat'  => $this->input->post('jenis_obat')[$i]
+            );
+            $this->course_model->saveData($dataObat, 'rzl_m_aset_obat');
         }
         echo "Berhasil Disimpan";
     }

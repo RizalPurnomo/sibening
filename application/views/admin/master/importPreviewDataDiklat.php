@@ -58,6 +58,7 @@
                 <th>Tgl Upload</th>
                 <!-- <th>Akreditasi</th> -->
                 <th>Status</th>
+                <th>Files</th>
               </tr>
             </thead>
             <tbody>
@@ -86,6 +87,7 @@
                       <td><input name='dateupload[]' value='<?php echo $sheetData[$a]['9']; ?>'></td>
                       <!-- <td><input name='akreditasi[]' value='<?php echo $sheetData[$a]['10']; ?>'></td> -->
                       <td><input name='status[]' value='<?php echo $sheetData[$a]['11']; ?>'></td>
+                      <td><input name='files[]' value='<?php echo $sheetData[$a]['12']; ?>'></td>
                     </tr>
                   <?php } ?>
               <?php }

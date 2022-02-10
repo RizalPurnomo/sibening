@@ -9,7 +9,7 @@ use PhpOffice\PhpSpreadsheet\Reader\Xlsx;
 
 class Import extends CI_Controller
 {
-    
+
 
     public function __construct()
     {
@@ -23,8 +23,7 @@ class Import extends CI_Controller
     public function index()
     {
         $data['course'] = $this->course_model->allCourse();
-        $this->load->view('admin/master/importQuestion',$data);
-
+        $this->load->view('admin/master/importQuestion', $data);
     }
 
     public function importQuestion()
@@ -45,7 +44,7 @@ class Import extends CI_Controller
             // print_r($data);
             $this->load->view('admin/master/importPreviewQuestion', $data);
         }
-    }    
+    }
 
     public function saveQuestion()
     {
@@ -53,14 +52,12 @@ class Import extends CI_Controller
         $q = $this->course_model->getQuestionById($this->input->post('idCourse'));
         print_r($q);
         // exit;
-        if(empty($q)){ //tambahkan question kosong
+        if (empty($q)) { //tambahkan question kosong
             $this->savedQuestion();
-        }else{
+        } else {
             $this->course_model->deleteCourse($this->input->post('idCourse'), 'rzl_m_question');
             $this->savedQuestion();
         }
-
-
     }
 
     function savedQuestion()
@@ -85,16 +82,16 @@ class Import extends CI_Controller
 
     public function export()
     {
-        
+
         // require 'assets/vendor/autoload.php';
 
         // use PhpOffice\PhpSpreadsheet\Spreadsheet;
         // use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
-        
+
         // $spreadsheet = new Spreadsheet();
         // $sheet = $spreadsheet->getActiveSheet();
         // $sheet->setCellValue('A1', 'Hello World !');
-        
+
         // $writer = new Xlsx($spreadsheet);
         // $writer->save('hello world.xls');
 
@@ -104,20 +101,20 @@ class Import extends CI_Controller
         $sheet = $spreadsheet->getActiveSheet();
 
         // manually set table data value
-        $sheet->setCellValue('A1', 'Gipsy Danger'); 
+        $sheet->setCellValue('A1', 'Gipsy Danger');
         $sheet->setCellValue('A2', 'Gipsy Avenger');
         $sheet->setCellValue('A3', 'Striker Eureka');
-        
+
         $writer = new Xlsx($spreadsheet); // instantiate Xlsx
- 
+
         $filename = 'list-of-jaegers'; // set filename for excel file to be exported
- 
+
         header('Content-Type: application/vnd.ms-excel'); // generate excel file
-        header('Content-Disposition: attachment;filename="'. $filename .'.xlsx"'); 
+        header('Content-Disposition: attachment;filename="' . $filename . '.xlsx"');
         header('Cache-Control: max-age=0');
-        
-        $writer->save('php://output');	// download file      
-    }    
+
+        // $writer->save('php://output');	// download file      
+    }
 
 
 

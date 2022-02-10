@@ -205,6 +205,105 @@
             </div>
         </div>         -->
 
+
+            <!-- Data Barang -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">
+                                <i class="fas fa-chart-pie mr-1"></i>
+                                Import Data Barang
+                            </h3>
+                            <div class="card-tools">
+
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="container-fluid">
+                                <?php echo form_open_multipart('admin/import/importDataBarang', array('name' => 'spreadsheet')); ?>
+                                <table cellpadding="5">
+                                    <tr>
+                                        <td>File :</td>
+                                        <td><input type="file" size="40px" name="upload_file" /></td>
+                                        <td class="error"><?php echo form_error('name'); ?></td>
+                                        <td colspan="5" align="center">
+                                            <input type="submit" value="Import Data Barang" />
+                                        </td>
+                                    </tr>
+                                </table>
+                                <?php echo form_close(); ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Data Pembelian -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">
+                                <i class="fas fa-chart-pie mr-1"></i>
+                                Import Data Pembelian
+                            </h3>
+                            <div class="card-tools">
+
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="container-fluid">
+                                <?php echo form_open_multipart('admin/import/importDataPembelian', array('name' => 'spreadsheet')); ?>
+                                <table cellpadding="5">
+                                    <tr>
+                                        <td>File :</td>
+                                        <td><input type="file" size="40px" name="upload_file" /></td>
+                                        <td class="error"><?php echo form_error('name'); ?></td>
+                                        <td colspan="5" align="center">
+                                            <input type="submit" value="Import Data Pembelian" />
+                                        </td>
+                                    </tr>
+                                </table>
+                                <?php echo form_close(); ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Data Obat -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">
+                                <i class="fas fa-chart-pie mr-1"></i>
+                                Import Data Obat
+                            </h3>
+                            <div class="card-tools">
+
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="container-fluid">
+                                <?php echo form_open_multipart('admin/import/importDataObat', array('name' => 'spreadsheet')); ?>
+                                <table cellpadding="5">
+                                    <tr>
+                                        <td>File :</td>
+                                        <td><input type="file" size="40px" name="upload_file" /></td>
+                                        <td class="error"><?php echo form_error('name'); ?></td>
+                                        <td colspan="5" align="center">
+                                            <input type="submit" value="Import Data Obat" />
+                                        </td>
+                                    </tr>
+                                </table>
+                                <?php echo form_close(); ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <!-- Main row -->
 
         </div><!-- /.container-fluid -->
