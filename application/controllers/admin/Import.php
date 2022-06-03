@@ -425,4 +425,128 @@ class Import extends CI_Controller
         }
         echo "Berhasil Disimpan";
     }
+
+    // DataPenerimaan
+    public function importDataPenerimaan()
+    {
+        $file_mimes = array('text/x-comma-separated-values', 'text/comma-separated-values', 'application/octet-stream', 'application/vnd.ms-excel', 'application/x-csv', 'text/x-csv', 'text/csv', 'application/csv', 'application/excel', 'application/vnd.msexcel', 'text/plain', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        if (isset($_FILES['upload_file']['name']) && in_array($_FILES['upload_file']['type'], $file_mimes)) {
+            $arr_file = explode('.', $_FILES['upload_file']['name']);
+            $extension = end($arr_file);
+            if ('csv' == $extension) {
+                $reader = new \PhpOffice\PhpSpreadsheet\Reader\Csv();
+            } else {
+                $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
+            }
+            $spreadsheet = $reader->load($_FILES['upload_file']['tmp_name']);
+            $sheetData = $spreadsheet->getActiveSheet()->toArray();
+            $data['sheetData'] = $sheetData;
+            // echo "<pre>";
+            // print_r($data);
+            $this->load->view('admin/master/importPreviewPenerimaan', $data);
+        }
+    }
+
+    public function saveDataPenerimaan()
+    {
+        $jum = count($this->input->post('id_obat_masuk'));
+        //insert Batch
+        for ($i = 0; $i < $jum; $i++) {
+            $dataObat = array(
+                'id_obat_masuk' => $this->input->post('id_obat_masuk')[$i],
+                'id_lokasi_obat' => $this->input->post('id_lokasi_obat')[$i],
+                'id_obat'  => $this->input->post('id_obat')[$i],
+                'batch'  => $this->input->post('batch')[$i],
+                'tgl_ed'  => $this->input->post('tgl_ed')[$i],
+                'jumlah_masuk'  => $this->input->post('jumlah_masuk')[$i],
+                'harga'  => $this->input->post('harga')[$i]
+            );
+            $this->course_model->saveData($dataObat, 'rzl_obat_masuk_detail');
+        }
+        echo "Berhasil Disimpan";
+    }
+
+    // DataPemakaian
+    public function importDataPemakaian()
+    {
+        $file_mimes = array('text/x-comma-separated-values', 'text/comma-separated-values', 'application/octet-stream', 'application/vnd.ms-excel', 'application/x-csv', 'text/x-csv', 'text/csv', 'application/csv', 'application/excel', 'application/vnd.msexcel', 'text/plain', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        if (isset($_FILES['upload_file']['name']) && in_array($_FILES['upload_file']['type'], $file_mimes)) {
+            $arr_file = explode('.', $_FILES['upload_file']['name']);
+            $extension = end($arr_file);
+            if ('csv' == $extension) {
+                $reader = new \PhpOffice\PhpSpreadsheet\Reader\Csv();
+            } else {
+                $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
+            }
+            $spreadsheet = $reader->load($_FILES['upload_file']['tmp_name']);
+            $sheetData = $spreadsheet->getActiveSheet()->toArray();
+            $data['sheetData'] = $sheetData;
+            echo "<pre>";
+
+            $no = 0;
+            for ($b = 3; $b < count($sheetData[0]) - 1; $b++) {
+                $status = "";
+                if ($sheetData[7][$b] == "") {
+                    $status = "Umum";
+                } else {
+                    $status = "BPJS";
+                }
+                $arr['header'][$no] = array(
+                    'id_pemakaian' => $sheetData[9][$b],
+                    "nama_pasien" => $sheetData[5][$b],
+                    "umur_pasien" => $sheetData[6][$b],
+                    "status" => $status,
+                    "tgl_pemakaian" => date("Y-m-d", strtotime($sheetData[4][$b])),
+                    "id_lokasi_obat" => $sheetData[1][2],
+                    "nip" => '1020184119860919202107210',
+                    "pemakaian" => 'resep'
+                );
+                $this->course_model->saveData($arr['header'][$no], 'rzl_obat_pemakaian');
+                $no++;
+            }
+
+            $no = 0;
+            for ($a = 3; $a < count($sheetData[0]) - 1; $a++) {
+                $noDet = 0;
+                for ($b = 11; $b < count($sheetData); $b++) {
+                    if (!empty($sheetData[$b][$a]) || $sheetData[$b][$a] > 0) {
+                        $arr['detail'][$no][$noDet] =  array(
+                            'id_pemakaian' => $sheetData[9][$a],
+                            'id_lokasi_obat' => $sheetData[1][2],
+                            'id_obat_masuk_detail' => $sheetData[$b][0],
+                            'id_obat' => $sheetData[$b][1],
+                            'jumlah_keluar' => $sheetData[$b][$a]
+                        );
+                        $this->course_model->saveData($arr['detail'][$no][$noDet], 'rzl_obat_pemakaian_detail');
+                    }
+                    $noDet++;
+                }
+                $no++;
+            }
+
+
+            print_r($arr);
+            // print_r($data);
+            // $this->load->view('admin/master/importPreviewPemakaian', $data);
+        }
+    }
+
+    public function saveDataPemakaian()
+    {
+        $jum = count($this->input->post('id_obat_masuk'));
+        //insert Batch
+        for ($i = 0; $i < $jum; $i++) {
+            $dataObat = array(
+                'id_obat_masuk' => $this->input->post('id_obat_masuk')[$i],
+                'id_lokasi_obat' => $this->input->post('id_lokasi_obat')[$i],
+                'id_obat'  => $this->input->post('id_obat')[$i],
+                'batch'  => $this->input->post('batch')[$i],
+                'tgl_ed'  => $this->input->post('tgl_ed')[$i],
+                'jumlah_masuk'  => $this->input->post('jumlah_masuk')[$i],
+                'harga'  => $this->input->post('harga')[$i]
+            );
+            $this->course_model->saveData($dataObat, 'rzl_obat_masuk_detail');
+        }
+        echo "Berhasil Disimpan";
+    }
 }
